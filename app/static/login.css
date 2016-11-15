@@ -1,0 +1,45 @@
+body, html {
+	height: 100%;
+	background: linear-gradient(deepskyblue, mediumspringgreen);
+}
+
+.card {
+	background-color: #F7F7F7;
+	max-width: 350px;
+	padding: 40px 40px;
+	margin: 200px auto 25px;
+	border-radius: 2px;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+	text-align: center;
+}
+
+.form-signin input,
+.form-signin button {
+	margin-bottom: 10px;
+	z-index: 1;
+	position: relative;
+	box-sizing: border-box;
+}
+
+.form-signin .form-control:focus {
+	border-color: #6891a2;
+	outline: 0;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px #6891a2;
+}
+
+.btn {
+	background-color: #6891a2;
+	padding: 0;
+	height: 36px;
+	font-weight: 700;
+	font-size: 14px;
+	border-radius: 3px;
+	border: none;
+	transition: all 0.218s;
+}
+
+.btn:hover,
+.btn:active,
+.btn:focus {
+	background-color: #0c6121;
+}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Inschrijflijsten{% endblock %}
+
+{% block content %}
+    <h1>Inschrijflijsten</h1>
+    <ul>
+        {% for event in object_list %}
+            <li>{{ event.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
