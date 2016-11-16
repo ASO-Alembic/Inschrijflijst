@@ -8,6 +8,7 @@ class Registration(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 	withdrawn_at = models.DateTimeField(default=None, null=True, blank=True)
+	note = models.CharField(max_length=25, default=None, null=True, blank=True)
 
 	def __str__(self):
 		return self.list.name + ' - ' + self.participant.username
