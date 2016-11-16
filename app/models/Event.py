@@ -14,5 +14,8 @@ class Event(models.Model):
 	committee = models.ForeignKey(Committee, on_delete=models.PROTECT)
 	participants = models.ManyToManyField(settings.AUTH_USER_MODEL, through=Registration)
 
+	def __str__(self):
+		return self.name
+
 	class Meta:
 		ordering = ['created_at']
