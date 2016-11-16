@@ -3,10 +3,26 @@
 {% block title %}Inschrijflijsten{% endblock %}
 
 {% block content %}
-    <h1>Inschrijflijsten</h1>
-    <ul>
-        {% for event in object_list %}
-            <li>{{ event.name }}</li>
-        {% endfor %}
-    </ul>
+	<h1>Inschrijflijsten</h1>
+
+	<div class="row">
+		{% for event in object_list %}
+
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading"><h2 class="text-center">{{ event.name }}</h2></div>
+					<div class="panel-body">
+						<h3>{{ event.committee.name }}</h3>
+						<p><strong>{{ event.event_at }}</strong></p>
+						<p>{{ event.description }}</p>
+						<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+	<ul>
+
+	</ul>
 {% endblock %}

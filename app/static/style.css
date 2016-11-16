@@ -2,3 +2,15 @@ body {
 	font-family: Open Sans, serif !important;
 	padding-top: 51px;
 }
+
+.eventBlock {
+	border-radius: 6px;
+	background-color: #eee;
+	padding: 20px;
+}
+
+footer {
+	width: 75%;
+	margin-left: auto;
+	margin-right: auto;
+}
