@@ -19,11 +19,10 @@ from django.contrib.auth import views as auth_views
 from app.views import EventListView
 
 urlpatterns = [
-	url(r'^admin/', admin.site.urls),
+	url(r'^admin/', admin.site.urls, name='admin'),
 
-	url(r'^login/$', auth_views.login),
-	url(r'^logout/$', auth_views.logout),
+	url(r'^login/$', auth_views.login, name='login'),
+	url(r'^logout/$', auth_views.logout, name='logout'),
 
-
-	url(r'^events/$', EventListView.as_view()),
+	url(r'^events/$', EventListView.as_view(), name='events-list')
 ]
