@@ -17,6 +17,7 @@ class Event(models.Model):
 	price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 	committee = models.ForeignKey(Committee, on_delete=models.PROTECT)
 	participants = models.ManyToManyField(settings.AUTH_USER_MODEL, through=Registration)
+	places = models.IntegerField(default=None, null=True, blank=True)
 
 	def __str__(self):
 		return self.name
