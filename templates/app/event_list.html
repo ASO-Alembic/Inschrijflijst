@@ -7,22 +7,31 @@
 
 	<div class="row">
 		{% for event in object_list %}
-
 			<div class="col-md-4">
 				<div class="panel panel-default">
-					<div class="panel-heading"><h2 class="text-center">{{ event.name }}</h2></div>
+					<div class="panel-heading"><h2 class="text-center">{{ event.name }} <small>{{ event.committee.name }}</small></h2></div>
 					<div class="panel-body">
-						<h3>{{ event.committee.name }}</h3>
 						<p><strong>{{ event.event_at }}</strong></p>
 						<p>{{ event.description }}</p>
-						<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+						{% if event.places != None %}
+							<div class="progress">
+								<div class="progress-bar" role="progressbar" style="width: {% widthratio event.participants.count  event.places 100 %}%;">
+									{{ event.participants.count }} / {{ event.places }}
+								</div>
+							</div>
+						{% else %}
+							<p>Ingeschreven: {{ event.participants.count }}</p>
+						{% endif %}
+
+						{% if user in event.participants.all %}
+							<p><span class="glyphicon glyphicon-check"></span> Ingeschreven</p>
+						{% endif %}
+					</div>
+					<div class="panel-footer">
+						<a class="btn btn-default" href="{% url 'events-detail' event.pk %}" role="button">Details</a>
 					</div>
 				</div>
 			</div>
 		{% endfor %}
 	</div>
-
-	<ul>
-
-	</ul>
 {% endblock %}
