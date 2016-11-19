@@ -86,6 +86,7 @@ LOGIN_URL = '/login/'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+LANGUAGE_CODE = 'NL-nl'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
