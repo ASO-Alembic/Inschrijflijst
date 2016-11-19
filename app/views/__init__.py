@@ -1,1 +1,1 @@
-from .EventView import EventListView
+from .EventView import *
