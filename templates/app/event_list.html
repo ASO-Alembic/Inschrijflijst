@@ -6,7 +6,7 @@
 	<h1>Inschrijflijsten</h1>
 
 	<div class="row">
-		{% for event in object_list %}
+		{% for event in events %}
 			<div class="col-md-4">
 				<div class="panel panel-default">
 					<div class="panel-heading"><h2 class="text-center">{{ event.name }} <small>{{ event.committee.name }}</small></h2></div>
@@ -28,7 +28,7 @@
 						{% endif %}
 					</div>
 					<div class="panel-footer">
-						<a class="btn btn-default" href="{% url 'events-detail' event.pk %}" role="button">Details</a>
+						<a class="btn btn-default" href="{% url 'event-detail' event.pk %}" role="button">Details</a>
 					</div>
 				</div>
 			</div>
