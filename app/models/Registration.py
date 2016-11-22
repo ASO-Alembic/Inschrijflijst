@@ -3,7 +3,7 @@ from django.conf import settings
 
 
 class Registration(models.Model):
-	list = models.ForeignKey('Event', on_delete=models.CASCADE)
+	event = models.ForeignKey('Event', on_delete=models.CASCADE)
 	participant = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
