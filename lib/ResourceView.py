@@ -1,4 +1,5 @@
 from django import http
+from django.conf.urls import url
 from django.utils.decorators import classonlymethod
 
 
@@ -81,3 +82,53 @@ class ResourceView:
 
 	def edit(self, request, pk):
 		raise NotImplementedError
+
+
+class ResourceRouter:
+	"""
+	Basic router for automatically generating URLconf patterns for use with ResourceView.
+	"""
+
+	def __init__(self):
+		self.resources = []
+
+	def register(self, prefix, view, name):
+		"""
+		Register a new ResourceView.
+		"""
+		self.resources.append((prefix, view, name))
+
+	def urls(self):
+		"""
+		Generate a list of URL patterns from the registered routes.
+		"""
+		ret = []
+
+		for prefix, view, name in self.resources:
+			list_url = url(
+				r'^{}/$'.format(prefix),
+				view.as_view('index'),
+				name='{}-list'.format(name)
+			)
+
+			create_url = url(
+				r'^{}/create$'.format(prefix),
+				view.as_view('create'),
+				name='{}-create'.format(name)
+			)
+
+			detail_url = url(
+				r'^{}/(?P<pk>\d+)$'.format(prefix),
+				view.as_view('show'),
+				name='{}-detail'.format(name)
+			)
+
+			edit_url = url(
+				r'^{}/(?P<pk>\d+)/edit$'.format(prefix),
+				view.as_view('edit'),
+				name='{}-edit'.format(name)
+			)
+
+			ret.extend([list_url, create_url, detail_url, edit_url])
+
+		return ret
