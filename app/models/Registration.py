@@ -11,4 +11,4 @@ class Registration(models.Model):
 	note = models.CharField(max_length=25, default=None, null=True, blank=True)
 
 	def __str__(self):
-		return self.list.name + ' - ' + self.participant.username
+		return self.event.name + ' - ' + self.participant.username
