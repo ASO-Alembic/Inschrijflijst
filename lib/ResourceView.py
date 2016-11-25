@@ -7,6 +7,8 @@ class ResourceView:
 	"""
 	Simple Laravel-style RESTful resource controller/view base class.
 	"""
+	# Model name for model binding (see decorator below)
+	model = None
 
 	# 2d lookup table with routes and HTTP methods, returns name of handler method
 	# a 'route' in this case is an unique URL pattern
@@ -82,6 +84,20 @@ class ResourceView:
 
 	def edit(self, request, pk):
 		raise NotImplementedError
+
+
+def bind_model(func):
+	"""
+	Decorator for automatically retrieving models from database; the object is passed as 3rd argument instead of the pk.
+	Requires the model property to be set in the view class.
+	Can only be used on show(), update(), destroy(), and edit() class methods.
+	"""
+	def decorator(self, request, pk):
+		model_object = self.model.objects.get(pk=pk)
+
+		return func(self, request, model_object)
+
+	return decorator
 
 
 class ResourceRouter:
