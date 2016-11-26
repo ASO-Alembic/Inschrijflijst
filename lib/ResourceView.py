@@ -1,6 +1,7 @@
 from django import http
 from django.conf.urls import url
 from django.utils.decorators import classonlymethod
+from django.shortcuts import get_object_or_404
 
 
 class ResourceView:
@@ -93,7 +94,7 @@ def bind_model(func):
 	Can only be used on show(), update(), destroy(), and edit() class methods.
 	"""
 	def decorator(self, request, pk):
-		model_object = self.model.objects.get(pk=pk)
+		model_object = get_object_or_404(self.model, pk=pk)
 
 		return func(self, request, model_object)
 
