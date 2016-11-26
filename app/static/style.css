@@ -3,6 +3,10 @@ body {
 	padding-top: 51px;
 }
 
+.main {
+	padding-top: 20px;
+}
+
 .eventBlock {
 	border-radius: 6px;
 	background-color: #eee;
