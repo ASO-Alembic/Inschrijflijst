@@ -8,9 +8,15 @@
 			<h1>{{ event.name }}</h1>
 		</div>
 		<div class="panel-body">
-			<p><strong>{{ event.event_at }}</strong></p>
-			<p>{{ event.description }}</p>
+			<p><strong>Datum: </strong>{{ event.event_at }}</p>
+			{% if event.deadline_at != None %}
+				<p><strong>Inschrijfdeadline: </strong>{{ event.deadline_at }}</p>
+			{% endif %}
+			<p><strong>Locatie: </strong>{{ event.location }}</p>
+			<p><strong>Kosten: </strong>€{{ event.price }}</p>
 
+			<br>
+			<p>{{ event.description }}</p>
 		</div>
 		<table class="table table-bordered table-hover">
 			<thead>
@@ -22,7 +28,7 @@
 			</thead>
 			<tbody>
 				{% for reg in regs %}
-					<tr>
+					<tr {% if reg.participant == user %}class="info"{% endif %}>
 						<td>{{ forloop.counter }}</td>
 						<td>
 							{% if reg.withdrawn != None %}<s>{% endif %}
