@@ -12,7 +12,7 @@ class Event(models.Model):
 	deadline_at = models.DateTimeField(default=None, null=True, blank=True)
 	ended_at = models.DateTimeField()
 	event_at = models.DateTimeField()
-	note_field = models.CharField(max_length=25, default=None, null=True, blank=True)
+	note_field = models.CharField(max_length=25, default='', blank=True)
 	location = models.CharField(max_length=25)
 	price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 	committee = models.ForeignKey(Committee, on_delete=models.PROTECT)
