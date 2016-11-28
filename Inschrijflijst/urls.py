@@ -20,7 +20,7 @@ from lib.ResourceView import ResourceRouter
 from app.views import EventView
 
 router = ResourceRouter()
-router.register('events', EventView, 'event')
+router.register(['events'], EventView, 'event')
 
 urlpatterns = [
 	url(r'^admin/', admin.site.urls, name='admin'),
