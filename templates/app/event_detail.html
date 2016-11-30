@@ -33,9 +33,9 @@
 					<tr {% if reg.participant == user %}class="info"{% endif %}>
 						<td>{{ forloop.counter }}</td>
 						<td>
-							{% if reg.withdrawn != None %}<s>{% endif %}
+							{% if reg.withdrawn_at != None %}<s>{% endif %}
 								{{ reg.participant.first_name }} {{ reg.participant.last_name }}
-							{% if reg.withdrawn != None %}</s>{% endif %}
+							{% if reg.withdrawn_at != None %}</s>{% endif %}
 						</td>
 						<td>{{ reg.created_at }}</td>
 					</tr>
