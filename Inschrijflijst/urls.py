@@ -17,10 +17,12 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from lib.ResourceView import ResourceRouter
-from app.views import EventView
+from app.views import EventView, RegistrationView
+
 
 router = ResourceRouter()
 router.register(['events'], EventView, 'event')
+router.register(['events', 'registrations'], RegistrationView, 'registration')
 
 urlpatterns = [
 	url(r'^admin/', admin.site.urls, name='admin'),

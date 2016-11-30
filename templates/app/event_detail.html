@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load bootstrap3 %}
+
 {% block title %}Inschrijflijsten{% endblock %}
 
 {% block content %}
@@ -41,7 +43,12 @@
 			</tbody>
 		</table>
 		<div class="panel-footer">
-
+			<form class="form-inline" action="{{ action }}" method="post">
+				{% csrf_token %}
+                <input name="_method" value="PUT" type="hidden">
+				{% bootstrap_form form layout='inline' %}
+				<button class="btn btn-primary" type="submit">OK</button>
+			</form>
 		</div>
 	</div>
 {% endblock %}
