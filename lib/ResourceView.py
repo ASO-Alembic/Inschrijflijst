@@ -54,8 +54,13 @@ class ResourceView:
 		"""
 		Dispatch to the right class method by looking up the route and HTTP method in the lookup table.
 		"""
+		method = request.method
+		if '_method' in request.POST:
+			if request.POST['_method'].lower() in ['put', 'patch', 'delete']:
+				method = request.POST['_method']
+
 		try:
-			handler = getattr(self, self.handler_method_names[self.route][request.method.lower()])
+			handler = getattr(self, self.handler_method_names[self.route][method.lower()])
 		except KeyError:
 			# If route/method doesn't exist, return 405 Method Not Allowed with the allowed methods for current route
 			allowed_methods = self.handler_method_names[self.route]
