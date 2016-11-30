@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class EventView(LoginRequiredMixin, ResourceView):
-	model = Event
+	models = [Event]
 
 	def index(self, request):
 		events = Event.objects.all()
