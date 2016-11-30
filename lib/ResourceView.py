@@ -59,7 +59,7 @@ class ResourceView:
 		except KeyError:
 			# If route/method doesn't exist, return 405 Method Not Allowed with the allowed methods for current route
 			allowed_methods = self.handler_method_names[self.route]
-			handler = http.HttpResponseNotAllowed(allowed_methods)
+			return http.HttpResponseNotAllowed(allowed_methods)
 
 		return handler(request, *args, **kwargs)
 
