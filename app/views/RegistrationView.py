@@ -3,6 +3,7 @@ from app.models import Event, Registration
 from app.forms import RegistrationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
+from django.core.exceptions import PermissionDenied
 from datetime import datetime
 
 
@@ -34,6 +35,10 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 		form = RegistrationForm(event, request.POST)
 
 		if form.is_valid():
+			# Make sure the user is updating their own registration
+			if registration.participant != request.user:
+				raise PermissionDenied
+
 			registration.note = form.cleaned_data.get('note', '')
 
 			if form.cleaned_data['registered']:
