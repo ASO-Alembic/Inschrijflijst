@@ -4,7 +4,7 @@ from app.forms import RegistrationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.core.exceptions import PermissionDenied
-from datetime import datetime
+from django.utils import timezone
 
 
 class RegistrationView(LoginRequiredMixin, ResourceView):
@@ -44,7 +44,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 			if form.cleaned_data['registered']:
 				registration.withdrawn_at = None
 			else:
-				registration.withdrawn_at = datetime.now()
+				registration.withdrawn_at = timezone.now()
 
 			registration.save()
 
