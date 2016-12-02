@@ -3,6 +3,7 @@ from app.models import Event, Registration
 from app.forms import RegistrationForm
 from django.shortcuts import render, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils import timezone
 
 
 class EventView(LoginRequiredMixin, ResourceView):
@@ -19,15 +20,20 @@ class EventView(LoginRequiredMixin, ResourceView):
 		active_regs = Registration.objects.filter(event_id=event, withdrawn_at=None)
 		withdrawn_regs = Registration.objects.filter(event_id=event).exclude(withdrawn_at=None)
 
-		if request.user in event.participants.all():
-			# Show update form
-			registration = Registration.objects.get(event=event, participant=request.user)
-			form = RegistrationForm(event, data={'registered': registration.withdrawn_at is None, 'note': registration.note})
-			action = reverse('registration-detail', args=[event.pk, registration.pk])
+		# Show form if deadline hasn't expired
+		if event.deadline_at is None or event.deadline_at > timezone.now():
+			if request.user in event.participants.all():
+				# Show update form
+				registration = Registration.objects.get(event=event, participant=request.user)
+				form = RegistrationForm(event, data={'registered': registration.withdrawn_at is None, 'note': registration.note})
+				action = reverse('registration-detail', args=[event.pk, registration.pk])
+			else:
+				# Show store form
+				form = RegistrationForm(event)
+				action = reverse('registration-list', args=[event.pk])
 		else:
-			# Show store form
-			form = RegistrationForm(event)
-			action = reverse('registration-list', args=[event.pk])
+			form = None
+			action = None
 
 		return render(request, 'app/event_detail.html', {
 				'event': event,

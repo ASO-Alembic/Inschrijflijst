@@ -42,15 +42,17 @@
 				{% endfor %}
 			</tbody>
 		</table>
-		<div class="panel-footer">
-			<form class="form-inline" action="{{ action }}" method="post">
-				{% csrf_token %}
-				{% if user in event.participants.all %}
-					<input name="_method" value="PUT" type="hidden">
-				{% endif %}
-				{% bootstrap_form form layout='inline' %}
-				<button class="btn btn-primary" type="submit">OK</button>
-			</form>
-		</div>
+		{% if form is not None %}
+			<div class="panel-footer">
+				<form class="form-inline" action="{{ action }}" method="post">
+					{% csrf_token %}
+					{% if user in event.participants.all %}
+						<input name="_method" value="PUT" type="hidden">
+					{% endif %}
+					{% bootstrap_form form layout='inline' %}
+					<button class="btn btn-primary" type="submit">OK</button>
+				</form>
+			</div>
+		{% endif %}
 	</div>
 {% endblock %}
