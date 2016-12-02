@@ -9,7 +9,8 @@ class EventView(LoginRequiredMixin, ResourceView):
 	models = [Event]
 
 	def index(self, request):
-		events = Event.objects.all()
+		events = [(e, e.registration_set.filter(participant=request.user, withdrawn_at__isnull=True).exists())
+		          for e in Event.objects.prefetch_related('registration_set').all()]
 
 		return render(request, 'app/event_list.html', {'events': events})
 
