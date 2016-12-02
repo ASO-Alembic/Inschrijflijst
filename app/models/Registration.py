@@ -12,3 +12,7 @@ class Registration(models.Model):
 
 	def __str__(self):
 		return self.event.name + ' - ' + self.participant.username
+
+	class Meta:
+		ordering = ['created_at']
+		unique_together = ('event', 'participant')
