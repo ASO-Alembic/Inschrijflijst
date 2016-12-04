@@ -10,6 +10,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 	models = [Event]
 
 	def index(self, request):
+		# Get a list of tuples with each event and a bool denoting whether the user is registered (and not withdrawn) for it
 		events = [(e, e.registration_set.filter(participant=request.user, withdrawn_at__isnull=True).exists())
 		          for e in Event.objects.prefetch_related('registration_set').all()]
 
