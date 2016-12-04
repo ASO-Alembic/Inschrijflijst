@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Alembic inschrijfsysteem - Beheer{% endblock %}
+
+{% block content %}
+	<h1>Commissies</h1>
+
+	<p>Hieronder vind je alle commissies waarvan jij voorzitter bent.</p>
+
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>Commissie</th>
+				<th>Aantal lijsten</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for c in committees %}
+				<tr>
+					<td><a href="{% url 'committee-detail' c.pk %}">{{ c.name }}</a></td>
+					<td>{{ c.event_set.count }}</td>
+					<th></th>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

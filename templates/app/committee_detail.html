@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Alembic inschrijfsysteem - {{ committee.name }}{% endblock %}
+
+{% block content %}
+	<h1>{{ committee.name }}</h1>
+
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>Inschrijflijst</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for event in committee.event_set.all %}
+				<tr>
+					<td><a href="{% url 'event-edit' event.pk %}">{{ event.name }}</a></td>
+					<td></td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

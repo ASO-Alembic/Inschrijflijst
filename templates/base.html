@@ -30,6 +30,9 @@
 				<ul class="nav navbar-nav">
 					{% with request.resolver_match.url_name as url_name %}
 						<li class="{% if url_name == 'event-list' %}active{% endif %}"><a href="{% url 'event-list' %}">Inschrijflijsten</a></li>
+						{% if user.committee_set is not None %}
+							<li class="{% if url_name == '' %}active{% endif %}"><a href="{% url 'committee-list' %}">Beheer</a></li>
+						{% endif %}
 					{% endwith %}
 				</ul>
 			</div>
