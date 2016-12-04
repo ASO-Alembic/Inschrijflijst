@@ -42,8 +42,8 @@
 				{% endfor %}
 			</tbody>
 		</table>
-		{% if form is not None %}
-			<div class="panel-footer">
+		<div class="panel-footer">
+			{% if form is not None %}
 				<form class="form-inline" action="{{ action }}" method="post">
 					{% csrf_token %}
 					{% if user in event.participants.all %}
@@ -52,7 +52,11 @@
 					{% bootstrap_form form layout='inline' %}
 					<button class="btn btn-primary" type="submit">OK</button>
 				</form>
-			</div>
-		{% endif %}
+			{% else %}
+				<div class="alert alert-warning">
+					<p>De deadline voor deze inschrijflijst is verstreken. Je kunt je niet meer in- of uitschrijven. Neem voor vragen <a href="mailto:{{ event.committee.email }}">contact op met de {{ event.committee.name }}</a>.</p>
+				</div>
+			{% endif %}
+		</div>
 	</div>
 {% endblock %}
