@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %}Bewerk {{ event.name }}{% endblock %}
+
+{% block content %}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h1><a href="{% url 'event-detail' event.pk %}">{{ event.name }}</a></h1>
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal" action="{% url 'event-detail' event.pk %}" method="post">
+				{% csrf_token %}
+				<input name="_method" value="PUT" type="hidden">
+				{% bootstrap_form form layout='horizontal' %}
+				<button class="btn btn-primary" type="submit">Opslaan</button>
+			</form>
+		</div>
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Naam</th>
+					<th>Inschrijfdatum</th>
+					<th>Uitschrijfdatum</th>
+					{% if event.note_field != '' %}
+						<th>{{ event.note_field }}</th>
+					{% endif %}
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for reg in regs %}
+					<tr>
+						<td>{{ forloop.counter }}</td>
+						<td>
+							{% if reg.withdrawn_at != None %}<s>{% endif %}
+								{{ reg.participant.first_name }} {{ reg.participant.last_name }}
+							{% if reg.withdrawn_at != None %}</s>{% endif %}
+						</td>
+						<td>{{ reg.created_at }}</td>
+						<td>{{ reg.withdrawn_at }}</td>
+						{% if event.note_field != '' %}
+							<td>{{ reg.note }}</td>
+						{% endif %}
+						<td><span class="glyphicon glyphicon-trash"></span></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="panel-footer">
+			<button class="btn btn-primary">Exporteren</button>
+		</div>
+	</div>
+{% endblock %}
