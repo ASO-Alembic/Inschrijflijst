@@ -6,7 +6,7 @@
 	<h1>Inschrijflijsten</h1>
 
 	<div class="row">
-		{% for event, registered in events %}
+		{% for event, participants in events %}
 			<div class="col-md-4">
 				<div class="panel panel-default">
 					<div class="panel-heading"><h2 class="text-center">{{ event.name }} <small>{{ event.committee.name }}</small></h2></div>
@@ -15,14 +15,14 @@
 						<p>{{ event.description }}</p>
 						{% if event.places != None %}
 							<div class="progress">
-								<div class="progress-bar" role="progressbar" style="width: {% widthratio event.participants.count event.places 100 %}%;">
-									{{ event.participants.count }} / {{ event.places }}
+								<div class="progress-bar" role="progressbar" style="width: {% widthratio participants.count event.places 100 %}%;">
+									{{ participants.count }} / {{ event.places }}
 								</div>
 							</div>
 						{% else %}
-							<p>Ingeschreven: {{ event.participants.count }}</p>
+							<p>Ingeschreven: {{ participants.count }}</p>
 						{% endif %}
-						{% if registered %}
+						{% if user in event.participants.all %}
 							<p><span class="glyphicon glyphicon-check"></span> Ingeschreven</p>
 						{% endif %}
 					</div>

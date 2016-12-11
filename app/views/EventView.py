@@ -12,10 +12,10 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 	def index(self, request):
 		# Get all (unexpired) events
-		events = Event.objects.prefetch_related('registration_set').filter(ended_at__gt=timezone.now())
+		events = Event.objects.prefetch_related('participants').filter(ended_at__gt=timezone.now())
 
-		# Get a list of tuples with each event and a bool denoting whether the user is registered (and not withdrawn) for it
-		event_list = [(e, e.registration_set.filter(participant=request.user, withdrawn_at__isnull=True).exists()) for e in events]
+		# Get a list of tuples with each event and a list of non-withdrawn participants for that event
+		event_list = [(e, e.participants.filter(registration__withdrawn_at__isnull=True)) for e in events]
 
 		return render(request, 'app/event_list.html', {'events': event_list})
 
