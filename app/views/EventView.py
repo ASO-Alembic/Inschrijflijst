@@ -11,11 +11,13 @@ class EventView(LoginRequiredMixin, ResourceView):
 	models = [Event]
 
 	def index(self, request):
-		# Get a list of tuples with each event and a bool denoting whether the user is registered (and not withdrawn) for it
-		events = [(e, e.registration_set.filter(participant=request.user, withdrawn_at__isnull=True).exists())
-		          for e in Event.objects.prefetch_related('registration_set').all()]
+		# Get all (unexpired) events
+		events = Event.objects.prefetch_related('registration_set').filter(ended_at__gt=timezone.now())
 
-		return render(request, 'app/event_list.html', {'events': events})
+		# Get a list of tuples with each event and a bool denoting whether the user is registered (and not withdrawn) for it
+		event_list = [(e, e.registration_set.filter(participant=request.user, withdrawn_at__isnull=True).exists()) for e in events]
+
+		return render(request, 'app/event_list.html', {'events': event_list})
 
 	@bind_model
 	def show(self, request, event):
