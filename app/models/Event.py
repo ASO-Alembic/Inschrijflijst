@@ -28,5 +28,12 @@ class Event(models.Model):
 		Return true if deadline is expired.
 		"""
 		return self.deadline_at is not None and self.deadline_at < timezone.now()
+
+	def is_full(self):
+		"""
+		Return true if there are no free places left.
+		"""
+		return self.places is not None and Registration.objects.filter(event=self, withdrawn_at__isnull=True).count() >= self.places
+
 	class Meta:
 		ordering = ['created_at']

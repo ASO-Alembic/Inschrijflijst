@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.core.exceptions import ValidationError
 
 
 class Registration(models.Model):
@@ -12,6 +13,13 @@ class Registration(models.Model):
 
 	def __str__(self):
 		return self.event.name + ' - ' + self.participant.username
+
+	def save(self, *args, **kwargs):
+		# Only permit enrolling in the event if there are free places
+		if self.event.is_full() and self.withdrawn_at is None:
+			raise ValidationError('Inschrijflijst vol')
+
+		super().save(*args, **kwargs)
 
 	class Meta:
 		ordering = ['created_at']

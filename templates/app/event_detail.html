@@ -52,6 +52,13 @@
 					{% bootstrap_form form layout='inline' %}
 					<button class="btn btn-primary" type="submit">OK</button>
 				</form>
+				{% if event.is_full %}
+					<br>
+					<div class="alert alert-warning">
+						<p>Deze inschrijflijst zit vol. Je kunt je niet meer inschrijven. Neem voor vragen <a href="mailto:{{ event.committee.email }}">contact op met de {{ event.committee.name }}</a>.
+						</p>
+					</div>
+				{% endif %}
 			{% else %}
 				<div class="alert alert-warning">
 					<p>De deadline voor deze inschrijflijst is verstreken. Je kunt je niet meer in- of uitschrijven. Neem voor vragen <a href="mailto:{{ event.committee.email }}">contact op met de {{ event.committee.name }}</a>.</p>
