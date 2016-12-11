@@ -19,7 +19,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 		if form.is_valid():
 			# Make sure deadline hasn't passed
-			if event.deadline_at is not None and event.deadline_at < timezone.now():
+			if event.is_expired():
 				raise PermissionDenied
 
 			registration = Registration(

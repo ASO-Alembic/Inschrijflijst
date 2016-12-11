@@ -23,7 +23,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 		withdrawn_regs = Registration.objects.filter(event_id=event).exclude(withdrawn_at=None)
 
 		# Show form if deadline hasn't expired
-		if event.deadline_at is None or event.deadline_at > timezone.now():
+		if not event.is_expired():
 			if request.user in event.participants.all():
 				# Show update form
 				registration = Registration.objects.get(event=event, participant=request.user)

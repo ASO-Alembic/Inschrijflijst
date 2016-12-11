@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 from .Committee import Committee
 from .Registration import Registration
 
@@ -22,5 +23,10 @@ class Event(models.Model):
 	def __str__(self):
 		return self.name
 
+	def is_expired(self):
+		"""
+		Return true if deadline is expired.
+		"""
+		return self.deadline_at is not None and self.deadline_at < timezone.now()
 	class Meta:
 		ordering = ['created_at']
