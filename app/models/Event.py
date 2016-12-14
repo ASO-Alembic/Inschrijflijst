@@ -1,13 +1,14 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.core.validators import MinValueValidator
 from .Committee import Committee
 from .Registration import Registration
 
 
 class Event(models.Model):
 	name = models.CharField(max_length=25)
-	description = models.CharField(max_length=255)
+	description = models.TextField(max_length=255)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 	deadline_at = models.DateTimeField(default=None, null=True, blank=True)
@@ -18,7 +19,7 @@ class Event(models.Model):
 	price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 	committee = models.ForeignKey(Committee, on_delete=models.PROTECT)
 	participants = models.ManyToManyField(settings.AUTH_USER_MODEL, through=Registration)
-	places = models.IntegerField(default=None, null=True, blank=True)
+	places = models.PositiveIntegerField(default=None, null=True, blank=True, validators=[MinValueValidator(1)])
 
 	def __str__(self):
 		return self.name
