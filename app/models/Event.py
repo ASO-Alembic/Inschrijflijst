@@ -33,7 +33,17 @@ class Event(models.Model):
 		"""
 		Return true if there are no free places left.
 		"""
-		return self.places is not None and Registration.objects.filter(event=self, withdrawn_at__isnull=True).count() >= self.places
+		return self.get_free_places() == 0
+
+	def get_free_places(self):
+		"""
+		Return the number of free places left.
+		"""
+		if self.places is None:
+			# If the event doesn't have a places limit, the value of this function is not defined
+			return None
+		else:
+			return self.places - Registration.objects.filter(event=self, withdrawn_at__isnull=True).count()
 
 	class Meta:
 		ordering = ['created_at']
