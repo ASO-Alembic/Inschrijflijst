@@ -1,6 +1,5 @@
-from django.db import models
+from django.db import models, transaction, IntegrityError
 from django.conf import settings
-from django.core.exceptions import ValidationError
 
 
 class Registration(models.Model):
@@ -14,12 +13,16 @@ class Registration(models.Model):
 	def __str__(self):
 		return self.event.name + ' - ' + self.participant.username
 
+	@transaction.atomic
 	def save(self, *args, **kwargs):
-		# Only permit enrolling in the event if there are free places
-		if self.event.is_full() and self.withdrawn_at is None:
-			raise ValidationError('Inschrijflijst vol')
-
+		"""
+		Ensure that the number of non-withdrawn registrations can never exceed the number of places of the event.
+		"""
 		super().save(*args, **kwargs)
+
+		if self.event.places is not None and self.event.get_free_places() < 0:
+			# Rollback transaction
+			raise IntegrityError('Inschrijflijst vol')
 
 	class Meta:
 		ordering = ['created_at']
