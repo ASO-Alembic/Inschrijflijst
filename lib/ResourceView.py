@@ -55,9 +55,8 @@ class ResourceView:
 		Dispatch to the right class method by looking up the route and HTTP method in the lookup table.
 		"""
 		method = request.method
-		if '_method' in request.POST:
-			if request.POST['_method'].lower() in ['put', 'patch', 'delete']:
-				method = request.POST['_method']
+		if '_method' in request.POST and request.POST['_method'].lower() in ['put', 'patch', 'delete']:
+			method = request.POST['_method']
 
 		try:
 			handler = getattr(self, self.handler_method_names[self.route][method.lower()])
