@@ -68,3 +68,13 @@ class EventView(LoginRequiredMixin, ResourceView):
 			form.save()
 			return redirect('event-edit', event.pk)
 
+	def create(self, request):
+		form = EventForm(request.user)
+		return render(request, 'app/event_create.html', {'form': form})
+
+	def store(self, request):
+		form = EventForm(request.user, request.POST)
+
+		if form.is_valid():
+			event = form.save()
+			return redirect('event-detail', event.pk)

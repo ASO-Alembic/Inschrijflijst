@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %}Nieuwe inschrijflijst{% endblock %}
+
+{% block content %}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h1>Nieuwe inschrijflijst</h1>
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal" action="{% url 'event-list' %}" method="post">
+				{% csrf_token %}
+				{% bootstrap_form form layout='horizontal' %}
+				<button class="btn btn-primary" type="submit">Opslaan</button>
+			</form>
+		</div>
+	</div>
+{% endblock %}
