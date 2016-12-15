@@ -36,6 +36,10 @@
 						<li><a href="{% url 'admin:index' %}">Django admin</a></li>
 					{% endwith %}
 				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="navbar-text">Welkom, {{ user.first_name }}!</li>
+					<li><a href="{% url 'logout' %}">Uitloggen</a></li>
+				</ul>
 			</div>
 		</div>
 	</nav>
