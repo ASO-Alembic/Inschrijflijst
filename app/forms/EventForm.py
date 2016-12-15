@@ -3,11 +3,16 @@ from app.models import Event
 
 
 class EventForm(ModelForm):
+	def __init__(self, user, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields['committee'].queryset = user.committee_set
+
 	class Meta:
 		model = Event
 		fields = [
 			'name',
 			'description',
+			'committee',
 			'deadline_at',
 			'ended_at',
 			'note_field',
@@ -18,6 +23,7 @@ class EventForm(ModelForm):
 		labels = {
 			'name': 'Naam',
 			'description': 'Beschrijving',
+			'committee': 'Commissie',
 			'deadline_at': 'Inschrijfdeadline',
 			'ended_at': 'Einddatum',
 			'note_field': 'Extra veld',

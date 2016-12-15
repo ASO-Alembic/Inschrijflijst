@@ -53,7 +53,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 		active_regs = Registration.objects.filter(event_id=event, withdrawn_at=None)
 		withdrawn_regs = Registration.objects.filter(event_id=event).exclude(withdrawn_at=None)
-		form = EventForm(instance=event)
+		form = EventForm(request.user, instance=event)
 
 		return render(request, 'app/event_edit.html', {'event': event, 'regs': active_regs | withdrawn_regs, 'form': form})
 
@@ -62,7 +62,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 		if event.committee.chairman != request.user:
 			raise PermissionDenied
 
-		form = EventForm(request.POST, instance=event)
+		form = EventForm(request.user, request.POST, instance=event)
 
 		if form.is_valid():
 			form.save()
