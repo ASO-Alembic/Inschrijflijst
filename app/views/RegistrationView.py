@@ -4,7 +4,6 @@ from app.forms import RegistrationForm
 from app.views import EventView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
-from django.core.exceptions import PermissionDenied
 from django.utils import timezone
 
 
@@ -19,10 +18,6 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 		form.fields['registered'].required = True
 
 		if form.is_valid():
-			# Make sure deadline hasn't passed
-			if event.is_expired():
-				raise PermissionDenied
-
 			registration = Registration(
 				event=event,
 				participant=request.user,
@@ -44,10 +39,6 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 		if form.is_valid():
 			# Make sure the user is updating their own registration
 			self.check_user(registration.participant)
-
-			# Make sure deadline hasn't passed
-			if event.deadline_at is not None and event.deadline_at < timezone.now():
-				raise PermissionDenied
 
 			registration.note = form.cleaned_data.get('note', '')
 
