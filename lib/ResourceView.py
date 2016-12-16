@@ -93,15 +93,15 @@ class ResourceView:
 
 def bind_model(func):
 	"""
-	Decorator for automatically retrieving models from database; instead of ids, the models instances are injected.
+	Decorator for automatically retrieving model instances from database; instead of ids, the models instances are injected.
 	Requires the model property to be set in the view class.
-	Can only be used on show(), update(), destroy(), and edit() class methods.
+	Attempts to retrieve model instances for all *args, leaves **kwargs untouched.
 	"""
-	def decorator(self, request, *args):
+	def decorator(self, request, *args, **kwargs):
 		# Instantiate a model for every passed argument, using self.models to look up the model class
 		objects = [get_object_or_404(self.models[i], pk=v) for i, v in enumerate(args)]
 
-		return func(self, request, *objects)
+		return func(self, request, *objects, **kwargs)
 
 	return decorator
 
