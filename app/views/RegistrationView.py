@@ -1,6 +1,7 @@
 from lib.ResourceView import ResourceView, bind_model
 from app.models import Event, Registration
 from app.forms import RegistrationForm
+from app.views import EventView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.core.exceptions import PermissionDenied
@@ -31,8 +32,10 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 			registration.save()
 
 			return redirect('event-detail', event.pk)
-
-		# TODO: Handle validation errors
+		else:
+			# Render previous page with validation errors
+			event_view = EventView(self.route, self.request)
+			return event_view.show(self.request, event.pk, form=form)
 
 	@bind_model
 	def update(self, request, event, registration):
@@ -57,3 +60,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 			registration.save()
 
 			return redirect('event-detail', event.pk)
+		else:
+			# Render previous page with validation errors
+			event_view = EventView(self.route, self.request)
+			return event_view.show(self.request, event.pk, form=form)

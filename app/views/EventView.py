@@ -20,7 +20,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 		return render(request, 'app/event_list.html', {'events': event_list})
 
 	@bind_model
-	def show(self, request, event):
+	def show(self, request, event, form=None):
 		active_regs = Registration.objects.filter(event_id=event, withdrawn_at=None)
 		withdrawn_regs = Registration.objects.filter(event_id=event).exclude(withdrawn_at=None)
 
@@ -29,11 +29,16 @@ class EventView(LoginRequiredMixin, ResourceView):
 			if event.registration_set.filter(participant=request.user).exists():
 				# Show update form
 				registration = Registration.objects.get(event=event, participant=request.user)
-				form = RegistrationForm(event, data={'registered': registration.withdrawn_at is None, 'note': registration.note})
+
+				if form is None:
+					form = RegistrationForm(event, data={'registered': registration.withdrawn_at is None, 'note': registration.note})
+
 				action = reverse('registration-detail', args=[event.pk, registration.pk])
 			else:
 				# Show store form
-				form = RegistrationForm(event)
+				if form is None:
+					form = RegistrationForm(event)
+
 				action = reverse('registration-list', args=[event.pk])
 		else:
 			form = None
@@ -53,7 +58,9 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 		active_regs = Registration.objects.filter(event_id=event, withdrawn_at=None)
 		withdrawn_regs = Registration.objects.filter(event_id=event).exclude(withdrawn_at=None)
-		form = EventForm(request.user, instance=event)
+
+		if form is None:
+			form = EventForm(request.user, instance=event)
 
 		return render(request, 'app/event_edit.html', {'event': event, 'regs': active_regs | withdrawn_regs, 'form': form})
 
@@ -67,9 +74,13 @@ class EventView(LoginRequiredMixin, ResourceView):
 		if form.is_valid():
 			form.save()
 			return redirect('event-edit', event.pk)
+		else:
+			return self.edit(request, event.pk, form=form)
 
-	def create(self, request):
-		form = EventForm(request.user)
+	def create(self, request, form=None):
+		if form is None:
+			form = EventForm(request.user)
+
 		return render(request, 'app/event_create.html', {'form': form})
 
 	def store(self, request):
@@ -78,3 +89,5 @@ class EventView(LoginRequiredMixin, ResourceView):
 		if form.is_valid():
 			event = form.save()
 			return redirect('event-detail', event.pk)
+		else:
+			return self.create(request, form=form)
