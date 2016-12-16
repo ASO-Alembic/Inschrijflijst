@@ -43,8 +43,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 		if form.is_valid():
 			# Make sure the user is updating their own registration
-			if registration.participant != request.user:
-				raise PermissionDenied
+			self.check_user(registration.participant)
 
 			# Make sure deadline hasn't passed
 			if event.deadline_at is not None and event.deadline_at < timezone.now():

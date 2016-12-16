@@ -2,6 +2,7 @@ from django import http
 from django.conf.urls import url
 from django.utils.decorators import classonlymethod
 from django.shortcuts import get_object_or_404
+from django.core.exceptions import PermissionDenied
 
 
 class ResourceView:
@@ -66,6 +67,13 @@ class ResourceView:
 			return http.HttpResponseNotAllowed(allowed_methods)
 
 		return handler(request, *args)
+
+	def check_user(self, user):
+		"""
+		Compare the passed object to the current user and raise PermissionDenied if they are not equal.
+		"""
+		if user != self.request.user:
+			raise PermissionDenied
 
 	# Handler methods, must be overridden in child class
 

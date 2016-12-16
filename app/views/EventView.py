@@ -4,7 +4,6 @@ from app.forms import RegistrationForm, EventForm
 from django.shortcuts import render, reverse, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
-from django.core.exceptions import PermissionDenied
 
 
 class EventView(LoginRequiredMixin, ResourceView):
@@ -52,9 +51,8 @@ class EventView(LoginRequiredMixin, ResourceView):
 		})
 
 	@bind_model
-	def edit(self, request, event):
-		if event.committee.chairman != request.user:
-			raise PermissionDenied
+	def edit(self, request, event, form=None):
+		self.check_user(event.committee.chairman)
 
 		active_regs = Registration.objects.filter(event_id=event, withdrawn_at=None)
 		withdrawn_regs = Registration.objects.filter(event_id=event).exclude(withdrawn_at=None)
@@ -66,8 +64,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def update(self, request, event):
-		if event.committee.chairman != request.user:
-			raise PermissionDenied
+		self.check_user(event.committee.chairman)
 
 		form = EventForm(request.user, request.POST, instance=event)
 
