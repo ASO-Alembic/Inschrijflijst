@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 from app.models import Event
+from bootstrap3_datetime.widgets import DateTimePicker
 
 
 class EventForm(ModelForm):
@@ -32,4 +33,9 @@ class EventForm(ModelForm):
 			'location': 'Locatie',
 			'price': 'Kosten',
 			'places': 'Beschikbare plaatsen'
+		}
+		widgets = {
+			'deadline_at': DateTimePicker,
+			'ended_at': DateTimePicker,
+			'event_at': DateTimePicker
 		}
