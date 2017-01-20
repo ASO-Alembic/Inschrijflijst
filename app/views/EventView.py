@@ -16,7 +16,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 		# Get a list of tuples with each event and a list of non-withdrawn participants for that event
 		event_list = [(e, e.participants.filter(registration__withdrawn_at__isnull=True)) for e in events]
 
-		return render(request, 'app/event_list.html', {'events': event_list})
+		return render(request, 'event_list.html', {'events': event_list})
 
 	@bind_model
 	def show(self, request, event, form=None):
@@ -43,7 +43,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 			form = None
 			action = None
 
-		return render(request, 'app/event_detail.html', {
+		return render(request, 'event_detail.html', {
 				'event': event,
 				'regs': active_regs | withdrawn_regs,
 				'form': form,
@@ -60,7 +60,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 		if form is None:
 			form = EventForm(request.user, instance=event)
 
-		return render(request, 'app/event_edit.html', {'event': event, 'regs': active_regs | withdrawn_regs, 'form': form})
+		return render(request, 'event_edit.html', {'event': event, 'regs': active_regs | withdrawn_regs, 'form': form})
 
 	@bind_model
 	def update(self, request, event):
@@ -78,7 +78,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 		if form is None:
 			form = EventForm(request.user)
 
-		return render(request, 'app/event_create.html', {'form': form})
+		return render(request, 'event_create.html', {'form': form})
 
 	def store(self, request):
 		form = EventForm(request.user, request.POST)

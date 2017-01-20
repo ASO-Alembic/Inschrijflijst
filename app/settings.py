@@ -39,13 +39,12 @@ MIDDLEWARE = [
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'Inschrijflijst.urls'
+ROOT_URLCONF = 'app.urls'
 
 TEMPLATES = [
 	{
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
-		'DIRS': [os.path.join(BASE_DIR, 'templates')]
-		,
+		'DIRS': [os.path.join(BASE_DIR, 'app/templates')],
 		'APP_DIRS': True,
 		'OPTIONS': {
 			'context_processors': [
@@ -58,7 +57,7 @@ TEMPLATES = [
 	},
 ]
 
-WSGI_APPLICATION = 'Inschrijflijst.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -90,7 +89,7 @@ USE_TZ = True
 LANGUAGE_CODE = 'NL-nl'
 
 FORMAT_MODULE_PATH = [
-	'Inschrijflijst.formats',
+	'app.formats',
 ]
 
 # Static files (CSS, JavaScript, Images)
