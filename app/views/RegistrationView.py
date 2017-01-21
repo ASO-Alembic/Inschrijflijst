@@ -1,7 +1,11 @@
+import csv
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.utils import timezone
+from django.utils.formats import date_format
 from django.core.exceptions import PermissionDenied
+from django.http import HttpResponse
 
 from lib.ResourceView import ResourceView, bind_model
 from app.models import Event, Registration
@@ -11,6 +15,25 @@ from app.views import EventView
 
 class RegistrationView(LoginRequiredMixin, ResourceView):
 	models = [Event, Registration]
+
+	@bind_model
+	def index(self, request, event):
+		self.check_user(event.committee.chairman)
+
+		regs = event.registration_set.filter(withdrawn_at=None)
+
+		if request.GET['format'] == 'csv':
+			response = HttpResponse(content_type='text/csv')
+			response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(event.name)
+
+			writer = csv.writer(response)
+			writer.writerow(('#', 'Voornaam', 'Achternaam', 'Inschrijfdatum', event.note_field))
+
+			for i, reg in enumerate(regs):
+				if not reg.is_backup():
+					writer.writerow((i, reg.participant.first_name, reg.participant.last_name, date_format(reg.created_at, 'SHORT_DATETIME_FORMAT'), reg.note))
+
+			return response
 
 	@bind_model
 	def store(self, request, event):
