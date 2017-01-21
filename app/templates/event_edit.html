@@ -32,7 +32,7 @@
 			</thead>
 			<tbody>
 				{% for reg in regs %}
-					<tr>
+					<tr class="{% if reg.is_backup %}warning{% endif %}">
 						<td>{{ forloop.counter }}</td>
 						<td>
 							{% if reg.withdrawn_at != None %}<s>{% endif %}

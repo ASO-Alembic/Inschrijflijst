@@ -1,4 +1,4 @@
-from django.db import models, transaction, IntegrityError
+from django.db import models
 from django.conf import settings
 
 
@@ -13,16 +13,14 @@ class Registration(models.Model):
 	def __str__(self):
 		return self.event.name + ' - ' + self.participant.username
 
-	@transaction.atomic
-	def save(self, *args, **kwargs):
+	def is_backup(self):
 		"""
-		Ensure that the number of non-withdrawn registrations can never exceed the number of places of the event.
+		Return true if this is a 'backup registration' (registered after the event was full)
 		"""
-		super().save(*args, **kwargs)
+		# Find position of registration in event by counting all preceding active registrations
+		position = self.event.registration_set.filter(created_at__lte=self.created_at, withdrawn_at__isnull=True).count()
 
-		if self.event.places is not None and self.event.get_free_places() < 0:
-			# Rollback transaction
-			raise IntegrityError('Inschrijflijst vol')
+		return self.event.places is not None and position > self.event.places
 
 	class Meta:
 		ordering = ['created_at']

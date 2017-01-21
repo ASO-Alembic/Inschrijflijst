@@ -33,7 +33,7 @@
 			</thead>
 			<tbody>
 				{% for reg in regs %}
-					<tr {% if reg.participant == user %}class="info"{% endif %}>
+					<tr class="{% if reg.participant == user %}info{% endif %}{% if reg.is_backup %} warning{% endif %}">
 						<td>{{ forloop.counter }}</td>
 						<td>
 							{% if reg.withdrawn_at != None %}<s>{% endif %}
@@ -58,7 +58,7 @@
 				{% if event.is_full %}
 					<br>
 					<div class="alert alert-warning">
-						<p>Deze inschrijflijst zit vol. Je kunt je niet meer inschrijven. Neem voor vragen <a href="mailto:{{ event.committee.email }}">contact op met de {{ event.committee.name }}</a>.</p>
+						<p>Deze inschrijflijst zit vol. Je kunt je nog wel inschrijven als reserve; je komt dan op de lijst te staan als iemand zich uitschrijft. Selectie is op basis van inschrijfdatum.</p>
 					</div>
 				{% endif %}
 			{% else %}

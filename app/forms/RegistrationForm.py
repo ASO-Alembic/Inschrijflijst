@@ -15,11 +15,6 @@ class RegistrationForm(forms.Form):
 		else:
 			self.fields.pop('note')
 
-		# If the user is not enrolled for this event and the event is full,
-		# disallow new registrations by disabling the checkbox.
-		if event.is_full() and (data is None or data['registered'] is False):
-			self.fields['registered'].disabled = True
-
 	def clean(self):
 		super().clean()
 
