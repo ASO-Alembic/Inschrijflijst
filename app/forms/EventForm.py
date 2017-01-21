@@ -1,6 +1,7 @@
 from django.forms import ModelForm
-from app.models import Event
 from bootstrap3_datetime.widgets import DateTimePicker
+
+from app.models import Event
 
 
 class EventForm(ModelForm):

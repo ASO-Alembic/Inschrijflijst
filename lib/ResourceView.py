@@ -118,7 +118,6 @@ class ResourceRouter:
 	"""
 	Basic router for automatically generating URLconf patterns for use with ResourceView.
 	"""
-
 	def __init__(self):
 		self.resources = []
 

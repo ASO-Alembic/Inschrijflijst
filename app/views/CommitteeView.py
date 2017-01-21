@@ -1,7 +1,8 @@
+from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from lib.ResourceView import ResourceView, bind_model
 from app.models import Committee
-from django.shortcuts import render, reverse
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class CommitteeView(LoginRequiredMixin, ResourceView):

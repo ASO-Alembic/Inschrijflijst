@@ -1,9 +1,10 @@
-from lib.ResourceView import ResourceView, bind_model
-from app.models import Event, Registration
-from app.forms import RegistrationForm, EventForm
 from django.shortcuts import render, reverse, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
+
+from lib.ResourceView import ResourceView, bind_model
+from app.models import Event, Registration
+from app.forms import RegistrationForm, EventForm
 
 
 class EventView(LoginRequiredMixin, ResourceView):
