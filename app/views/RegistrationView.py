@@ -35,6 +35,8 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def edit(self, request, event, registration, form=None):
+		self.check_user(event.committee.chairman)
+
 		if form is None:
 			form = RegistrationForm(event, data={'registered': registration.withdrawn_at is None, 'note': registration.note})
 
