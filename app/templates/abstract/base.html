@@ -33,7 +33,9 @@
 						{% if user.committee_set is not None %}
 							<li class="{% if url_name == 'committee-list' %}active{% endif %}"><a href="{% url 'committee-list' %}">Beheer</a></li>
 						{% endif %}
-						<li><a href="{% url 'admin:index' %}">Django admin</a></li>
+						{% if user.is_staff %}
+							<li><a href="{% url 'admin:index' %}">Django admin</a></li>
+						{% endif %}
 					{% endwith %}
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
