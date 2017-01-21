@@ -47,5 +47,11 @@ class Event(models.Model):
 		else:
 			return self.places - Registration.objects.filter(event=self, withdrawn_at__isnull=True).count()
 
+	def get_active_registrations_count(self):
+		"""
+		Return the number of non-withdrawn registrations
+		"""
+		return self.registration_set.filter(withdrawn_at__isnull=True).count()
+
 	class Meta:
 		ordering = ['created_at']

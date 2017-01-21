@@ -9,14 +9,16 @@
 		<thead>
 			<tr>
 				<th>Inschrijflijst</th>
+				<th>Aantal inschrijvingen</th>
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for event in committee.event_set.all %}
 				<tr>
-					<td><a href="{% url 'event-edit' event.pk %}">{{ event.name }}</a></td>
-					<td></td>
+					<td><a href="{% url 'event-detail' event.pk %}">{{ event.name }}</a></td>
+					<td>{{ event.get_active_registrations_count }} / {{ event.places|default:'∞' }}</td>
+					<td><a href="{% url 'event-edit' event.pk %}" class="glyphicon glyphicon-edit" title="Bewerken"></a></td>
 				</tr>
 			{% endfor %}
 		</tbody>
