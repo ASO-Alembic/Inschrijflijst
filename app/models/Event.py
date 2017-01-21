@@ -35,7 +35,7 @@ class Event(models.Model):
 		"""
 		Return true if there are no free places left.
 		"""
-		return self.get_free_places() <= 0
+		return self.get_free_places() is not None and self.get_free_places() <= 0
 
 	def get_free_places(self):
 		"""
