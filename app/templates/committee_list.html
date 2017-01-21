@@ -20,7 +20,7 @@
 				<tr>
 					<td><a href="{% url 'committee-detail' c.pk %}">{{ c.name }}</a></td>
 					<td>{{ c.event_set.count }}</td>
-					<td><a href="{% url 'event-create' %}?committee={{ c.name }}" title="Nieuwe inschrijflijst"><span class="glyphicon glyphicon-plus"></span></a></td>
+					<td><a href="{% url 'event-create' %}?committee={{ c.pk }}" title="Nieuwe inschrijflijst"><span class="glyphicon glyphicon-plus"></span></a></td>
 				</tr>
 			{% endfor %}
 		</tbody>

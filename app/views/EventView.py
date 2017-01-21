@@ -77,7 +77,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 	def create(self, request, form=None):
 		if form is None:
-			form = EventForm(request.user)
+			form = EventForm(request.user, initial={'committee': request.GET.get('committee')})
 
 		return render(request, 'event_create.html', {'form': form})
 
