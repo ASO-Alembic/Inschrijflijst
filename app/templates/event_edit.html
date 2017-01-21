@@ -44,7 +44,7 @@
 						{% if event.note_field != '' %}
 							<td>{{ reg.note }}</td>
 						{% endif %}
-						<td><span class="glyphicon glyphicon-trash"></span></td>
+						<td><a href="{% url 'registration-edit' event.pk reg.pk %}" class="glyphicon glyphicon-edit" title="Bewerken"></a></td>
 					</tr>
 				{% endfor %}
 			</tbody>

@@ -1,5 +1,4 @@
 from django import forms
-from django.core.exceptions import PermissionDenied
 
 
 class RegistrationForm(forms.Form):
@@ -27,7 +26,3 @@ class RegistrationForm(forms.Form):
 		# Conditional validation rule: note field must not be empty if registered checkbox is checked and note field exists
 		if self.cleaned_data['registered'] and 'note' in self.cleaned_data and self.cleaned_data['note'] == '':
 			self.add_error('note', "{} niet ingevuld".format(self.event.note_field))
-
-		# Make sure deadline hasn't passed
-		if self.event.is_expired():
-			raise PermissionDenied

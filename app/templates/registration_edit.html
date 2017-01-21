@@ -1,0 +1,21 @@
+{% extends "abstract/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h1>Bewerk inschrijving van {{ registration.participant.first_name }} {{ registration.participant.last_name }} voor {{ event.name }}</h1>
+		</div>
+		<div class="panel-body">
+			<form action="{% url 'registration-detail' event.pk registration.pk %}?role=cm-admin" method="post">
+				{% csrf_token %}
+				<input name="_method" value="PUT" type="hidden">
+				{% bootstrap_form form %}
+				<button class="btn btn-primary" type="submit">OK</button>
+			</form>
+		</div>
+	</div>
+{% endblock %}

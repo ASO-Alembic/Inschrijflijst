@@ -47,7 +47,7 @@
 		</table>
 		<div class="panel-footer">
 			{% if form is not None %}
-				<form class="form-inline" action="{{ action }}" method="post">
+				<form class="form-inline" action="{{ action }}?role=user" method="post">
 					{% csrf_token %}
 					{% if user in event.participants.all %}
 						<input name="_method" value="PUT" type="hidden">
