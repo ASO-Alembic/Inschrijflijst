@@ -49,11 +49,9 @@
 				{% endfor %}
 			</tbody>
 		</table>
-		<div class="panel-footer form-horizontal">
-			<div class="form-group">
-				<div class="col-md-1 col-sm-2"><a href="{% url 'registration-list' event.pk %}?format=csv" class="btn btn-primary">Exporteren</a></div>
-				<div class="col-sm-1 control-label"><span class="glyphicon glyphicon-question-sign" title="(Alleen ingeschreven deelnemers die niet op de reservelijst staan worden geëxporteerd)"></span></div>
-			</div>
+		<div class="panel-footer">
+			<a href="{% url 'registration-list' event.pk %}?format=csv" class="btn btn-primary" title="Alleen ingeschreven deelnemers die niet op de reservelijst staan worden geëxporteerd">Exporteren</a>
+			<a href="" class="btn btn-primary">Mass mail</a>
 		</div>
 	</div>
 {% endblock %}
