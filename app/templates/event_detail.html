@@ -43,12 +43,21 @@
 			</thead>
 			<tbody>
 				{% for reg in regs %}
-					<tr class="{% if reg.participant == user %}info{% endif %}{% if reg.is_backup %} warning{% endif %}">
-						<td>{{ forloop.counter }}</td>
+					<tr class="{% if reg.is_backup %}warning{% else %}success{% endif %}{% if reg.withdrawn_at != None %} danger{% endif %}">
 						<td>
-							{% if reg.withdrawn_at != None %}<s>{% endif %}
-								{{ reg.participant.first_name }} {{ reg.participant.last_name }}
-							{% if reg.withdrawn_at != None %}</s>{% endif %}
+							{{ forloop.counter }}
+							{% if reg.participant == user %}
+								<span class="glyphicon glyphicon-chevron-right"></span>
+							{% endif %}
+						</td>
+						<td>
+							{% if reg.participant == user %}
+								<strong>
+							{% endif %}
+							{{ reg.participant.first_name }} {{ reg.participant.last_name }}
+							{% if reg.participant == user %}
+								</strong>
+							{% endif %}
 						</td>
 						<td>{{ reg.created_at }}</td>
 					</tr>

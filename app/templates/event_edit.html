@@ -32,13 +32,9 @@
 			</thead>
 			<tbody>
 				{% for reg in regs %}
-					<tr class="{% if reg.is_backup %}warning{% endif %}">
+					<tr class="{% if reg.is_backup %}warning{% else %}success{% endif %}{% if reg.withdrawn_at != None %} danger{% endif %}">
 						<td>{{ forloop.counter }}</td>
-						<td>
-							{% if reg.withdrawn_at != None %}<s>{% endif %}
-								{{ reg.participant.first_name }} {{ reg.participant.last_name }}
-							{% if reg.withdrawn_at != None %}</s>{% endif %}
-						</td>
+						<td>{{ reg.participant.first_name }} {{ reg.participant.last_name }}</td>
 						<td>{{ reg.created_at }}</td>
 						<td>{{ reg.withdrawn_at }}</td>
 						{% if event.note_field != '' %}
@@ -51,7 +47,7 @@
 		</table>
 		<div class="panel-footer">
 			<a href="{% url 'registration-list' event.pk %}?format=csv" class="btn btn-primary" title="Alleen ingeschreven deelnemers die niet op de reservelijst staan worden geëxporteerd">Exporteren</a>
-			<a href="" class="btn btn-primary">Mass mail</a>
+			<a href="{% url 'mail-create' event.pk %}" class="btn btn-primary">Mass mail</a>
 		</div>
 	</div>
 {% endblock %}
