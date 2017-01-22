@@ -7,7 +7,7 @@
 {% block content %}
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h1>{{ event.name }}</h1>
+			<h1>{{ event.name }} <small>{{ event.committee.name }}</small></h1>
 			{% if event.committee in user.committee_set.all %}
 				<a class="btn btn-default" href="{% url 'event-edit' event.pk %}" role="button">Bewerken</a>
 			{% endif %}
@@ -22,6 +22,16 @@
 
 			<br>
 			<p>{{ event.description }}</p>
+
+			{% if event.places != None %}
+				<div class="progress">
+					<div class="progress-bar" role="progressbar" style="width: {% widthratio event.get_active_registrations_count event.places 100 %}%; max-width: 100%;">
+						{{ event.get_active_registrations_count }} / {{ event.places }}
+					</div>
+				</div>
+			{% else %}
+				<p>Ingeschreven: {{ event.get_active_registrations_count }}</p>
+			{% endif %}
 		</div>
 		<table class="table table-bordered table-hover">
 			<thead>
