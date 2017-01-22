@@ -16,7 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
+
 from lib.ResourceView import ResourceRouter
 from app.views import EventView, RegistrationView, CommitteeView
 
@@ -28,6 +29,7 @@ router.register(['committees'], CommitteeView, 'committee')
 
 urlpatterns = [
 	url(r'^$', lambda request: redirect('event-list'), name='home'),
+	url(r'^faq/$', lambda request: render(request, 'faq.html'), name='faq'),
 	url(r'^admin/', admin.site.urls, name='admin'),
 
 	url(r'^login/$', auth_views.login, name='login'),

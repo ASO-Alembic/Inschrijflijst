@@ -33,6 +33,7 @@
 						{% if user.committee_set is not None %}
 							<li class="{% if url_name == 'committee-list' %}active{% endif %}"><a href="{% url 'committee-list' %}">Beheer</a></li>
 						{% endif %}
+						<li class="{% if url_name == 'faq' %}active{% endif %}"><a href="{% url 'faq' %}">FAQ</a></li>
 						{% if user.is_staff %}
 							<li><a href="{% url 'admin:index' %}">Django admin</a></li>
 						{% endif %}
@@ -53,7 +54,7 @@
 	<footer>
 		<p class="pull-left text-muted">Alembic Inschrijfsysteem</p>
 		<p class="pull-right text-muted">v1</p>
-		<p class="text-muted" style="text-align: center">Geschreven door <a href="//github.com/Compizfox">Lars Veldscholte</a></p>
+		<p class="text-muted" style="text-align: center">Geschreven door <a href="//github.com/Compizfox">Lars Veldscholte</a> - ASO Alembic</p>
 	</footer>
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
