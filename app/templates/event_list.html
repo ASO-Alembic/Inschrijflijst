@@ -15,7 +15,7 @@
 						<p>{{ event.description }}</p>
 						{% if event.places != None %}
 							<div class="progress">
-								<div class="progress-bar" role="progressbar" style="width: {% widthratio participants.count event.places 100 %}%; max-width: 100%;">
+								<div class="progress-bar{% if participants.count == event.places %} progress-bar-warning{% elif participants.count > event.places %} progress-bar-danger{% endif %}" role="progressbar" style="width: {% widthratio participants.count event.places 100 %}%; max-width: 100%;">
 									{{ participants.count }} / {{ event.places }}
 								</div>
 							</div>

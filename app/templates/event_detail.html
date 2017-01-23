@@ -25,7 +25,7 @@
 
 			{% if event.places != None %}
 				<div class="progress">
-					<div class="progress-bar" role="progressbar" style="width: {% widthratio event.get_active_registrations_count event.places 100 %}%; max-width: 100%;">
+					<div class="progress-bar{% if event.get_active_registrations_count == event.places %} progress-bar-warning{% elif event.get_active_registrations_count > event.places %} progress-bar-danger{% endif %}" role="progressbar" style="width: {% widthratio event.get_active_registrations_count event.places 100 %}%; max-width: 100%;">
 						{{ event.get_active_registrations_count }} / {{ event.places }}
 					</div>
 				</div>
