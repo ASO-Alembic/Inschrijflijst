@@ -40,7 +40,7 @@ class CustomMail(Mail):
 		Builds an email message from a user object, a sender (from address), subject and template string
 		"""
 		self.subject = subject
-		self.context = {'name': user.first_name + user.last_name}
+		self.context = {'name': user.first_name + ' ' + user.last_name}
 		self.recipients = [user.email]
 		self.reply_to = [reply_to]
 		self.template_string = template_string
