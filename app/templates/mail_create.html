@@ -1,0 +1,41 @@
+{% extends "abstract/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %}Mass mail{% endblock %}
+
+{% block content %}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h1>Mass mail <small>aan deelnemers aan <strong>{{ event.name }}</strong></small></h1>
+		</div>
+		<form class="panel-body form-horizontal" action="{% url 'mail-list' event.pk %}" method="post">
+			<p>Gebruik dit formulier om een email te sturen aan alle deelnemers aan je activiteit. Gebruik in je bericht <code>{% verbatim %}{{ name }}{% endverbatim %}</code> voor de naam van je ontvanger.</p>
+			{% csrf_token %}
+			{% bootstrap_form form layout='horizontal' %}
+			<button class="btn btn-primary" type="submit">Verzenden</button>
+		</form>
+	</div>
+{% endblock %}
+
+{% block links %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css">
+{% endblock %}
+
+{% block scripts %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.min.js"></script>
+	<script>
+        $(document).ready(function () {
+            $('#summernote').summernote({
+                height: 300,
+                toolbar: [
+                    ['style', ['style']],
+                    ['format', ['bold', 'italic', 'underline', 'clear']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['insert', ['picture', 'link', 'hr']],
+                    ['misc', ['codeview', 'undo', 'redo']]
+                ]
+            });
+        });
+	</script>
+{% endblock %}

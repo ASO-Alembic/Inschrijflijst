@@ -19,13 +19,14 @@ from django.contrib.auth import views as auth_views
 from django.shortcuts import redirect, render
 
 from lib.ResourceView import ResourceRouter
-from app.views import EventView, RegistrationView, CommitteeView
+from app.views import EventView, RegistrationView, CommitteeView, MailView
 
 
 router = ResourceRouter()
 router.register(['events'], EventView, 'event')
 router.register(['events', 'registrations'], RegistrationView, 'registration')
 router.register(['committees'], CommitteeView, 'committee')
+router.register(['events', 'mail'], MailView, 'mail')
 
 urlpatterns = [
 	url(r'^$', lambda request: redirect('event-list'), name='home'),
