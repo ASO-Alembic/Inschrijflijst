@@ -27,11 +27,11 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 			response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(event.name)
 
 			writer = csv.writer(response)
-			writer.writerow(('#', 'Voornaam', 'Achternaam', 'Inschrijfdatum', event.note_field))
+			writer.writerow(('#', 'Voornaam', 'Achternaam', 'Emailadres', 'Inschrijfdatum', event.note_field))
 
 			for i, reg in enumerate(regs):
 				if not reg.is_backup():
-					writer.writerow((i, reg.participant.first_name, reg.participant.last_name, date_format(reg.created_at, 'SHORT_DATETIME_FORMAT'), reg.note))
+					writer.writerow((i, reg.participant.first_name, reg.participant.last_name, reg.participant.email, date_format(reg.created_at, 'SHORT_DATETIME_FORMAT'), reg.note))
 
 			return response
 
