@@ -1,3 +1,5 @@
+from abc import ABCMeta
+
 from django import http
 from django.conf.urls import url
 from django.utils.decorators import classonlymethod
@@ -5,7 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.core.exceptions import PermissionDenied
 
 
-class ResourceView:
+class ResourceView(metaclass=ABCMeta):
 	"""
 	Simple Laravel-style RESTful resource controller/view base class.
 	"""
@@ -75,7 +77,7 @@ class ResourceView:
 		if user != self.request.user:
 			raise PermissionDenied
 
-	# Handler methods, must be overridden in child class
+	# Handler methods, should be overridden in child class
 
 	def index(self, request, *args):
 		raise NotImplementedError
