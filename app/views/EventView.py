@@ -1,4 +1,5 @@
 from django.shortcuts import render, reverse, redirect
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 
@@ -71,6 +72,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 		if form.is_valid():
 			form.save()
+			messages.success(request, "Inschrijflijst bijgewerkt!")
 			return redirect('event-edit', event.pk)
 		else:
 			return self.edit(request, event.pk, form=form)
@@ -86,6 +88,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 		if form.is_valid():
 			event = form.save()
+			messages.success(request, "Inschrijflijst aangemaakt!")
 			return redirect('event-detail', event.pk)
 		else:
 			return self.create(request, form=form)

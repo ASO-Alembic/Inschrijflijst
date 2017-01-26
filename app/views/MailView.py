@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.conf import settings
@@ -26,6 +27,9 @@ class MailView(LoginRequiredMixin, ResourceView):
 
 		form = MassMailForm(data=request.POST)
 
+		# Counter
+		i = 0
+
 		if form.is_valid():
 			with Mailer(settings.DEFAULT_FROM_EMAIL) as mailer:
 				for reg in event.registration_set.filter(withdrawn_at=None):
@@ -33,7 +37,9 @@ class MailView(LoginRequiredMixin, ResourceView):
 					if not reg.is_backup() or form.cleaned_data['recipients'] == 'all':
 						msg = CustomMail(event.committee.email, reg.participant, form.cleaned_data['subject'], form.cleaned_data['body'])
 						mailer.send(msg)
+						i += 1
 		else:
 			return self.create(request, event.pk, form=form)
 
+		messages.success(request, "{} emails verstuurd!".format(i))
 		return redirect('mail-create', event.pk)

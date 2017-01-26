@@ -1,5 +1,6 @@
 import csv
 
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.utils import timezone
@@ -51,6 +52,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 			registration.save()
 
+			messages.success(request, "Inschrijving geregistreerd!")
 			return redirect('event-detail', event.pk)
 		else:
 			# Render previous page with validation errors
@@ -90,6 +92,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 			if form.is_valid():
 				process_form()
+				messages.success(request, "Inschrijving bijgewerkt!")
 				return redirect('event-edit', event.pk)
 			else:
 				# Render previous page with validation errors
@@ -105,6 +108,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 			if form.is_valid():
 				process_form()
+				messages.success(request, "Inschrijving bijgewerkt!")
 				return redirect('event-detail', event.pk)
 			else:
 				# Render previous page with validation errors

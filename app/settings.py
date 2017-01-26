@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+
+from django.contrib.messages import constants as message_constants
+
 from .settings_local import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -95,3 +98,11 @@ FORMAT_MODULE_PATH = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 STATIC_URL = '/static/'
+
+MESSAGE_TAGS = {
+	message_constants.DEBUG:    'alert-danger',
+	message_constants.INFO:     'alert-info',
+	message_constants.SUCCESS:  'alert-success',
+	message_constants.WARNING:  'alert-warning',
+	message_constants.ERROR:    'alert-danger'
+}
