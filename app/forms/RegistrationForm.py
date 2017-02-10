@@ -2,11 +2,32 @@ from django import forms
 
 
 class RegistrationForm(forms.Form):
-	registered = forms.BooleanField(required=False, label='Ik ben erbij!')
+	registered = forms.BooleanField(
+		required=False,
+		label='',
+		widget=forms.CheckboxInput(attrs={
+			'data-toggle': 'toggle',
+			'data-on': 'Ingeschreven',
+			'data-off': 'Niet ingeschreven',
+			'data-onstyle': 'success'
+		})
+	)
 	note = forms.CharField(required=False, max_length=25)
 
-	def __init__(self, event, data=None):
-		super().__init__(data=data)
+	def __init__(self, event, registration=None, data=None):
+		if registration is not None:
+			# Initialise form with existing data from registration object and use some other toggle labels
+			super().__init__(data={'registered': registration.withdrawn_at is None, 'note': registration.note})
+
+			self.fields['registered'].widget = forms.CheckboxInput(attrs={
+				'data-toggle': 'toggle',
+				'data-on': 'Ingeschreven',
+				'data-off': 'Uitgeschreven',
+				'data-onstyle': 'success',
+				'data-offstyle': 'danger'
+			})
+		else:
+			super().__init__(data=data)
 
 		self.event = event
 

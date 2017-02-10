@@ -25,3 +25,8 @@ footer {
 	width: 75%;
 	margin: auto auto 0;
 }
+
+.checkbox label .toggle {
+	margin-left: 0 !important;
+	width: 150px !important;
+}

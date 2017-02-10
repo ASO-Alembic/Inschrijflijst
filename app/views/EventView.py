@@ -32,7 +32,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 				registration = Registration.objects.get(event=event, participant=request.user)
 
 				if form is None:
-					form = RegistrationForm(event, data={'registered': registration.withdrawn_at is None, 'note': registration.note})
+					form = RegistrationForm(event, registration)
 
 				action = reverse('registration-detail', args=[event.pk, registration.pk])
 			else:

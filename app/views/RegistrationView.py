@@ -38,7 +38,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def store(self, request, event):
-		form = RegistrationForm(event, request.POST)
+		form = RegistrationForm(event, data=request.POST)
 
 		# For a new registration, the registered field is required
 		form.fields['registered'].required = True
@@ -64,7 +64,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 		self.check_user(event.committee.chairman)
 
 		if form is None:
-			form = RegistrationForm(event, data={'registered': registration.withdrawn_at is None, 'note': registration.note})
+			form = RegistrationForm(event, registration)
 
 		return render(request, 'registration_edit.html', {
 			'event': event,
@@ -74,7 +74,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def update(self, request, event, registration):
-		form = RegistrationForm(event, request.POST)
+		form = RegistrationForm(event, data=request.POST)
 
 		def process_form():
 			registration.note = form.cleaned_data.get('note', '')
