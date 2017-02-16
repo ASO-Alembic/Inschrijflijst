@@ -19,7 +19,7 @@ from django.contrib.auth import views as auth_views
 from django.shortcuts import redirect, render
 
 from lib.ResourceView import ResourceRouter
-from app.views import EventView, RegistrationView, CommitteeView, MailView
+from app.views import EventView, RegistrationView, CommitteeView, MailView, AdminView
 
 
 router = ResourceRouter()
@@ -31,7 +31,9 @@ router.register(['events', 'mail'], MailView, 'mail')
 urlpatterns = [
 	url(r'^$', lambda request: redirect('event-list'), name='home'),
 	url(r'^faq/$', lambda request: render(request, 'faq.html'), name='faq'),
-	url(r'^admin/', admin.site.urls, name='admin'),
+	url(r'^admin/$', AdminView.get, name='admin'),
+	url(r'^admin/sync-ldap$', AdminView.sync_ldap, name='admin-sync-ldap'),
+	url(r'^django-admin/', admin.site.urls, name='django-admin'),
 
 	url(r'^login/$', auth_views.login, name='login'),
 	url(r'^logout/$', auth_views.logout, name='logout'),
