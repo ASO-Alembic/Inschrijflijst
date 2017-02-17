@@ -1,4 +1,5 @@
 import ldap
+import re
 
 
 class LDAPService:
@@ -35,7 +36,7 @@ class LDAPService:
 		"""
 		filter = '(objectclass=group)'
 		dn = 'OU=Commissies,OU=Groepen,{}'.format(self.DC_SUFFIX)
-		attrs = ['cn', 'member', self.CHAIRMAN]
+		attrs = ['cn', 'member', self.CHAIRMAN, 'mail']
 
 		result = self.connection.search_s(dn, ldap.SCOPE_ONELEVEL, filter, attrs)
 
@@ -48,7 +49,7 @@ class LDAPService:
 		"""
 		filter = '(&(objectclass=group)(member={}))'.format(self.get_dn_from_username(username))
 		dn = 'OU=Commissies,OU=Groepen,{}'.format(self.DC_SUFFIX)
-		attrs = ['cn', 'member', self.CHAIRMAN]
+		attrs = ['cn', 'member', self.CHAIRMAN, 'mail']
 
 		result = self.connection.search_s(dn, ldap.SCOPE_ONELEVEL, filter, attrs)
 
@@ -94,8 +95,15 @@ class LDAPService:
 		else:
 			members = []
 
+		# Trim substring from beginning of mailing list addresses. Some committees don't have this attribute.
+		if 'mail' in attrs:
+			email = re.sub(r'^FooBarSecurityGroup\.', '', attrs['mail'][0].decode("utf-8"))
+		else:
+			email = ''
+
 		return {
 			'cn': attrs['cn'][0].decode("utf-8"),
+			'email': email,
 			'members': members,
 			'chairman': chairman
 		}

@@ -26,6 +26,7 @@ class Committee(models.Model):
 			c_object.members.set(
 				[User.objects.get(username=m) for m in c_dict['members'] if User.objects.filter(username=m).exists()])
 
-			# Update chairman
+			# Update chairman and email address
 			c_object.chairman = User.objects.filter(username=c_dict['chairman']).first()
+			c_object.email = c_dict['email']
 			c_object.save()
