@@ -81,9 +81,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Authentication URLs
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
-LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = FORCE_SCRIPT_NAME + '/'
+LOGOUT_REDIRECT_URL = FORCE_SCRIPT_NAME + '/'
+LOGIN_URL = FORCE_SCRIPT_NAME + '/login/'
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.10/howto/static-files/
+STATIC_URL = FORCE_SCRIPT_NAME + '/static/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -95,10 +99,6 @@ LANGUAGE_CODE = 'NL-nl'
 FORMAT_MODULE_PATH = [
 	'app.formats',
 ]
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
-STATIC_URL = '/static/'
 
 MESSAGE_TAGS = {
 	message_constants.DEBUG:    'alert-danger',
