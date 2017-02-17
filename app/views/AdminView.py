@@ -12,7 +12,7 @@ def get(request):
 
 def sync_ldap(request):
 	# Get committees from AD
-	with LDAPService(settings.AUTH_LDAP_SERVER_URI, settings.AUTH_LDAP_BIND_DN,settings.AUTH_LDAP_BIND_PASSWORD) as ldap_service:
+	with LDAPService(settings.AUTH_LDAP_SERVER_URI, settings.AUTH_LDAP_BIND_DN, settings.AUTH_LDAP_BIND_PASSWORD) as ldap_service:
 		committees = ldap_service.get_committees()
 
 	# Update all committees from list of dicts
