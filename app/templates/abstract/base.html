@@ -35,7 +35,7 @@
 						{% endif %}
 						<li class="{% if url_name == 'faq' %}active{% endif %}"><a href="{% url 'faq' %}">FAQ</a></li>
 						{% if user.is_staff %}
-							<li><a href="{% url 'admin' %}">Admin</a></li>
+							<li class="{% if url_name == 'admin' %}active{% endif %}"><a href="{% url 'admin' %}">Admin</a></li>
 							<li><a href="{% url 'admin:index' %}">Django admin</a></li>
 						{% endif %}
 					{% endwith %}
