@@ -1,0 +1,47 @@
+import ldap
+from django_auth_ldap.config import LDAPSearch
+
+SECRET_KEY = ''
+DEBUG = True
+ALLOWED_HOSTS = []
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'Europe/Amsterdam'
+DEFAULT_FROM_EMAIL = 'Inschrijflijst <www-data@example.com>'
+
+# Database
+DATABASES = {
+	'default': {
+		'ENGINE': 'django.db.backends.mysql',
+		'NAME': 'inschrijflijst',
+		'USER': 'inschrijflijst',
+		'PASSWORD': '',
+		'HOST': 'localhost',
+		'PORT': 3306
+	}
+}
+
+# LDAP Auth
+AUTHENTICATION_BACKENDS = [
+	'django_auth_ldap.backend.LDAPBackend',
+	'django.contrib.auth.backends.ModelBackend'
+]
+
+AUTH_LDAP_SERVER_URI = 'ldap://dc.example.com'
+AUTH_LDAP_BIND_DN = 'CN=Example,OU=Users,DC=dc,DC=example,DC=com'
+AUTH_LDAP_BIND_PASSWORD = ''
+
+AUTH_LDAP_ALWAYS_UPDATE_USER = False
+
+AUTH_LDAP_CONNECTION_OPTIONS = {
+	ldap.OPT_DEBUG_LEVEL: 1,
+	ldap.OPT_REFERRALS: 0,
+}
+
+AUTH_LDAP_USER_SEARCH = LDAPSearch('OU=Users,DC=dc,DC=example,DC=com', ldap.SCOPE_SUBTREE,
+                                   '(sAMAccountName=%(user)s)')
+
+AUTH_LDAP_USER_ATTR_MAP = {
+	"first_name": "givenName",
+	"last_name": "sn",
+	"email": "mail"
+}
