@@ -8,7 +8,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h1>{{ event.name }} <small>{{ event.committee.name }}</small></h1>
-			{% if event.committee in user.committee_set.all %}
+			{% if event.committee in user.chaired_committees.all %}
 				<a class="btn btn-default" href="{% url 'event-edit' event.pk %}" role="button">Bewerken</a>
 			{% endif %}
 		</div>
