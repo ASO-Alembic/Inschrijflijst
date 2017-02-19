@@ -9,7 +9,7 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 
 from lib.ResourceView import ResourceView, bind_model
-from app.models import Event, Registration
+from app.models import Event, Registration, Committee
 from app.forms import RegistrationForm
 from app.views import EventView
 
@@ -38,26 +38,42 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def store(self, request, event):
-		form = RegistrationForm(event, data=request.POST)
+		if request.GET['unit'] == 'committee':
+			# Bulk registration of whole committee
 
-		# For a new registration, the registered field is required
-		form.fields['registered'].required = True
+			# Get committee that was POSTed and check if user is chairman
+			committee = Committee.objects.get(name=request.POST['committee'])
+			self.check_user(committee.chairman)
 
-		if form.is_valid():
-			registration = Registration(
-				event=event,
-				participant=request.user,
-				note=form.cleaned_data.get('note', '')
-			)
+			# Register all members for event, creating a new Registration instance if one does not exist yet
+			for member in committee.members.all():
+				registration, created = Registration.objects.get_or_create(event=event, participant=member)
+				registration.withdrawn_at = None
+				registration.save()
 
-			registration.save()
-
-			messages.success(request, "Inschrijving geregistreerd!")
+			messages.success(request, "Commissie {} geregistreerd!".format(committee.name))
 			return redirect('event-detail', event.pk)
 		else:
-			# Render previous page with validation errors
-			event_view = EventView(self.route, self.request)
-			return event_view.show(self.request, event.pk, form=form)
+			form = RegistrationForm(event, data=request.POST)
+
+			# For a new registration, the registered field is required
+			form.fields['registered'].required = True
+
+			if form.is_valid():
+				registration = Registration(
+					event=event,
+					participant=request.user,
+					note=form.cleaned_data.get('note', '')
+				)
+
+				registration.save()
+
+				messages.success(request, "Inschrijving geregistreerd!")
+				return redirect('event-detail', event.pk)
+			else:
+				# Render previous page with validation errors
+				event_view = EventView(self.route, self.request)
+				return event_view.show(self.request, event.pk, form=form)
 
 	@bind_model
 	def edit(self, request, event, registration, form=None):

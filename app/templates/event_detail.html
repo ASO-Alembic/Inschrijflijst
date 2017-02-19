@@ -72,8 +72,20 @@
 						<input name="_method" value="PUT" type="hidden">
 					{% endif %}
 					{% bootstrap_form form layout='inline' %}
-					<button class="btn btn-primary" type="submit">OK</button>
+					<button class="btn btn-primary" type="submit">Opslaan</button>
 				</form>
+				{% if user.chaired_committees.exists %}
+					<br>
+					<form class="form-inline">
+						Schrijf je commissie in:
+						<select id="chairedCommittees" class="form-control">
+							<option selected></option>
+							{% for committee in user.chaired_committees.all %}
+								<option>{{ committee.name }}</option>
+							{% endfor %}
+						</select>
+					</form>
+				{% endif %}
 				{% if event.is_full %}
 					<br>
 					<div class="alert alert-warning">
@@ -87,6 +99,8 @@
 			{% endif %}
 		</div>
 	</div>
+
+	{% include 'include/bulk_registration.html' with committees=user.chaired_committees.all %}
 {% endblock %}
 
 {% block links %}
@@ -95,4 +109,17 @@
 
 {% block scripts %}
 	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#chairedCommittees').on('change', function () {
+				var committeeName = $('#chairedCommittees').val();
+				if(committeeName != "") {
+					$('.members').hide();
+					$('.members#' + committeeName).show();
+					$('#CommitteeInput').attr('value', committeeName);
+					$('#myModal').modal();
+				}
+			});
+		});
+	</script>
 {% endblock %}

@@ -1,0 +1,23 @@
+{% extends "abstract/modal.html" %}
+
+{% block title %}Commissie inschrijven{% endblock %}
+
+{% block body %}
+	<p>
+		Weet je zeker dat je hele
+		{% for committee in committees %}
+			<strong>{{ committee.name }}</strong>:
+			<span class="members" id="{{ committee.name }}" style="display: none">
+				{% for member in committee.members.all %}{{ member.first_name }} {{ member.last_name }}{% if not forloop.last %}, {% endif %}{% endfor %}
+			</span>
+		{% endfor %}
+		wilt inschrijven?
+	</p>
+	<p>Dit kun jij niet ongedaan maken. De leden van je commissie kunnen zichzelf wel uitschrijven.</p>
+{% endblock %}
+
+{% block action %}{% url 'registration-list' event.pk %}?unit=committee{% endblock %}
+
+{% block inputs %}
+	<input type="hidden" id="CommitteeInput" name="committee" value="">
+{% endblock %}
