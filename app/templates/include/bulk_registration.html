@@ -16,7 +16,7 @@
 	<p>Dit kun jij niet ongedaan maken. De leden van je commissie kunnen zichzelf wel uitschrijven.</p>
 {% endblock %}
 
-{% block action %}{% url 'registration-list' event.pk %}?unit=committee{% endblock %}
+{% block action %}{% url 'registration-list' event.pk %}?role=cm-committee{% endblock %}
 
 {% block inputs %}
 	<input type="hidden" id="CommitteeInput" name="committee" value="">

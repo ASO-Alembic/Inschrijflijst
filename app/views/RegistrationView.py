@@ -38,8 +38,8 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def store(self, request, event):
-		if request.GET['unit'] == 'committee':
-			# Bulk registration of whole committee
+		if request.GET['role'] == 'cm-committee':
+			# Bulk registration of whole committee by chairman
 
 			# Get committee that was POSTed and check if user is chairman
 			committee = Committee.objects.get(name=request.POST['committee'])
@@ -53,7 +53,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 			messages.success(request, "Commissie {} geregistreerd!".format(committee.name))
 			return redirect('event-detail', event.pk)
-		else:
+		elif request.GET['role'] == 'user':
 			form = RegistrationForm(event, data=request.POST)
 
 			# For a new registration, the registered field is required
