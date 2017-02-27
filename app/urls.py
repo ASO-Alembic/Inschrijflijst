@@ -31,8 +31,8 @@ router.register(['events', 'mail'], MailView, 'mail')
 urlpatterns = [
 	url(r'^$', lambda request: redirect('event-list'), name='home'),
 	url(r'^faq/$', lambda request: render(request, 'faq.html'), name='faq'),
-	url(r'^admin/$', AdminView.get, name='admin'),
-	url(r'^admin/sync-ldap$', AdminView.sync_ldap, name='admin-sync-ldap'),
+	url(r'^admin/$', AdminView.as_view('show'), name='admin'),
+	url(r'^admin/sync-ldap$', AdminView.as_view('sync-ldap'), name='admin-sync-ldap'),
 	url(r'^django-admin/', admin.site.urls, name='django-admin'),
 
 	url(r'^login/$', auth_views.login, name='login'),
