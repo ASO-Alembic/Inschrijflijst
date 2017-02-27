@@ -22,7 +22,7 @@
 						{% else %}
 							<p>Ingeschreven: {{ participants.count }}</p>
 						{% endif %}
-						{% if user in event.participants.all %}
+						{% if user in participants %}
 							<p><span class="glyphicon glyphicon-check"></span> Ingeschreven</p>
 						{% endif %}
 					</div>
