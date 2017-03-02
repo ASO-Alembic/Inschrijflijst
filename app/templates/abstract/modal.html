@@ -1,3 +1,5 @@
+{% load static %}
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -13,7 +15,7 @@
 				<form id="modalForm" action="{% block action %}{% endblock %}" method="POST">
 					{% csrf_token %}
 					{% block inputs %}{% endblock %}
-					<button type="button" class="btn btn-default" data-dismiss="modal">Of nee, toch niet</button>
+					<button type="button" class="btn btn-default imageTooltip" data-dismiss="modal">Of nee, toch niet <img src="{% static 'images/heydrich.jpg' %}"></button>
 					<button type="submit" class="btn btn-primary" name="submit">Ja</button>
 				</form>
 			</div>

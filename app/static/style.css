@@ -30,3 +30,16 @@ footer {
 	margin-left: 0 !important;
 	width: 150px !important;
 }
+
+.imageTooltip {
+	position: relative;
+}
+
+.imageTooltip img {
+	display:none;
+}
+
+.imageTooltip:hover img {
+	display: block;
+	position: absolute;
+}
