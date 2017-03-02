@@ -81,7 +81,7 @@ class LDAPService:
 
 	def build_committee_dict(self, attrs):
 		"""
-		Build a dict containing cn, members and chairman for a commitee from a dict of attributes returned from LDAP.
+		Build a dict containing cn, members and chairman for a committee from a dict of attributes returned from LDAP.
 		"""
 		# Lookup username for chairman. Some committees don't have this attribute.
 		if self.CHAIRMAN in attrs:
