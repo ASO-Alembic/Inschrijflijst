@@ -1,0 +1,67 @@
+{% extends "abstract/base.html" %}
+
+{% load bootstrap3 %}
+{% load static %}
+
+{% block title %}Voeg inschrijvingen toe aan lijst{% endblock %}
+
+{% block content %}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h1>Voeg inschrijvingen toe aan {{ event.name }}</h1>
+		</div>
+		<div class="panel-body">
+			<p>Het is mogelijk om personen in te schrijven die nog niet in het systeem staan, maar zorg hierbij wel dat de gebruikersnaam correct is gespeld. Als de gebruikersnaam verkeerd is gespeld, zal de persoon niet correct gekoppeld worden met het juiste account. De gebruikersnaam bestaat uit de voornaam en de achternaam achter elkaar geschreven zonder spaties.</p>
+			<form action="{% url 'registration-list' event.pk %}?role=cm-admin" method="post">
+				{% csrf_token %}
+
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>Gebruikersnaam</th>
+							{% if event.note_field != '' %}
+								<th>{{ event.note_field }}</th>
+							{% endif %}
+							<th>Datum</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody id="rows">
+						<tr>
+							{% for field in form %}
+								<td>{% bootstrap_field field show_label=False form_group_class='' %}</td>
+							{% endfor %}
+							<td><button type="button" class="btn close"><span>&times;</span></button></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<button class="btn btn-default" type="button" id="addRow">Nieuwe regel</button>
+				<button class="btn btn-primary" type="submit">OK</button>
+			</form>
+		</div>
+	</div>
+
+	<datalist id="usernames">
+		{% for username in usernames %}
+			<option>{{ username }}</option>
+		{% endfor %}
+	</datalist>
+{% endblock %}
+
+{% block links %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
+{% endblock %}
+
+{% block scripts %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+	<script>
+		$(function () {
+			$('.date').datetimepicker({
+				format: 'YYYY-MM-DD'
+			});
+		});
+	</script>
+	<script src="{% static 'js/registration_create.js' %}"></script>
+{% endblock %}

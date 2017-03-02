@@ -2,6 +2,7 @@ import csv
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.utils.formats import date_format
@@ -10,7 +11,7 @@ from django.http import HttpResponse
 
 from lib.ResourceView import ResourceView, bind_model
 from app.models import Event, Registration, Committee
-from app.forms import RegistrationForm
+from app.forms import RegistrationForm, RegistrationsForm
 from app.views import EventView
 
 
@@ -53,6 +54,43 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 			messages.success(request, "Commissie {} geregistreerd!".format(committee.name))
 			return redirect('event-detail', event.pk)
+		elif request.GET['role'] == 'cm-admin':
+			# Bulk registration of users as chairman administrating the event
+			self.check_user(event.committee.chairman)
+
+			# Create list of tuples from three lists of inputs
+			rows = list(zip(
+				request.POST.getlist('username'),
+				request.POST.getlist('note'),
+				request.POST.getlist('date')
+			))
+
+			# Build list of forms
+			forms = [RegistrationsForm(event, data={
+				'username': username,
+				'note': note,
+				'date': date
+			}) for username, note, date in rows]
+
+			count = 0
+			for form in forms:
+				if form.is_valid():
+					registration, created = Registration.objects.get_or_create(
+						event=event,
+						participant=form.cleaned_data['username']
+					)
+
+					registration.note = form.cleaned_data.get('note', '')
+					registration.created_at = form.cleaned_data.get('date', timezone.now())
+
+					registration.save()
+					count += 1
+				else:
+					messages.error(request, form.errors)
+
+			if count > 0:
+				messages.success(request, "{} inschrijvingen toegevoegd!".format(count))
+			return redirect('event-edit', event.pk)
 		elif request.GET['role'] == 'user':
 			form = RegistrationForm(event, data=request.POST)
 
@@ -130,3 +168,16 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 				# Render previous page with validation errors
 				event_view = EventView(self.route, self.request)
 				return event_view.show(self.request, event.pk, form=form)
+
+	@bind_model
+	def create(self, request, event):
+		form = RegistrationsForm(event=event)
+
+		# Get list of usernames for suggestions
+		usernames = User.objects.values_list('username', flat=True)
+
+		return render(request, 'registration_create.html', {
+			'event': event,
+			'form': form,
+			'usernames': usernames
+		})
