@@ -23,4 +23,9 @@
 
 	<h3>Hoe gaat het?</h3>
 	<p>Goed, met jou?</p>
+
+	{% if user.chaired_committees.exists %}
+		<h3>Hoe kan ik inschrijvingen op papier in het systeem zetten?</h3>
+		<p>Dit kan via de functie "Inschrijvingen toevoegen", te vinden op de bewerkpagina van je inschrijflijst. Deelnemers die al in het systeem staan worden geäutocompletet. Het is ook mogelijk om deelnemers in te schrijven die nog niet bestaan in het systeem, mits de gebruikersnaam correct wordt gespeld.</p>
+	{% endif %}
 {% endblock %}
