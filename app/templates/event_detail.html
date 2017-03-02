@@ -1,6 +1,7 @@
 {% extends "abstract/base.html" %}
 
 {% load bootstrap3 %}
+{% load static %}
 
 {% block title %}{{ event.name }}{% endblock %}
 
@@ -109,17 +110,5 @@
 
 {% block scripts %}
 	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-	<script>
-		$(document).ready(function () {
-			$('#chairedCommittees').on('change', function () {
-				var committeeName = $('#chairedCommittees').val();
-				if(committeeName != "") {
-					$('.members').hide();
-					$('.members#' + committeeName).show();
-					$('#CommitteeInput').attr('value', committeeName);
-					$('#myModal').modal();
-				}
-			});
-		});
-	</script>
+	<script src="{% static 'js/bulk_registration.js'%}"></script>
 {% endblock %}
