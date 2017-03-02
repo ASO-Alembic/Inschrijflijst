@@ -16,6 +16,10 @@ $(document).ready(function() {
 			.hide()
 			.fadeIn('normal')
 			.appendTo('tbody');
+
+		$('.date').datetimepicker({
+			format: 'YYYY-MM-DD'
+		});
 	});
 
 	// Remove rows
