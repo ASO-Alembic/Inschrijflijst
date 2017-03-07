@@ -43,3 +43,10 @@ footer {
 	display: block;
 	position: absolute;
 }
+
+.progress-bar {
+	min-width: -moz-max-content;
+	min-width: -webkit-max-content;
+	min-width: max-content;
+	padding: 0 5px;
+}
