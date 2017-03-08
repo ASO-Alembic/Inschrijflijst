@@ -83,6 +83,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 					registration.note = form.cleaned_data.get('note', '')
 					registration.created_at = form.cleaned_data.get('date', timezone.now())
+					registration.withdrawn_at = None
 
 					registration.save()
 					count += 1
