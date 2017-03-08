@@ -9,6 +9,7 @@ class Committee(models.Model):
 	chairman = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, null=True, blank=True, related_name='chaired_committees')
 	email = models.EmailField()
 	members = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='in_committees')
+	super_members = models.BooleanField(default=False)
 
 	def __str__(self):
 		return self.name
