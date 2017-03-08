@@ -1,9 +1,10 @@
-from django.contrib.auth.models import User as AuthUser
+from django.contrib.auth.models import AbstractUser
 
 
-class User(AuthUser):
-	class Meta:
-		proxy = True
+class User(AbstractUser):
+	class Meta(AbstractUser.Meta):
+		swappable = 'AUTH_USER_MODEL'
+		db_table = 'auth_user'
 
 	def is_admin(self):
 		"""
