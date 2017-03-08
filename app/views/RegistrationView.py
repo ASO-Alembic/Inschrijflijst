@@ -3,7 +3,6 @@ from itertools import zip_longest
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.utils.formats import date_format
@@ -11,7 +10,7 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 
 from lib.ResourceView import ResourceView, bind_model
-from app.models import Event, Registration, Committee
+from app.models import Event, Registration, Committee, User
 from app.forms import RegistrationForm, RegistrationsForm
 from app.views import EventView
 
