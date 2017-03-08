@@ -10,12 +10,12 @@ class CommitteeView(LoginRequiredMixin, ResourceView):
 
 	def index(self, request):
 		# Get all committees for which the user is chairman
-		committees = Committee.objects.filter(chairman=request.user)
+		committees = request.user.get_admined_committees()
 
 		return render(request, 'committee_list.html', {'committees': committees})
 
 	@bind_model
 	def show(self, request, committee):
-		self.check_user(committee.chairman)
+		self.check_admin_of(committee)
 
 		return render(request, 'committee_detail.html', {'committee': committee})
