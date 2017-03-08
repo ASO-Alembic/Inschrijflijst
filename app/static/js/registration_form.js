@@ -3,7 +3,7 @@
  */
 
 // Snippet for disabling submit button if form is unchanged
-$('form')
+$('form.form-inline')
 	.each(function () {
 		$(this).data('serialized', $(this).serialize())
 	})
