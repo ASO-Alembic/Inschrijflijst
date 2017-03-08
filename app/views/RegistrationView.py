@@ -1,4 +1,5 @@
 import csv
+from itertools import zip_longest
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -59,7 +60,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 			self.check_user(event.committee.chairman)
 
 			# Create list of tuples from three lists of inputs
-			rows = list(zip(
+			rows = list(zip_longest(
 				request.POST.getlist('username'),
 				request.POST.getlist('note'),
 				request.POST.getlist('date')
