@@ -1,8 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils.decorators import classonlymethod
-
-from app.models import User
+from django.contrib.auth.models import User
 
 
 class Committee(models.Model):
