@@ -54,7 +54,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def edit(self, request, event, form=None):
-		self.check_user(event.committee.chairman)
+		self.check_admin_of(event.committee)
 
 		active_regs = Registration.objects.filter(event_id=event, withdrawn_at=None)
 		withdrawn_regs = Registration.objects.filter(event_id=event).exclude(withdrawn_at=None)
@@ -66,8 +66,6 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def update(self, request, event):
-		self.check_user(event.committee.chairman)
-
 		form = EventForm(request.user, request.POST, instance=event)
 
 		if form.is_valid():

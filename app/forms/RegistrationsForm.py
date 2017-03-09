@@ -1,8 +1,9 @@
 from django import forms
-from django.contrib.auth.models import User
 from django.utils import timezone
 from bootstrap3_datetime.widgets import DateTimePicker
 from django_auth_ldap.backend import LDAPBackend
+
+from app.models import User
 
 
 class RegistrationsForm(forms.Form):

@@ -3,7 +3,6 @@ from itertools import zip_longest
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.utils.formats import date_format
@@ -11,7 +10,7 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 
 from lib.ResourceView import ResourceView, bind_model
-from app.models import Event, Registration, Committee
+from app.models import Event, Registration, Committee, User
 from app.forms import RegistrationForm, RegistrationsForm
 from app.views import EventView
 
@@ -21,7 +20,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def index(self, request, event):
-		self.check_user(event.committee.chairman)
+		self.check_admin_of(event.committee)
 
 		regs = event.registration_set.filter(withdrawn_at=None)
 
@@ -57,7 +56,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 			return redirect('event-detail', event.pk)
 		elif request.GET['role'] == 'cm-admin':
 			# Bulk registration of users as chairman administrating the event
-			self.check_user(event.committee.chairman)
+			self.check_admin_of(event.committee)
 
 			# Create list of tuples from three lists of inputs
 			rows = list(zip_longest(
@@ -117,7 +116,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def edit(self, request, event, registration, form=None):
-		self.check_user(event.committee.chairman)
+		self.check_admin_of(event.committee)
 
 		if form is None:
 			form = RegistrationForm(event, registration)
@@ -144,7 +143,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 		if request.GET['role'] == 'cm-admin':
 			# POSTing the form as an chairman administrating the event
-			self.check_user(event.committee.chairman)
+			self.check_admin_of(event.committee)
 
 			if form.is_valid():
 				process_form()

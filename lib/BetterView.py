@@ -60,6 +60,13 @@ class BetterView(metaclass=ABCMeta):
 		if user != self.request.user:
 			raise PermissionDenied
 
+	def check_admin_of(self, committee):
+		"""
+		Check if the current user is admin of the passed committee and raise PermissionDenied if not
+		"""
+		if not self.request.user.is_admin_of_committee(committee):
+			raise PermissionDenied
+
 
 class StaffRequiredMixin:
 	"""

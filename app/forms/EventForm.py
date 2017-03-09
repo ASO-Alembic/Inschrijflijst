@@ -7,7 +7,7 @@ from app.models import Event
 class EventForm(ModelForm):
 	def __init__(self, user, *args, **kwargs):
 		super().__init__(*args, **kwargs)
-		self.fields['committee'].queryset = user.chaired_committees
+		self.fields['committee'].queryset = user.get_admined_committees()
 
 	class Meta:
 		model = Event

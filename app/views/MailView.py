@@ -14,7 +14,7 @@ class MailView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def create(self, request, event, form=None):
-		self.check_user(event.committee.chairman)
+		self.check_admin_of(event.committee)
 
 		if form is None:
 			form = MassMailForm
@@ -23,7 +23,7 @@ class MailView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def store(self, request, event):
-		self.check_user(event.committee.chairman)
+		self.check_admin_of(event.committee)
 
 		form = MassMailForm(data=request.POST)
 
