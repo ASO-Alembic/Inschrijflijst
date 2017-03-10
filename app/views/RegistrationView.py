@@ -8,11 +8,14 @@ from django.utils import timezone
 from django.utils.formats import date_format
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
+from django.conf import settings
 
 from lib.ResourceView import ResourceView, bind_model
+from lib.Mail import Mailer
 from app.models import Event, Registration, Committee, User
 from app.forms import RegistrationForm, RegistrationsForm
 from app.views import EventView
+from app.mails import RegistrationNotificationMail
 
 
 class RegistrationView(LoginRequiredMixin, ResourceView):
@@ -47,10 +50,14 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 			self.check_user(committee.chairman)
 
 			# Register all members for event, creating a new Registration instance if one does not exist yet
-			for member in committee.members.all():
-				registration, created = Registration.objects.get_or_create(event=event, participant=member)
-				registration.withdrawn_at = None
-				registration.save()
+			with Mailer(settings.DEFAULT_FROM_EMAIL) as mailer:
+				for member in committee.members.all():
+					registration, created = Registration.objects.get_or_create(event=event, participant=member)
+					registration.withdrawn_at = None
+					registration.save()
+
+					# Send mail to member
+					mailer.send(RegistrationNotificationMail(event, member, request))
 
 			messages.success(request, "Commissie {} geregistreerd!".format(committee.name))
 			return redirect('event-detail', event.pk)
@@ -73,21 +80,25 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 			}) for username, note, date in rows]
 
 			count = 0
-			for form in forms:
-				if form.is_valid():
-					registration, created = Registration.objects.get_or_create(
-						event=event,
-						participant=form.cleaned_data['username']
-					)
+			with Mailer(settings.DEFAULT_FROM_EMAIL) as mailer:
+				for form in forms:
+					if form.is_valid():
+						registration, created = Registration.objects.get_or_create(
+							event=event,
+							participant=form.cleaned_data['username']
+						)
 
-					registration.note = form.cleaned_data.get('note', '')
-					registration.created_at = form.cleaned_data.get('date', timezone.now())
-					registration.withdrawn_at = None
+						registration.note = form.cleaned_data.get('note', '')
+						registration.created_at = form.cleaned_data.get('date', timezone.now())
+						registration.withdrawn_at = None
+						registration.save()
 
-					registration.save()
-					count += 1
-				else:
-					messages.error(request, form.errors)
+						# Send mail to participant
+						mailer.send(RegistrationNotificationMail(event, form.cleaned_data['username'], request))
+
+						count += 1
+					else:
+						messages.error(request, form.errors)
 
 			if count > 0:
 				messages.success(request, "{} inschrijvingen toegevoegd!".format(count))
