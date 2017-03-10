@@ -17,9 +17,10 @@ class Mail(metaclass=ABCMeta):
 		self.context = {}
 		self.recipients = []
 		self.reply_to = ''
+		self.request = None
 
 	def get_body(self):
-		return render_to_string(self.template, self.context)
+		return render_to_string(self.template, self.context, self.request)
 
 	def get_subject(self):
 		return self.subject
