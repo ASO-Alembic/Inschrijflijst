@@ -1,0 +1,12 @@
+<p>Beste {{ recipient }},</p>
+
+<p>Je wordt erop geattendeerd dat {{ sender }} je heeft ingeschreven voor de activiteit <a href="{{ base_url }}{% url 'event-detail' event.pk %}">{{ event.name }}</a>.</p>
+
+<p>
+	Het is mogelijk om dit te annuleren door jezelf (via bovenstaande link) weer uit te schrijven.
+	{% if event.deadline_at is not None %}
+		Dit kan uiterlijk tot {{ event.deadline_at }}.
+	{% endif %}
+</p>
+
+<p><i>Verzonden door het <a href="{{ base_url }}{% url 'home' %}">Alembic Inschrijfsysteem</a></i></p>
