@@ -9,7 +9,15 @@
 		{% for event, participants in events %}
 			<div class="col-md-4">
 				<div class="panel panel-default">
-					<div class="panel-heading"><h2 class="text-center">{{ event.name }} <small>{{ event.committee.name }}</small></h2></div>
+					<div class="panel-heading">
+						<h2 class="text-center">
+							{{ event.name }}
+							<small>{{ event.committee.name }}</small>
+							{% if event.created_at > request.user.last_seen_at %}
+								<span class="label label-info">Nieuw!</span>
+							{% endif %}
+						</h2>
+					</div>
 					<div class="panel-body">
 						<p><strong>{{ event.event_at }}</strong></p>
 						<p>{{ event.description }}</p>
