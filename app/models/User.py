@@ -1,10 +1,13 @@
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 
 
 class User(AbstractUser):
 	class Meta(AbstractUser.Meta):
 		swappable = 'AUTH_USER_MODEL'
 		db_table = 'auth_user'
+
+	last_seen_at = models.DateTimeField(default=None, null=True)
 
 	def is_admin(self):
 		"""
