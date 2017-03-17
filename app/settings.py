@@ -38,7 +38,6 @@ MIDDLEWARE = [
 	'django.middleware.common.CommonMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
-	'app.middleware.proxy_user_middleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -81,6 +80,8 @@ AUTH_PASSWORD_VALIDATORS = [
 		'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
 	},
 ]
+
+AUTH_USER_MODEL = 'app.User'
 
 # Authentication URLs
 LOGIN_REDIRECT_URL = FORCE_SCRIPT_NAME + '/'
