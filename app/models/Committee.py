@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils.decorators import classonlymethod
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 
 class Committee(models.Model):
@@ -25,9 +25,9 @@ class Committee(models.Model):
 
 			# Update members
 			c_object.members.set(
-				[User.objects.get(username=m) for m in c_dict['members'] if User.objects.filter(username=m).exists()])
+				[get_user_model().objects.get(username=m) for m in c_dict['members'] if get_user_model().objects.filter(username=m).exists()])
 
 			# Update chairman and email address
-			c_object.chairman = User.objects.filter(username=c_dict['chairman']).first()
+			c_object.chairman = get_user_model().objects.filter(username=c_dict['chairman']).first()
 			c_object.email = c_dict['email']
 			c_object.save()
