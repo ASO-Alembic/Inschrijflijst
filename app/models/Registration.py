@@ -18,7 +18,7 @@ class Registration(models.Model):
 		Return true if this is a 'backup registration' (registered after the event was full)
 		"""
 		# Find position of registration in event by counting all preceding active registrations
-		position = self.event.registration_set.filter(created_at__lte=self.created_at, withdrawn_at__isnull=True).count()
+		position = self.event.registration_set.filter(created_at__lte=self.updated_at, withdrawn_at__isnull=True).count()
 
 		return self.event.places is not None and position > self.event.places
 
