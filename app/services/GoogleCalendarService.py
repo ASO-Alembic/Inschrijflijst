@@ -87,6 +87,7 @@ class FlowService:
 			scope=self.SCOPES,
 			redirect_uri=redirect_uri
 		)
+		self.flow.params['access_type'] = 'offline'
 
 	def get_authorize_url(self):
 		return self.flow.step1_get_authorize_url()
