@@ -26,7 +26,7 @@ class AdminView(StaffRequiredMixin, BetterView):
 
 		# Try to instantiate GoogleCalendarService and get list of calendars
 		try:
-			cal_service = GoogleCalendarService(self.flow)
+			cal_service = GoogleCalendarService(self.flow, self.base_url())
 			cals = cal_service.get_calendars()
 			active_cal = cal_service.calendar
 		except RuntimeError:
@@ -41,7 +41,7 @@ class AdminView(StaffRequiredMixin, BetterView):
 
 	def calendar(self, request):
 		# Set 'active' calendar
-		cal_service = GoogleCalendarService(self.flow)
+		cal_service = GoogleCalendarService(self.flow, self.base_url())
 		cal_service.calendar = request.POST['calender_id']
 
 		messages.success(request, "Kalender ingesteld!")
@@ -54,7 +54,7 @@ class AdminView(StaffRequiredMixin, BetterView):
 		self.flow.exchange(request.GET['code'])
 
 		# Empty active calendar setting
-		cal_service = GoogleCalendarService(self.flow)
+		cal_service = GoogleCalendarService(self.flow, self.base_url())
 		cal_service.calendar = None
 
 		messages.success(request, "Google-account gekoppeld!")

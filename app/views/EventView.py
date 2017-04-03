@@ -6,6 +6,7 @@ from django.utils import timezone
 from lib.ResourceView import ResourceView, bind_model
 from app.models import Event, Registration
 from app.forms import RegistrationForm, EventForm
+from app.services import GoogleCalendarService, FlowService
 
 
 class EventView(LoginRequiredMixin, ResourceView):
@@ -86,6 +87,16 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 		if form.is_valid():
 			event = form.save()
+
+			# Insert event in calendar
+			try:
+				flow_service = FlowService(self.base_url() + reverse('admin-calendar-flow'))
+				cal_service = GoogleCalendarService(flow_service, self.base_url())
+				cal_service.insert_event(event)
+			except RuntimeError:
+				# Calendar not set up
+				pass
+
 			messages.success(request, "Inschrijflijst aangemaakt!")
 			return redirect('event-detail', event.pk)
 		else:

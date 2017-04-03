@@ -11,19 +11,21 @@ class GoogleCalendarService:
 	"""
 	Service for communicating with Google Calendar API.
 	"""
-	def __init__(self, flow):
+	def __init__(self, flow, base_url):
 		"""
-		Get credentials from injected FlowService
+		Get credentials from injected FlowService and setup service
 		"""
+		self.base_url = base_url
 		self.credentials = flow.get_credentials()
+
+		http = self.credentials.authorize(httplib2.Http())
+		self.service = build('calendar', 'v3', http=http)
 
 	def get_calendars(self):
 		"""
 		Retrieves list of all (writeable) calendars and returns it as dict.
 		"""
-		http = self.credentials.authorize(httplib2.Http())
-		service = build('calendar', 'v3', http=http)
-		result = service.calendarList().list(minAccessRole='writer').execute()
+		result = self.service.calendarList().list(minAccessRole='writer').execute()
 
 		return {cal['id']: cal['summary'] for cal in result['items']}
 
@@ -43,6 +45,29 @@ class GoogleCalendarService:
 		Set 'active' calendar by saving it in Setting table
 		"""
 		Setting.objects.update_or_create(key='calendar_id', defaults={'value': calendar_id})
+
+	def insert_event(self, app_event):
+		"""
+		Create and insert calendar event from App event
+		"""
+		cal_event = {
+			'summary': app_event.name,
+			'location': app_event.location,
+			'description': self.base_url + app_event.get_absolute_url(),
+			'start': {
+				'dateTime': app_event.start_at.isoformat(),
+			},
+			'end': {
+				'dateTime': app_event.end_at.isoformat(),
+			},
+		}
+
+		# Insert calendar event
+		result = self.service.events().insert(calendarId=self.calendar, body=cal_event).execute()
+
+		# Update app event with calendar URL
+		app_event.calendar_url = result['htmlLink']
+		app_event.save()
 
 
 class FlowService:
