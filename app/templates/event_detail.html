@@ -12,6 +12,9 @@
 			{% if event.committee in user.get_admined_committees %}
 				<a class="btn btn-default" href="{% url 'event-edit' event.pk %}" role="button">Bewerken</a>
 			{% endif %}
+			{% if event.calendar_url %}
+				<a href="{{ event.calendar_url }}"><img src="{% static 'images/logo_calendar_32px.png' %}"></a>
+			{% endif %}
 		</div>
 		<div class="panel-body">
 			<p><strong>Datum: </strong>{{ event.start_at }} - {{ event.end_at }}</p>
