@@ -18,7 +18,7 @@
 			{% for event in committee.event_set.all %}
 				<tr class="{% if event.deadline_at > now %}active{% endif %}">
 					<td><a href="{% url 'event-detail' event.pk %}">{{ event.name }}</a></td>
-					<td>{{ event.event_at }}</td>
+					<td>{{ event.start_at }}</td>
 					<td>{{ event.get_active_registrations_count }} / {{ event.places|default:'∞' }}</td>
 					<td><a href="{% url 'event-edit' event.pk %}" class="glyphicon glyphicon-edit" title="Bewerken"></a></td>
 				</tr>

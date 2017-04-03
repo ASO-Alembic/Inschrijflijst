@@ -14,7 +14,7 @@
 			{% endif %}
 		</div>
 		<div class="panel-body">
-			<p><strong>Datum: </strong>{{ event.event_at }}</p>
+			<p><strong>Datum: </strong>{{ event.start_at }} - {{ event.end_at }}</p>
 			{% if event.deadline_at != None %}
 				<p><strong>Inschrijfdeadline: </strong>{{ event.deadline_at }}</p>
 			{% endif %}

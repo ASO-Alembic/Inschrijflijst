@@ -15,9 +15,9 @@ class EventForm(ModelForm):
 			'name',
 			'description',
 			'committee',
-			'event_at',
+			'start_at',
+			'end_at',
 			'deadline_at',
-			'ended_at',
 			'note_field',
 			'location',
 			'price',
@@ -27,9 +27,9 @@ class EventForm(ModelForm):
 			'name': 'Naam',
 			'description': 'Beschrijving',
 			'committee': 'Commissie',
-			'event_at': 'Datum',
+			'start_at': 'Begindatumtijd',
+			'end_at': 'Einddatumtijd',
 			'deadline_at': 'Inschrijfdeadline',
-			'ended_at': 'Einddatum',
 			'note_field': 'Extra veld',
 			'location': 'Locatie',
 			'price': 'Kosten',
@@ -37,6 +37,6 @@ class EventForm(ModelForm):
 		}
 		widgets = {
 			'deadline_at': DateTimePicker,
-			'ended_at': DateTimePicker,
-			'event_at': DateTimePicker
+			'start_at': DateTimePicker,
+			'end_at': DateTimePicker
 		}

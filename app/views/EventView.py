@@ -13,7 +13,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 	def index(self, request):
 		# Get all (unexpired) events
-		events = Event.objects.prefetch_related('participants').filter(ended_at__gt=timezone.now())
+		events = Event.objects.prefetch_related('participants').filter(end_at__gt=timezone.now())
 
 		# Get a list of tuples with each event and a list of non-withdrawn participants for that event
 		event_list = [(e, e.participants.filter(registration__withdrawn_at__isnull=True)) for e in events]
