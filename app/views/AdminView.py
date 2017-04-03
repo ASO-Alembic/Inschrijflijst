@@ -18,7 +18,7 @@ class AdminView(StaffRequiredMixin, BetterView):
 	def __init__(self, route, request):
 		super().__init__(route, request)
 		# Instantiate FlowService
-		self.flow = FlowService(request.build_absolute_uri('/').strip("/") + reverse('admin-calendar-flow'))
+		self.flow = FlowService(self.base_url() + reverse('admin-calendar-flow'))
 
 	def show(self, request):
 		# Get authorization URL for link
