@@ -88,6 +88,7 @@ class FlowService:
 			redirect_uri=redirect_uri
 		)
 		self.flow.params['access_type'] = 'offline'
+		self.flow.params['prompt'] = 'consent'
 
 	def get_authorize_url(self):
 		return self.flow.step1_get_authorize_url()
