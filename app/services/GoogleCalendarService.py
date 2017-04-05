@@ -51,9 +51,9 @@ class GoogleCalendarService:
 		Create and insert calendar event from App event
 		"""
 		cal_event = {
-			'summary': app_event.name,
+			'summary': app_event.committee.name + " " + app_event.name,
 			'location': app_event.location,
-			'description': self.base_url + app_event.get_absolute_url(),
+			'description': self.base_url + app_event.get_absolute_url() + "\n" + app_event.description,
 			'start': {
 				'dateTime': app_event.start_at.isoformat(),
 			},
