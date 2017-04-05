@@ -30,9 +30,9 @@ router.register(['events', 'mail'], MailView, 'mail')
 
 urlpatterns = [
 	url(r'^$', lambda request: redirect('event-list'), name='home'),
-	url(r'^faq/$', lambda request: render(request, 'faq.html'), name='faq'),
-	url(r'^admin/$', AdminView.as_view('show'), name='admin'),
+	url(r'^faq$', lambda request: render(request, 'faq.html'), name='faq'),
 	url(r'^calendar$', CalendarView.as_view('show'), name='calendar'),
+	url(r'^admin$', AdminView.as_view('show'), name='admin'),
 	url(r'^admin/sync-ldap$', AdminView.as_view('sync-ldap'), name='admin-sync-ldap'),
 	url(r'^admin/calendar$', AdminView.as_view('calendar'), name='admin-calendar'),
 	url(r'^admin/calendar/flow$', AdminView.as_view('calendar-flow'), name='admin-calendar-flow'),
