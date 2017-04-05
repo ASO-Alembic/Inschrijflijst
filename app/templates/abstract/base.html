@@ -37,6 +37,7 @@
 				<ul class="nav navbar-nav">
 					{% with request.resolver_match.url_name as url_name %}
 						<li class="{% if url_name == 'event-list' %}active{% endif %}"><a href="{% url 'event-list' %}">Inschrijflijsten</a></li>
+						<li class="{% if url_name == 'calendar' %}active{% endif %}"><a href="{% url 'calendar' %}">Jaarcirkel</a></li>
 						{% if user.is_admin %}
 							<li class="{% if url_name == 'committee-list' %}active{% endif %}"><a href="{% url 'committee-list' %}">Beheer</a></li>
 						{% endif %}
