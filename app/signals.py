@@ -1,7 +1,7 @@
 from django.conf import settings
 
-from app.services.LDAPService import LDAPService
-from app.models.Committee import Committee
+from app.services import LDAPService
+from app.models import Committee
 
 
 def update_committees(sender, **kwargs):
