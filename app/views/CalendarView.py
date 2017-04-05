@@ -1,6 +1,6 @@
 from django.shortcuts import reverse, render
 
-from app.services import GoogleCalendarService, FlowService
+from app.services import GoogleCalendarService
 from lib.BetterView import BetterView
 
 
@@ -10,7 +10,6 @@ class CalendarView(BetterView):
 	}
 
 	def show(self, request):
-		flow = FlowService(self.base_url() + reverse('admin-calendar-flow'))
-		cal_service = GoogleCalendarService(flow, self.base_url())
+		cal_service = GoogleCalendarService(self.base_url())
 
 		return render(request, 'calendar.html', {'calendar': cal_service.calendar})

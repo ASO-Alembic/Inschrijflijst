@@ -11,12 +11,12 @@ class GoogleCalendarService:
 	"""
 	Service for communicating with Google Calendar API.
 	"""
-	def __init__(self, flow, base_url):
+	def __init__(self, base_url):
 		"""
-		Get credentials from injected FlowService and setup service
+		Get credentials from FlowService and setup service
 		"""
 		self.base_url = base_url
-		self.credentials = flow.get_credentials()
+		self.credentials = FlowService.get_credentials()
 
 		http = self.credentials.authorize(httplib2.Http())
 		self.service = build('calendar', 'v3', http=http)
@@ -94,12 +94,20 @@ class FlowService:
 		return self.flow.step1_get_authorize_url()
 
 	def exchange(self, code):
+		"""
+		Acquire credentials form OAuth2 process and store them
+		"""
 		credentials = self.flow.step2_exchange(code)
+
 		store = Storage(self.CREDENTIALS_FILE)
 		store.put(credentials)
 
-	def get_credentials(self):
-		store = Storage(self.CREDENTIALS_FILE)
+	@classmethod
+	def get_credentials(cls):
+		"""
+		Get stored credentials.
+		"""
+		store = Storage(cls.CREDENTIALS_FILE)
 		credentials = store.get()
 
 		if not credentials or credentials.invalid:

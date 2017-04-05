@@ -90,8 +90,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 			# Insert event in calendar
 			try:
-				flow_service = FlowService(self.base_url() + reverse('admin-calendar-flow'))
-				cal_service = GoogleCalendarService(flow_service, self.base_url())
+				cal_service = GoogleCalendarService(self.base_url())
 				cal_service.insert_event(event)
 			except RuntimeError:
 				# Calendar not set up
