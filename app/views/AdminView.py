@@ -1,20 +1,64 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.conf import settings
 from django.contrib import messages
 
 from lib.BetterView import BetterView, StaffRequiredMixin
-from app.services.LDAPService import LDAPService
-from app.models.Committee import Committee
+from app.services import LDAPService, GoogleCalendarService, FlowService
+from app.models import Committee
 
 
 class AdminView(StaffRequiredMixin, BetterView):
 	handler_method_names = {
 		'show': {'get': 'show'},
-		'sync-ldap': {'post': 'sync_ldap'}
+		'sync-ldap': {'post': 'sync_ldap'},
+		'calendar': {'post': 'calendar'},
+		'calendar-flow': {'get': 'calendar_flow'}
 	}
 
+	def __init__(self, route, request):
+		super().__init__(route, request)
+		# Instantiate FlowService
+		self.flow = FlowService(self.base_url() + reverse('admin-calendar-flow'))
+
 	def show(self, request):
-		return render(request, 'admin.html')
+		# Get authorization URL for link
+		authorize_url = self.flow.get_authorize_url()
+
+		# Try to instantiate GoogleCalendarService and get list of calendars
+		try:
+			cal_service = GoogleCalendarService(self.base_url())
+			cals = cal_service.get_calendars()
+			active_cal = cal_service.calendar
+		except RuntimeError:
+			cals = None
+			active_cal = None
+
+		return render(request, 'admin.html', {
+			'authorize_url': authorize_url,
+			'cals': cals,
+			'active_cal': active_cal
+		})
+
+	def calendar(self, request):
+		# Set 'active' calendar
+		cal_service = GoogleCalendarService(self.base_url())
+		cal_service.calendar = request.POST['calender_id']
+
+		messages.success(request, "Kalender ingesteld!")
+		return redirect('admin')
+
+	def calendar_flow(self, request):
+		# Callback from Google
+
+		# Finish Flow
+		self.flow.exchange(request.GET['code'])
+
+		# Empty active calendar setting
+		cal_service = GoogleCalendarService(self.base_url())
+		cal_service.calendar = None
+
+		messages.success(request, "Google-account gekoppeld!")
+		return redirect('admin')
 
 	def sync_ldap(self, request):
 		# Get committees from AD

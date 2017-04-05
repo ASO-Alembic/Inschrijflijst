@@ -18,3 +18,5 @@ __pycache__/
 
 ## Django
 settings_local.py
+
+storage/
