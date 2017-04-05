@@ -35,18 +35,7 @@
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					{% with request.resolver_match.url_name as url_name %}
-						<li class="{% if url_name == 'event-list' %}active{% endif %}"><a href="{% url 'event-list' %}">Inschrijflijsten</a></li>
-						<li class="{% if url_name == 'calendar' %}active{% endif %}"><a href="{% url 'calendar' %}">Jaarcirkel</a></li>
-						{% if user.is_admin %}
-							<li class="{% if url_name == 'committee-list' %}active{% endif %}"><a href="{% url 'committee-list' %}">Beheer</a></li>
-						{% endif %}
-						<li class="{% if url_name == 'faq' %}active{% endif %}"><a href="{% url 'faq' %}">FAQ</a></li>
-						{% if user.is_staff %}
-							<li class="{% if url_name == 'admin' %}active{% endif %}"><a href="{% url 'admin' %}">Admin</a></li>
-							<li><a href="{% url 'admin:index' %}">Django admin</a></li>
-						{% endif %}
-					{% endwith %}
+					{% include 'include/menu.html' %}
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="navbar-text">Welkom, {{ user.first_name }}!</li>
