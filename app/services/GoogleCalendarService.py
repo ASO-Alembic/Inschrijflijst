@@ -50,24 +50,24 @@ class GoogleCalendarService:
 		"""
 		Create and insert calendar event from App event
 		"""
-		cal_event = {
-			'summary': app_event.committee.name + " " + app_event.name,
-			'location': app_event.location,
-			'description': self.base_url + app_event.get_absolute_url() + "\n" + app_event.description,
-			'start': {
-				'dateTime': app_event.start_at.isoformat(),
-			},
-			'end': {
-				'dateTime': app_event.end_at.isoformat(),
-			},
-		}
+		if not app_event.calendar_url:
+			cal_event = {
+				'summary': app_event.committee.name + " " + app_event.name,
+				'location': app_event.location,
+				'description': self.base_url + app_event.get_absolute_url() + "\n" + app_event.description,
+				'start': {
+					'dateTime': app_event.start_at.isoformat(),
+				},
+				'end': {
+					'dateTime': app_event.end_at.isoformat(),
+				},
+			}
 
-		# Insert calendar event
-		result = self.service.events().insert(calendarId=self.calendar, body=cal_event).execute()
+			# Insert calendar event
+			result = self.service.events().insert(calendarId=self.calendar, body=cal_event).execute()
 
-		# Update app event with calendar URL
-		app_event.calendar_url = result['htmlLink']
-		app_event.save()
+			# Return calendar URL
+			return result['htmlLink']
 
 
 class FlowService:

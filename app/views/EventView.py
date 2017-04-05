@@ -6,7 +6,6 @@ from django.utils import timezone
 from lib.ResourceView import ResourceView, bind_model
 from app.models import Event, Registration
 from app.forms import RegistrationForm, EventForm
-from app.services import GoogleCalendarService, FlowService
 
 
 class EventView(LoginRequiredMixin, ResourceView):
@@ -67,10 +66,10 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def update(self, request, event):
-		form = EventForm(request.user, request.POST, instance=event)
+		form = EventForm(request.user, data=request.POST, instance=event)
 
 		if form.is_valid():
-			form.save()
+			form.save(self.base_url())
 			messages.success(request, "Inschrijflijst bijgewerkt!")
 			return redirect('event-edit', event.pk)
 		else:
@@ -83,18 +82,10 @@ class EventView(LoginRequiredMixin, ResourceView):
 		return render(request, 'event_create.html', {'form': form})
 
 	def store(self, request):
-		form = EventForm(request.user, request.POST)
+		form = EventForm(request.user, data=request.POST)
 
 		if form.is_valid():
-			event = form.save()
-
-			# Insert event in calendar
-			try:
-				cal_service = GoogleCalendarService(self.base_url())
-				cal_service.insert_event(event)
-			except RuntimeError:
-				# Calendar not set up
-				pass
+			event = form.save(self.base_url())
 
 			messages.success(request, "Inschrijflijst aangemaakt!")
 			return redirect('event-detail', event.pk)
