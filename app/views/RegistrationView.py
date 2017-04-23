@@ -83,19 +83,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 			with Mailer(settings.DEFAULT_FROM_EMAIL) as mailer:
 				for form in forms:
 					if form.is_valid():
-						registration, created = Registration.objects.get_or_create(
-							event=event,
-							participant=form.cleaned_data['username']
-						)
-
-						registration.note = form.cleaned_data.get('note', '')
-						registration.created_at = form.cleaned_data.get('date', timezone.now())
-						registration.withdrawn_at = None
-						registration.save()
-
-						# Send mail to participant
-						mailer.send(RegistrationNotificationMail(event, form.cleaned_data['username'], request))
-
+						form.save(mailer, request)
 						count += 1
 					else:
 						messages.error(request, form.errors)
