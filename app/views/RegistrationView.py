@@ -106,18 +106,8 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 		elif request.GET['role'] == 'user':
 			form = RegistrationForm(event, data=request.POST)
 
-			# For a new registration, the registered field is required
-			form.fields['registered'].required = True
-
 			if form.is_valid():
-				registration = Registration(
-					event=event,
-					participant=request.user,
-					note=form.cleaned_data.get('note', '')
-				)
-
-				registration.save()
-
+				form.save(request.user)
 				messages.success(request, "Inschrijving geregistreerd!")
 				return redirect('event-detail', event.pk)
 			else:
@@ -130,7 +120,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 		self.check_admin_of(event.committee)
 
 		if form is None:
-			form = RegistrationForm(event, registration)
+			form = RegistrationForm(event, instance=registration)
 
 		return render(request, 'registration_edit.html', {
 			'event': event,
@@ -140,24 +130,14 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def update(self, request, event, registration):
-		form = RegistrationForm(event, data=request.POST)
-
-		def process_form():
-			registration.note = form.cleaned_data.get('note', '')
-
-			if form.cleaned_data['registered']:
-				registration.withdrawn_at = None
-			else:
-				registration.withdrawn_at = timezone.now()
-
-			registration.save()
+		form = RegistrationForm(event, data=request.POST, instance=registration)
 
 		if request.GET['role'] == 'cm-admin':
 			# POSTing the form as an chairman administrating the event
 			self.check_admin_of(event.committee)
 
 			if form.is_valid():
-				process_form()
+				form.save(registration.participant)
 				messages.success(request, "Inschrijving bijgewerkt!")
 				return redirect('event-edit', event.pk)
 			else:
@@ -173,7 +153,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 				raise PermissionDenied
 
 			if form.is_valid():
-				process_form()
+				form.save(request.user)
 				messages.success(request, "Inschrijving bijgewerkt!")
 				return redirect('event-detail', event.pk)
 			else:
