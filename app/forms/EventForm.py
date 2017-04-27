@@ -53,7 +53,7 @@ class EventForm(forms.ModelForm):
 	def save(self, base_url, commit=True):
 		event = super().save(commit=commit)
 
-		if self.fields.get('add_to_calendar'):
+		if self.cleaned_data.get('add_to_calendar'):
 			# Try to insert event in calendar
 			try:
 				cal_service = GoogleCalendarService(base_url)
