@@ -14,6 +14,7 @@ class Event(models.Model):
 	description = models.TextField(max_length=255)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
+	published_at = models.DateTimeField(default=timezone.now, blank=True)
 	deadline_at = models.DateTimeField(default=None, null=True, blank=True)
 	start_at = models.DateTimeField()
 	end_at = models.DateTimeField()
@@ -30,6 +31,12 @@ class Event(models.Model):
 
 	def get_absolute_url(self):
 		return reverse('event-detail', args=[self.pk])
+
+	def is_published(self):
+		"""
+		Return true if the event is published (past published date and not past end date)
+		"""
+		return self.published_at < timezone.now() < self.end_at
 
 	def is_expired(self):
 		"""

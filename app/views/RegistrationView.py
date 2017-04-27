@@ -83,19 +83,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 			with Mailer(settings.DEFAULT_FROM_EMAIL) as mailer:
 				for form in forms:
 					if form.is_valid():
-						registration, created = Registration.objects.get_or_create(
-							event=event,
-							participant=form.cleaned_data['username']
-						)
-
-						registration.note = form.cleaned_data.get('note', '')
-						registration.created_at = form.cleaned_data.get('date', timezone.now())
-						registration.withdrawn_at = None
-						registration.save()
-
-						# Send mail to participant
-						mailer.send(RegistrationNotificationMail(event, form.cleaned_data['username'], request))
-
+						form.save(mailer, request)
 						count += 1
 					else:
 						messages.error(request, form.errors)
@@ -106,18 +94,12 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 		elif request.GET['role'] == 'user':
 			form = RegistrationForm(event, data=request.POST)
 
-			# For a new registration, the registered field is required
-			form.fields['registered'].required = True
+			# Make sure deadline hasn't passed and event is open
+			if event.is_expired() or not event.is_published():
+				raise PermissionDenied
 
 			if form.is_valid():
-				registration = Registration(
-					event=event,
-					participant=request.user,
-					note=form.cleaned_data.get('note', '')
-				)
-
-				registration.save()
-
+				form.save(request.user)
 				messages.success(request, "Inschrijving geregistreerd!")
 				return redirect('event-detail', event.pk)
 			else:
@@ -130,7 +112,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 		self.check_admin_of(event.committee)
 
 		if form is None:
-			form = RegistrationForm(event, registration)
+			form = RegistrationForm(event, instance=registration)
 
 		return render(request, 'registration_edit.html', {
 			'event': event,
@@ -140,24 +122,14 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def update(self, request, event, registration):
-		form = RegistrationForm(event, data=request.POST)
-
-		def process_form():
-			registration.note = form.cleaned_data.get('note', '')
-
-			if form.cleaned_data['registered']:
-				registration.withdrawn_at = None
-			else:
-				registration.withdrawn_at = timezone.now()
-
-			registration.save()
+		form = RegistrationForm(event, data=request.POST, instance=registration)
 
 		if request.GET['role'] == 'cm-admin':
 			# POSTing the form as an chairman administrating the event
 			self.check_admin_of(event.committee)
 
 			if form.is_valid():
-				process_form()
+				form.save(registration.participant)
 				messages.success(request, "Inschrijving bijgewerkt!")
 				return redirect('event-edit', event.pk)
 			else:
@@ -168,12 +140,12 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 			# POSTing the form as an user updating their own registration
 			self.check_user(registration.participant)
 
-			# Make sure deadline hasn't passed
-			if event.is_expired():
+			# Make sure deadline hasn't passed and event is open
+			if event.is_expired() or not event.is_published():
 				raise PermissionDenied
 
 			if form.is_valid():
-				process_form()
+				form.save(request.user)
 				messages.success(request, "Inschrijving bijgewerkt!")
 				return redirect('event-detail', event.pk)
 			else:

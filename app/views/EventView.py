@@ -2,6 +2,7 @@ from django.shortcuts import render, reverse, redirect
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
+from django.core.exceptions import PermissionDenied
 
 from lib.ResourceView import ResourceView, bind_model
 from app.models import Event, Registration
@@ -13,7 +14,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 	def index(self, request):
 		# Get all (unexpired) events
-		events = Event.objects.prefetch_related('participants').filter(end_at__gt=timezone.now())
+		events = Event.objects.prefetch_related('participants').filter(published_at__lt=timezone.now(), end_at__gt=timezone.now())
 
 		# Get a list of tuples with each event and a list of non-withdrawn participants for that event
 		event_list = [(e, e.participants.filter(registration__withdrawn_at__isnull=True)) for e in events]
@@ -22,6 +23,10 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def show(self, request, event, form=None):
+		# Deny access for non-admins if event is not published
+		if not event.is_published() and not request.user.is_admin_of_committee(event.committee):
+			raise PermissionDenied
+
 		active_regs = Registration.objects.filter(event_id=event, withdrawn_at=None)
 		withdrawn_regs = Registration.objects.filter(event_id=event).exclude(withdrawn_at=None)
 
@@ -32,7 +37,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 				registration = Registration.objects.get(event=event, participant=request.user)
 
 				if form is None:
-					form = RegistrationForm(event, registration)
+					form = RegistrationForm(event, instance=registration)
 
 				action = reverse('registration-detail', args=[event.pk, registration.pk])
 			else:
