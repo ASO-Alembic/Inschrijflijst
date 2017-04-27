@@ -47,7 +47,8 @@ class EventForm(forms.ModelForm):
 		widgets = {
 			'deadline_at': DateTimePicker,
 			'start_at': DateTimePicker,
-			'end_at': DateTimePicker
+			'end_at': DateTimePicker,
+			'published_at': DateTimePicker
 		}
 
 	add_to_calendar = forms.BooleanField(required=False, initial=True, label="Toevoegen aan jaarcirkel")
