@@ -18,9 +18,9 @@ class RegistrationForm(forms.Form):
 	note = forms.CharField(required=False, max_length=25)
 
 	def __init__(self, event, data=None, initial=None, instance=None):
-		if instance is not None:
-			self.instance = instance
+		self.instance = instance
 
+		if instance is not None:
 			# Initialise form with initial data from instance and use some other toggle labels
 			super().__init__(data=data, initial={'registered': instance.withdrawn_at is None, 'note': instance.note})
 
