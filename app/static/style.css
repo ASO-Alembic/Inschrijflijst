@@ -50,3 +50,11 @@ footer {
 	min-width: max-content;
 	padding: 0 5px;
 }
+
+.col-md-4 #description {
+	height: 200px;
+}
+
+.col-md-4 #info {
+	height: 50px;
+}

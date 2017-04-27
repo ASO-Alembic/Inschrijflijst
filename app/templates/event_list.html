@@ -18,9 +18,11 @@
 							{% endif %}
 						</h2>
 					</div>
-					<div class="panel-body">
+					<div class="panel-body" id="description">
 						<p><strong>{{ event.start_at }}</strong></p>
 						<p>{{ event.description }}</p>
+					</div>
+					<div class="panel-body" id="info">
 						{% if event.places != None %}
 							<div class="progress">
 								<div class="progress-bar{% if participants.count == event.places %} progress-bar-warning{% elif participants.count > event.places %} progress-bar-danger{% endif %}" role="progressbar" style="width: {% widthratio participants.count event.places 100 %}%; max-width: 100%;">
@@ -30,12 +32,9 @@
 						{% else %}
 							<p>Ingeschreven: {{ participants.count }}</p>
 						{% endif %}
-						{% if user in participants %}
-							<p><span class="glyphicon glyphicon-check"></span> Ingeschreven</p>
-						{% endif %}
 					</div>
 					<div class="panel-footer">
-						<a class="btn btn-default" href="{% url 'event-detail' event.pk %}" role="button">Details</a>
+						<a class="btn btn-default" href="{% url 'event-detail' event.pk %}" role="button">Details</a>{% if user in participants %}&nbsp;<span class="glyphicon glyphicon-check"></span> Ingeschreven{% endif %}
 					</div>
 				</div>
 			</div>

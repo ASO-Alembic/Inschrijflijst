@@ -3,7 +3,8 @@ from django.utils import timezone
 from bootstrap3_datetime.widgets import DateTimePicker
 from django_auth_ldap.backend import LDAPBackend
 
-from app.models import User
+from app.models import User, Registration
+from app.mails import RegistrationNotificationMail
 
 
 class RegistrationsForm(forms.Form):
@@ -13,6 +14,8 @@ class RegistrationsForm(forms.Form):
 
 	def __init__(self, event, **kwargs):
 		super().__init__(**kwargs)
+
+		self.event = event
 
 		if event.note_field != '':
 			self.fields['note'].label = event.note_field
@@ -34,3 +37,17 @@ class RegistrationsForm(forms.Form):
 				raise forms.ValidationError("Gebruikersnaam {} is niet bekend".format(self.cleaned_data['username']))
 
 		return user
+
+	def save(self, mailer, request):
+		registration, created = Registration.objects.get_or_create(
+			event=self.event,
+			participant=self.cleaned_data['username']
+		)
+
+		registration.note = self.cleaned_data.get('note', '')
+		registration.created_at = self.cleaned_data.get('date', timezone.now())
+		registration.withdrawn_at = None
+		registration.save()
+
+		# Send mail to participant
+		mailer.send(RegistrationNotificationMail(self.event, self.cleaned_data['username'], request))
