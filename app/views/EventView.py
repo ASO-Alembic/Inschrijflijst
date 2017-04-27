@@ -2,6 +2,7 @@ from django.shortcuts import render, reverse, redirect
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
+from django.core.exceptions import PermissionDenied
 
 from lib.ResourceView import ResourceView, bind_model
 from app.models import Event, Registration
@@ -22,6 +23,10 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def show(self, request, event, form=None):
+		# Deny access for non-admins if event is not published
+		if not event.is_published() and not request.user.is_admin_of_committee(event.committee):
+			raise PermissionDenied
+
 		active_regs = Registration.objects.filter(event_id=event, withdrawn_at=None)
 		withdrawn_regs = Registration.objects.filter(event_id=event).exclude(withdrawn_at=None)
 

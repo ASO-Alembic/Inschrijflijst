@@ -94,6 +94,10 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 		elif request.GET['role'] == 'user':
 			form = RegistrationForm(event, data=request.POST)
 
+			# Make sure deadline hasn't passed and event is open
+			if event.is_expired() or not event.is_published():
+				raise PermissionDenied
+
 			if form.is_valid():
 				form.save(request.user)
 				messages.success(request, "Inschrijving geregistreerd!")
@@ -136,8 +140,8 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 			# POSTing the form as an user updating their own registration
 			self.check_user(registration.participant)
 
-			# Make sure deadline hasn't passed
-			if event.is_expired():
+			# Make sure deadline hasn't passed and event is open
+			if event.is_expired() or not event.is_published():
 				raise PermissionDenied
 
 			if form.is_valid():

@@ -32,6 +32,12 @@ class Event(models.Model):
 	def get_absolute_url(self):
 		return reverse('event-detail', args=[self.pk])
 
+	def is_published(self):
+		"""
+		Return true if the event is published (past published date and not past end date)
+		"""
+		return self.published_at < timezone.now() < self.end_at
+
 	def is_expired(self):
 		"""
 		Return true if deadline is expired.
