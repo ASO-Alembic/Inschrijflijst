@@ -10,7 +10,7 @@ $(document).ready(function() {
 			.clone();
 
 		// Reset all inputs
-		row.find('input:text').val('');
+		row.find("input:text[name!='date']").val('');
 
 		row
 			.hide()
