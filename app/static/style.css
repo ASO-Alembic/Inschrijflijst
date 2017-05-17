@@ -58,3 +58,7 @@ footer {
 .col-md-4 #info {
 	height: 50px;
 }
+
+.col-md-4 .panel-heading {
+	height: 115px;
+}
