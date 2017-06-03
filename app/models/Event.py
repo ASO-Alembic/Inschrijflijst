@@ -70,7 +70,7 @@ class Event(models.Model):
 		"""
 		Return true if the deadline is closer than a day.
 		"""
-		return self.deadline_at - timezone.now() < timezone.timedelta(days=1)
+		return self.deadline_at - timezone.now() < timezone.timedelta(days=1) and not self.is_expired()
 
 	def clean(self):
 		if self.start_at > self.end_at:

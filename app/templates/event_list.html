@@ -39,6 +39,8 @@
 							<div><span class="glyphicon glyphicon-check"></span> Ingeschreven</div>
 						{% elif event.is_almost_expired %}
 							<span class="label label-info">Inschrijving sluit binnenkort!</span>
+						{% elif event.is_expired %}
+							<span class="label label-warning">Inschrijving gesloten!</span>
 						{% endif %}
 					</div>
 				</div>
