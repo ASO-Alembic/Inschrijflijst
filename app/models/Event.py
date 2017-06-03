@@ -66,6 +66,12 @@ class Event(models.Model):
 		"""
 		return self.registration_set.filter(withdrawn_at__isnull=True).count()
 
+	def is_almost_expired(self):
+		"""
+		Return true if the deadline is closer than a day.
+		"""
+		return self.deadline_at - timezone.now() < timezone.timedelta(days=1)
+
 	def clean(self):
 		if self.start_at > self.end_at:
 			raise ValidationError("Begindatum is later dan de einddatum!")

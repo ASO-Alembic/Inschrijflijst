@@ -35,7 +35,11 @@
 					</div>
 					<div class="panel-footer">
 						<a class="btn btn-default" href="{% url 'event-detail' event.pk %}" role="button">Details</a>
-						{% if user in participants %}<div><span class="glyphicon glyphicon-check"></span> Ingeschreven</div>{% endif %}
+						{% if user in participants %}
+							<div><span class="glyphicon glyphicon-check"></span> Ingeschreven</div>
+						{% elif event.is_almost_expired %}
+							<span class="label label-info">Inschrijving sluit binnenkort!</span>
+						{% endif %}
 					</div>
 				</div>
 			</div>
