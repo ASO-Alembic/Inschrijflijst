@@ -34,7 +34,8 @@
 						{% endif %}
 					</div>
 					<div class="panel-footer">
-						<a class="btn btn-default" href="{% url 'event-detail' event.pk %}" role="button">Details</a>{% if user in participants %}&nbsp;<span class="glyphicon glyphicon-check"></span> Ingeschreven{% endif %}
+						<a class="btn btn-default" href="{% url 'event-detail' event.pk %}" role="button">Details</a>
+						{% if user in participants %}<div><span class="glyphicon glyphicon-check"></span> Ingeschreven</div>{% endif %}
 					</div>
 				</div>
 			</div>
