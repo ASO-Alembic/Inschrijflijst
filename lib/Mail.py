@@ -1,8 +1,9 @@
 from abc import ABCMeta, abstractmethod
 
 from django.template.loader import render_to_string
-from django.core.mail import EmailMessage, get_connection
+from django.core.mail import EmailMultiAlternatives, get_connection
 from django.template import Context, Template
+from html2text import html2text
 
 
 class Mail(metaclass=ABCMeta):
@@ -19,8 +20,11 @@ class Mail(metaclass=ABCMeta):
 		self.reply_to = ''
 		self.request = None
 
-	def get_body(self):
+	def get_html_body(self):
 		return render_to_string(self.template, self.context, self.request)
+
+	def get_plain_text_body(self):
+		return html2text(self.get_html_body())
 
 	def get_subject(self):
 		return self.subject
@@ -46,7 +50,7 @@ class CustomMail(Mail):
 		self.reply_to = [reply_to]
 		self.template_string = template_string
 
-	def get_body(self):
+	def get_html_body(self):
 		"""
 		Renders the template from the given string and context and returns the message body
 		"""
@@ -74,14 +78,14 @@ class Mailer:
 		self.connection.close()
 
 	def send(self, mail):
-		msg = EmailMessage(
+		msg = EmailMultiAlternatives(
 			mail.get_subject(),
-			mail.get_body(),
+			mail.get_plain_text_body(),
 			self.sender,
 			mail.get_recipients(),
 			reply_to=mail.get_reply_to(),
 			connection=self.connection
 		)
 
-		msg.content_subtype = 'html'
+		msg.attach_alternative(mail.get_html_body(), 'text/html')
 		msg.send()
