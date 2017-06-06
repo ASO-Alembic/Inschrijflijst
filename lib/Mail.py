@@ -50,7 +50,9 @@ class CustomMail(Mail):
 		"""
 		Renders the template from the given string and context and returns the message body
 		"""
-		template = Template(self.template_string)
+		html_template_string = '{{% extends "abstract/email_base.html" %}} {{% block content %}}{}{{% endblock %}}'.format(self.template_string)
+
+		template = Template(html_template_string)
 		context = Context(self.context)
 
 		return template.render(context)
