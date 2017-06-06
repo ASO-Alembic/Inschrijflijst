@@ -15,7 +15,7 @@ class RegistrationForm(forms.Form):
 			'data-onstyle': 'success'
 		})
 	)
-	note = forms.CharField(required=False, max_length=25)
+	note = forms.CharField(max_length=25)
 
 	def __init__(self, event, data=None, initial=None, instance=None):
 		self.instance = instance
@@ -43,13 +43,6 @@ class RegistrationForm(forms.Form):
 			self.fields['note'].label = event.note_field
 		else:
 			self.fields.pop('note')
-
-	def clean(self):
-		super().clean()
-
-		# Conditional validation rule: note field must not be empty if registered checkbox is checked and note field exists
-		if self.cleaned_data['registered'] and 'note' in self.cleaned_data and self.cleaned_data['note'] == '':
-			self.add_error('note', "{} niet ingevuld".format(self.event.note_field))
 
 	def save(self, user):
 		if self.instance is not None:
