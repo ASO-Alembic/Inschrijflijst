@@ -15,7 +15,7 @@ class Event(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 	published_at = models.DateTimeField(default=timezone.now, blank=True)
-	deadline_at = models.DateTimeField(default=None, null=True, blank=True)
+	deadline_at = models.DateTimeField()
 	start_at = models.DateTimeField()
 	end_at = models.DateTimeField()
 	note_field = models.CharField(max_length=25, default='', blank=True)
