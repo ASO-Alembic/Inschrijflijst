@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser):
@@ -8,6 +9,7 @@ class User(AbstractUser):
 		db_table = 'auth_user'
 
 	last_seen_at = models.DateTimeField(default=None, null=True)
+	email = models.EmailField(_('email address'))
 
 	def is_admin(self):
 		"""
