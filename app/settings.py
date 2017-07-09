@@ -29,7 +29,8 @@ INSTALLED_APPS = [
 	'django.contrib.staticfiles',
 	'app.apps.AppConfig',
 	'bootstrap3',
-	'bootstrap3_datetime'
+	'bootstrap3_datetime',
+	'post_office'
 ]
 
 MIDDLEWARE = [
@@ -110,4 +111,11 @@ MESSAGE_TAGS = {
 	message_constants.SUCCESS:  'alert-success',
 	message_constants.WARNING:  'alert-warning',
 	message_constants.ERROR:    'alert-danger'
+}
+
+# Django Post Office
+EMAIL_BACKEND = 'post_office.EmailBackend'
+
+POST_OFFICE = {
+	'BATCH_SIZE': 30
 }

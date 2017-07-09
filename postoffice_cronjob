@@ -1,0 +1,5 @@
+# Send queued email every minute
+# https://github.com/ui/django-post_office
+# Place into /etc/cron.d/
+
+* * * * * root /usr/bin/python3 /opt/Inschrijflijst/manage.py send_queued_mail > /dev/null 2>&1
