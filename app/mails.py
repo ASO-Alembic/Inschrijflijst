@@ -13,4 +13,4 @@ class RegistrationNotificationMail(Mail):
 			'event': event
 		}
 		self.recipients = [recipient_user.email]
-		self.reply_to = [request.user.email]
+		self.reply_to = request.user.email

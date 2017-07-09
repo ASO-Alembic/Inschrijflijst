@@ -47,7 +47,7 @@ class CustomMail(Mail):
 		self.subject = subject
 		self.context = {'name': user.first_name + ' ' + user.last_name}
 		self.recipients = [user.email]
-		self.reply_to = [reply_to]
+		self.reply_to = reply_to
 		self.template_string = template_string
 
 	def get_html_body(self):
