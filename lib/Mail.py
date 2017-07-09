@@ -1,9 +1,9 @@
 from abc import ABCMeta, abstractmethod
 
 from django.template.loader import render_to_string
-from django.core.mail import EmailMultiAlternatives, get_connection
 from django.template import Context, Template
 from html2text import html2text
+from post_office import mail
 
 
 class Mail(metaclass=ABCMeta):
@@ -64,28 +64,23 @@ class CustomMail(Mail):
 
 class Mailer:
 	"""
-	Mailer class that wraps around Django's mailing functions. Is a context manager for a connection.
+	Mailer class that wraps around Django's mailing functions.
 	"""
 	def __init__(self, sender):
 		self.sender = sender
-		self.connection = get_connection()
-		self.connection.open()
 
 	def __enter__(self):
 		return self
 
 	def __exit__(self, exc_type, exc_value, traceback):
-		self.connection.close()
+		pass
 
-	def send(self, mail):
-		msg = EmailMultiAlternatives(
-			mail.get_subject(),
-			mail.get_plain_text_body(),
+	def send(self, msg):
+		mail.send(
+			msg.get_recipients(),
 			self.sender,
-			mail.get_recipients(),
-			reply_to=mail.get_reply_to(),
-			connection=self.connection
+			subject=msg.get_subject(),
+			message=msg.get_plain_text_body(),
+			html_message=msg.get_html_body(),
+			headers={'Reply-to': msg.get_reply_to()}
 		)
-
-		msg.attach_alternative(mail.get_html_body(), 'text/html')
-		msg.send()
