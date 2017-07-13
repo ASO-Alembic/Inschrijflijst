@@ -73,6 +73,12 @@ class Event(models.Model):
 		"""
 		return self.deadline_at - timezone.now() < timezone.timedelta(days=1) and not self.is_expired()
 
+	def get_note_field_options(self):
+		"""
+		Return list of tuples from string containing comma separated values
+		"""
+		return [('', '---------')] + [(x, x) for x in self.note_field_options.split(',')]
+
 	def clean(self):
 		if self.start_at > self.end_at:
 			raise ValidationError("Begindatum is later dan de einddatum!")
