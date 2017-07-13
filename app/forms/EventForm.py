@@ -26,6 +26,7 @@ class EventForm(forms.ModelForm):
 			'deadline_at',
 			'published_at',
 			'note_field',
+			'note_field_options',
 			'location',
 			'price',
 			'places',
@@ -39,7 +40,8 @@ class EventForm(forms.ModelForm):
 			'end_at': 'Einddatumtijd',
 			'deadline_at': 'Inschrijfdeadline',
 			'published_at': 'Publicatiedatum',
-			'note_field': 'Extra veld',
+			'note_field': 'Titel',
+			'note_field_options': 'Opties',
 			'location': 'Locatie',
 			'price': 'Kosten',
 			'places': 'Beschikbare plaatsen'
@@ -48,7 +50,10 @@ class EventForm(forms.ModelForm):
 			'deadline_at': DateTimePicker,
 			'start_at': DateTimePicker,
 			'end_at': DateTimePicker,
-			'published_at': DateTimePicker
+			'published_at': DateTimePicker,
+			'note_field_options': forms.TextInput(attrs={
+				'data-role': 'tagsinput'
+			})
 		}
 
 	add_to_calendar = forms.BooleanField(required=False, initial=True, label="Toevoegen aan jaarcirkel")

@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, validate_comma_separated_integer_list
 from django.urls import reverse
 from django.core.exceptions import ValidationError
 
@@ -19,6 +19,7 @@ class Event(models.Model):
 	start_at = models.DateTimeField()
 	end_at = models.DateTimeField()
 	note_field = models.CharField(max_length=25, default='', blank=True)
+	note_field_options = models.CharField(max_length=255, default='', blank=True, validators=[validate_comma_separated_integer_list])
 	location = models.CharField(max_length=25)
 	price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 	calendar_url = models.CharField(max_length=255, blank=True)
