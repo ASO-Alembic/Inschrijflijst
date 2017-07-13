@@ -20,6 +20,8 @@ class Event(models.Model):
 	end_at = models.DateTimeField()
 	note_field = models.CharField(max_length=25, default='', blank=True)
 	note_field_options = models.CharField(max_length=255, default='', blank=True, validators=[validate_comma_separated_integer_list])
+	note_field_required = models.BooleanField()
+	note_field_public = models.BooleanField()
 	location = models.CharField(max_length=25)
 	price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 	calendar_url = models.CharField(max_length=255, blank=True)

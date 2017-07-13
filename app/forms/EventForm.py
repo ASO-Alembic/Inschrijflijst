@@ -27,6 +27,8 @@ class EventForm(forms.ModelForm):
 			'published_at',
 			'note_field',
 			'note_field_options',
+			'note_field_required',
+			'note_field_public',
 			'location',
 			'price',
 			'places',
@@ -42,6 +44,8 @@ class EventForm(forms.ModelForm):
 			'published_at': 'Publicatiedatum',
 			'note_field': 'Titel',
 			'note_field_options': 'Opties',
+			'note_field_required': 'Verplicht',
+			'note_field_public': 'Antwoord publiek zichtbaar',
 			'location': 'Locatie',
 			'price': 'Kosten',
 			'places': 'Beschikbare plaatsen'
