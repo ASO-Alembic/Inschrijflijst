@@ -40,6 +40,9 @@
 					<div class="col-md-3">
 						{% bootstrap_field form.deadline_at show_label=False form_group_class='' %}
 					</div>
+					<label class="control-label">
+						<span class="glyphicon glyphicon-question-sign" title="De publicatiedatum is het moment waarop de inschrijflijst zichtbaar wordt. De inschrijfdeadline is het moment waarop de inschrijving wordt gesloten."></span>
+					</label>
 				</div>
 
 				<hr>
@@ -63,23 +66,25 @@
 						<div class="col-md-9">
 							<div class="radio">
 								<label>
-									<input type="radio" name="note_field" checked>
-									Vrij
+									<input type="radio" name="note_field_radio" checked>
+									Open antwoord
 								</label>
 							</div>
 						</div>
 						<div class="col-md-offset-3 col-md-2">
 							<div class="radio">
 								<label>
-									<input type="radio" name="note_field">
-									Multiple-choice
+									<input type="radio" name="note_field_radio">
+									Meerkeuze
 								</label>
 							</div>
 						</div>
-						<div class="col-md-7">
+						<div class="col-md-6">
 							{{ form.note_field_options }}
-
 						</div>
+						<label class="control-label">
+							<span class="glyphicon glyphicon-question-sign" title="Vul hier de opties, gescheiden door een komma (of enter) in."></span>
+						</label>
 					</div>
 
 					{% bootstrap_field form.note_field_required layout='horizontal' %}
