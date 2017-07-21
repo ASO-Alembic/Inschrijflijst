@@ -79,7 +79,7 @@ class Event(models.Model):
 		"""
 		Return list of tuples from string containing comma separated values
 		"""
-		return [('', '---------')] + [(x, x) for x in self.note_field_options.split(',')]
+		return [('', self.note_field + ':')] + [(x, x) for x in self.note_field_options.split(',')]
 
 	def clean(self):
 		if self.start_at > self.end_at:
