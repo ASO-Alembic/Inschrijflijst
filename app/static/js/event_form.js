@@ -3,11 +3,9 @@
  */
 
 $(document).ready(function () {
-	$('.bootstrap-tagsinput input').prop('disabled', true);
-
-	$('#note_field_check').click(function() {
-		$('#note_field').prop('disabled', !this.checked);
-	});
+	$('#note_field_check').click(setNoteFieldsetState);
+	if($('.bootstrap-tagsinput input').val() == '')
+		$('.bootstrap-tagsinput input').prop('disabled', true);
 
 	$('input:radio').change(function() {
 		$(this).closest('.form-group').find("#id_note_field_options").tagsinput('removeAll');
@@ -17,3 +15,7 @@ $(document).ready(function () {
 			$(this).parent().parent().parent().next().find("input:text").prop('disabled', false);
 	});
 });
+
+function setNoteFieldsetState() {
+	$('#note_fieldset').prop('disabled', !$('#note_field_check').is(':checked'));
+}

@@ -1,6 +1,5 @@
 {% extends "abstract/base.html" %}
 
-{% load bootstrap3 %}
 {% load static %}
 
 {% block title %}Nieuwe inschrijflijst{% endblock %}
@@ -12,86 +11,7 @@
 		</div>
 		<div class="panel-body">
 			<form class="form-horizontal" action="{% url 'event-list' %}" method="post">
-				{% csrf_token %}
-
-				{% bootstrap_field form.name layout='horizontal' %}
-				{% bootstrap_field form.description layout='horizontal' %}
-				{% bootstrap_field form.committee layout='horizontal' %}
-				{% bootstrap_field form.location layout='horizontal' %}
-				{% bootstrap_field form.price layout='horizontal' addon_before='€' %}
-				{% bootstrap_field form.places layout='horizontal' %}
-
-				<hr>
-
-				<div class="form-group">
-					<label class="control-label col-md-3">Evenement:</label>
-					<div class="col-md-3">
-						{% bootstrap_field form.start_at show_label=False form_group_class='' %}
-					</div>
-					<div class="col-md-3">
-						{% bootstrap_field form.end_at show_label=False form_group_class='' %}
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-3">Inschrijflijst:</label>
-					<div class="col-md-3">
-						{% bootstrap_field form.published_at show_label=False form_group_class='' %}
-					</div>
-					<div class="col-md-3">
-						{% bootstrap_field form.deadline_at show_label=False form_group_class='' %}
-					</div>
-					<label class="control-label">
-						<span class="glyphicon glyphicon-question-sign" title="De publicatiedatum is het moment waarop de inschrijflijst zichtbaar wordt. De inschrijfdeadline is het moment waarop de inschrijving wordt gesloten."></span>
-					</label>
-				</div>
-
-				<hr>
-
-				<div class="form-group">
-					<div class="col-md-offset-3 col-md-4">
-						<div class="checkbox">
-							<label>
-								<input type="checkbox" id="note_field_check">
-								Voeg een extra veld toe
-							</label>
-						</div>
-					</div>
-				</div>
-
-				<fieldset id="note_field" disabled>
-					{% bootstrap_field form.note_field layout='horizontal' %}
-
-					<div class="form-group">
-						<label class="control-label col-md-3">Type:</label>
-						<div class="col-md-9">
-							<div class="radio">
-								<label>
-									<input type="radio" name="note_field_radio" checked>
-									Open antwoord
-								</label>
-							</div>
-						</div>
-						<div class="col-md-offset-3 col-md-2">
-							<div class="radio">
-								<label>
-									<input type="radio" name="note_field_radio">
-									Meerkeuze
-								</label>
-							</div>
-						</div>
-						<div class="col-md-6">
-							{{ form.note_field_options }}
-						</div>
-						<label class="control-label">
-							<span class="glyphicon glyphicon-question-sign" title="Vul hier de opties, gescheiden door een komma (of enter) in."></span>
-						</label>
-					</div>
-
-					{% bootstrap_field form.note_field_required layout='horizontal' %}
-					{% bootstrap_field form.note_field_public layout='horizontal' %}
-				</fieldset>
-
-				<button class="btn btn-primary" type="submit">Opslaan</button>
+				{% include 'include/event_form.html' %}
 			</form>
 		</div>
 	</div>
