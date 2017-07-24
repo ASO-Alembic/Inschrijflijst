@@ -7,6 +7,7 @@ from django.core.exceptions import ValidationError
 
 from .Committee import Committee
 from .Registration import Registration
+from lib.CommaSeparatedStringsField import CommaSeparatedStringsField
 
 
 class Event(models.Model):
@@ -19,7 +20,7 @@ class Event(models.Model):
 	start_at = models.DateTimeField()
 	end_at = models.DateTimeField()
 	note_field = models.CharField(max_length=25, default='', blank=True)
-	note_field_options = models.CharField(max_length=255, default='', blank=True, validators=[validate_comma_separated_integer_list])
+	note_field_options = CommaSeparatedStringsField(max_length=255, default='', blank=True)
 	note_field_required = models.BooleanField()
 	note_field_public = models.BooleanField()
 	location = models.CharField(max_length=25)
@@ -77,9 +78,9 @@ class Event(models.Model):
 
 	def get_note_field_options(self):
 		"""
-		Return list of tuples from string containing comma separated values
+		Return list of tuples from list of options
 		"""
-		return [('', self.note_field + ':')] + [(x, x) for x in self.note_field_options.split(',')]
+		return [('', self.note_field + ':')] + [(x, x) for x in self.note_field_options]
 
 	def clean(self):
 		if self.start_at > self.end_at:
