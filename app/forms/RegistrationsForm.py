@@ -9,7 +9,6 @@ from app.mails import RegistrationNotificationMail
 
 class RegistrationsForm(forms.Form):
 	username = forms.CharField(label='Gebruikersnaam', widget=forms.TextInput(attrs={'list': 'usernames'}))
-	note = forms.CharField(max_length=25)
 	date = forms.DateField(initial=timezone.now(), widget=DateTimePicker)
 
 	def __init__(self, event, **kwargs):
@@ -17,10 +16,12 @@ class RegistrationsForm(forms.Form):
 
 		self.event = event
 
+		# Add CharField or ChoiceField depending if note options are set in event
 		if event.note_field != '':
-			self.fields['note'].label = event.note_field
-		else:
-			self.fields.pop('note')
+			if event.note_field_options == '':
+				self.fields['note'] = forms.CharField(max_length=25, label=event.note_field, required=event.note_field_required)
+			else:
+				self.fields['note'] = forms.ChoiceField(choices=event.get_note_field_options(), label=event.note_field, required=event.note_field_required)
 
 	def clean_username(self):
 		"""

@@ -68,3 +68,9 @@ footer {
 	justify-content: space-between;
 	align-items: center;
 }
+
+/* Placeholder option */
+option[value=""] {
+	color: #999;
+	font-weight: bold;
+}

@@ -43,6 +43,9 @@
 					<th>#</th>
 					<th>Naam</th>
 					<th>Inschrijfdatum</th>
+					{% if event.note_field != '' and event.note_field_public %}
+						<th>{{ event.note_field }}</th>
+					{% endif %}
 				</tr>
 			</thead>
 			<tbody>
@@ -64,6 +67,9 @@
 							{% endif %}
 						</td>
 						<td>{{ reg.updated_at }}</td>
+						{% if event.note_field != '' and event.note_field_public %}
+							<td>{{ reg.note }}</td>
+						{% endif %}
 					</tr>
 				{% endfor %}
 			</tbody>

@@ -15,7 +15,6 @@ class RegistrationForm(forms.Form):
 			'data-onstyle': 'success'
 		})
 	)
-	note = forms.CharField(max_length=25)
 
 	def __init__(self, event, data=None, initial=None, instance=None):
 		self.instance = instance
@@ -39,10 +38,12 @@ class RegistrationForm(forms.Form):
 
 		self.event = event
 
+		# Add CharField or ChoiceField depending if note options are set in event
 		if event.note_field != '':
-			self.fields['note'].label = event.note_field
-		else:
-			self.fields.pop('note')
+			if event.note_field_options == '':
+				self.fields['note'] = forms.CharField(max_length=25, label=event.note_field, required=event.note_field_required)
+			else:
+				self.fields['note'] = forms.ChoiceField(choices=event.get_note_field_options(), label=event.note_field, required=event.note_field_required)
 
 	def save(self, user):
 		if self.instance is not None:

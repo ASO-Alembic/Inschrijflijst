@@ -1,6 +1,6 @@
 {% extends "abstract/base.html" %}
 
-{% load bootstrap3 %}
+{% load static %}
 
 {% block title %}Nieuwe inschrijflijst{% endblock %}
 
@@ -11,9 +11,7 @@
 		</div>
 		<div class="panel-body">
 			<form class="form-horizontal" action="{% url 'event-list' %}" method="post">
-				{% csrf_token %}
-				{% bootstrap_form form layout='horizontal' %}
-				<button class="btn btn-primary" type="submit">Opslaan</button>
+				{% include 'include/event_form.html' %}
 			</form>
 		</div>
 	</div>
@@ -21,9 +19,11 @@
 
 {% block links %}
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
 {% endblock %}
 
 {% block scripts %}
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
 	<script>
@@ -33,4 +33,5 @@
             });
         });
 	</script>
+	<script src="{% static 'js/event_form.js' %}"></script>
 {% endblock %}

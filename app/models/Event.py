@@ -7,6 +7,7 @@ from django.core.exceptions import ValidationError
 
 from .Committee import Committee
 from .Registration import Registration
+from lib.CommaSeparatedStringsField import CommaSeparatedStringsField
 
 
 class Event(models.Model):
@@ -19,6 +20,9 @@ class Event(models.Model):
 	start_at = models.DateTimeField()
 	end_at = models.DateTimeField()
 	note_field = models.CharField(max_length=25, default='', blank=True)
+	note_field_options = CommaSeparatedStringsField(max_length=255, default='', blank=True)
+	note_field_required = models.BooleanField()
+	note_field_public = models.BooleanField()
 	location = models.CharField(max_length=25)
 	price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 	calendar_url = models.CharField(max_length=255, blank=True)
@@ -72,6 +76,12 @@ class Event(models.Model):
 		"""
 		return self.deadline_at - timezone.now() < timezone.timedelta(days=1) and not self.is_expired()
 
+	def get_note_field_options(self):
+		"""
+		Return list of tuples from list of options
+		"""
+		return [('', self.note_field + ':')] + [(x, x) for x in self.note_field_options]
+
 	def clean(self):
 		if self.start_at > self.end_at:
 			raise ValidationError("Begindatum is later dan de einddatum!")
@@ -81,6 +91,9 @@ class Event(models.Model):
 
 		if self.end_at < timezone.now():
 			raise ValidationError({'end_at': "Einddatum is in het verleden!"})
+
+		if self.note_field_options and len(self.note_field_options) < 2:
+			raise ValidationError({'note_field_options': "Geef minstens twee opties op."})
 
 	class Meta:
 		ordering = ['created_at']
