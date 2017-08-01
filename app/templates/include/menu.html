@@ -9,7 +9,7 @@
 		<a href="{% url 'faq' %}"><span class="glyphicon glyphicon-question-sign"></span> FAQ</a>
 	</li>
 
-	{% if user.is_admin or user.is_staff %}
+	{% if user.is_admin %}
 		<li class="dropdown{% if url_name == 'committee-list' or url_name == 'admin' %} active{% endif %}">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Admin<span class="caret"></span></a>
 			<ul class="dropdown-menu">
