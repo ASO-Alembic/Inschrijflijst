@@ -1,12 +1,8 @@
 from django.db import models
 from django.forms import CharField
-from django.core.exceptions import ValidationError
 
 
 class CommaSeparatedCharField(CharField):
-	default_error_messages = {
-		'too_few_items': "Geef minstens twee opties op.",
-	}
 
 	def prepare_value(self, value):
 		"""Convert list to comma-separated string"""
@@ -18,13 +14,6 @@ class CommaSeparatedCharField(CharField):
 			return []
 
 		return value.split(',')
-
-	def validate(self, value):
-		if value in self.empty_values and self.required:
-			raise ValidationError(self.error_messages['required'], code='required')
-
-		if value and len(value) < 2:
-			raise ValidationError(self.error_messages['too_few_items'])
 
 	def widget_attrs(self, widget):
 		attrs = super().widget_attrs(widget)

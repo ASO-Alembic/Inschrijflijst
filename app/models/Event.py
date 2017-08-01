@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
-from django.core.validators import MinValueValidator, validate_comma_separated_integer_list
+from django.core.validators import MinValueValidator
 from django.urls import reverse
 from django.core.exceptions import ValidationError
 
@@ -91,6 +91,9 @@ class Event(models.Model):
 
 		if self.end_at < timezone.now():
 			raise ValidationError({'end_at': "Einddatum is in het verleden!"})
+
+		if self.note_field_options and len(self.note_field_options) < 2:
+			raise ValidationError({'note_field_options': "Geef minstens twee opties op."})
 
 	class Meta:
 		ordering = ['created_at']
