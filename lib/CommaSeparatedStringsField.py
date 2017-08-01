@@ -6,6 +6,9 @@ class CommaSeparatedCharField(CharField):
 
 	def prepare_value(self, value):
 		"""Convert list to comma-separated string"""
+		if value in self.empty_values:
+			return ''
+
 		return ','.join(value)
 
 	def to_python(self, value):
