@@ -18,7 +18,7 @@ class RegistrationsForm(forms.Form):
 
 		# Add CharField or ChoiceField depending if note options are set in event
 		if event.note_field != '':
-			if event.note_field_options == '':
+			if not event.note_field_options:
 				self.fields['note'] = forms.CharField(max_length=25, label=event.note_field, required=event.note_field_required)
 			else:
 				self.fields['note'] = forms.ChoiceField(choices=event.get_note_field_options(), label=event.note_field, required=event.note_field_required)
