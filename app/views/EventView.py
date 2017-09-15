@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from django.core.exceptions import PermissionDenied
+from django.utils.translation import ugettext as _
 
 from lib.ResourceView import ResourceView, bind_model
 from app.models import Event, Registration
@@ -75,7 +76,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 		if form.is_valid():
 			form.save(self.base_url())
-			messages.success(request, "Inschrijflijst bijgewerkt!")
+			messages.success(request, _("Inschrijflijst bijgewerkt!"))
 			return redirect('event-edit', event.pk)
 		else:
 			return self.edit(request, event.pk, form=form)
@@ -92,7 +93,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 		if form.is_valid():
 			event = form.save(self.base_url())
 
-			messages.success(request, "Inschrijflijst aangemaakt!")
+			messages.success(request, _("Inschrijflijst aangemaakt!"))
 			return redirect('event-detail', event.pk)
 		else:
 			return self.create(request, form=form)

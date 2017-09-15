@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.core.validators import MinValueValidator
 from django.urls import reverse
 from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext as _
 
 from .Committee import Committee
 from .Registration import Registration
@@ -84,16 +85,16 @@ class Event(models.Model):
 
 	def clean(self):
 		if self.start_at > self.end_at:
-			raise ValidationError("Begindatum is later dan de einddatum!")
+			raise ValidationError(_("Begindatum is later dan de einddatum!"))
 
 		if self.start_at < timezone.now():
-			raise ValidationError({'start_at': "Startdatum is in het verleden!"})
+			raise ValidationError({'start_at': _("Startdatum is in het verleden!")})
 
 		if self.end_at < timezone.now():
-			raise ValidationError({'end_at': "Einddatum is in het verleden!"})
+			raise ValidationError({'end_at': _("Einddatum is in het verleden!")})
 
 		if self.note_field_options and len(self.note_field_options) < 2:
-			raise ValidationError({'note_field_options': "Geef minstens twee opties op."})
+			raise ValidationError({'note_field_options': _("Geef minstens twee opties op.")})
 
 	class Meta:
 		ordering = ['created_at']

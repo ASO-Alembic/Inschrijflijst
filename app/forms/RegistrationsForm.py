@@ -2,13 +2,14 @@ from django import forms
 from django.utils import timezone
 from bootstrap3_datetime.widgets import DateTimePicker
 from django_auth_ldap.backend import LDAPBackend
+from django.utils.translation import ugettext as _
 
 from app.models import User, Registration
 from app.mails import RegistrationNotificationMail
 
 
 class RegistrationsForm(forms.Form):
-	username = forms.CharField(label='Gebruikersnaam', widget=forms.TextInput(attrs={'list': 'usernames'}))
+	username = forms.CharField(label=_("Gebruikersnaam"), widget=forms.TextInput(attrs={'list': 'usernames'}))
 	date = forms.DateField(initial=timezone.now(), widget=DateTimePicker)
 
 	def __init__(self, event, **kwargs):
@@ -35,7 +36,7 @@ class RegistrationsForm(forms.Form):
 
 			# Raise ValidationError if username does not exist in LDAP
 			if user is None:
-				raise forms.ValidationError("Gebruikersnaam {} is niet bekend".format(self.cleaned_data['username']))
+				raise forms.ValidationError(_("Gebruikersnaam {} is niet bekend").format(self.cleaned_data['username']))
 
 		return user
 

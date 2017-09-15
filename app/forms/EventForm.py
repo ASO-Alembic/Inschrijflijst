@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import ugettext as _
 from bootstrap3_datetime.widgets import DateTimePicker
 
 from app.models import Event
@@ -35,29 +36,29 @@ class EventForm(forms.ModelForm):
 			'add_to_calendar'
 		]
 		labels = {
-			'name': 'Naam',
-			'description': 'Beschrijving',
-			'committee': 'Commissie',
-			'start_at': 'Begindatumtijd',
-			'end_at': 'Einddatumtijd',
-			'deadline_at': 'Inschrijfdeadline',
-			'published_at': 'Publicatiedatum',
-			'note_field': 'Titel',
-			'note_field_options': 'Opties',
-			'note_field_required': 'Verplicht',
-			'note_field_public': 'Antwoord publiek zichtbaar',
-			'location': 'Locatie',
-			'price': 'Kosten',
-			'places': 'Beschikbare plaatsen'
+			'name':                 _('Naam'),
+			'description':          _("Beschrijving"),
+			'committee':            _("Commissie"),
+			'start_at':             _("Begindatumtijd"),
+			'end_at':               _("Einddatumtijd"),
+			'deadline_at':          _("Inschrijfdeadline"),
+			'published_at':         _("Publicatiedatum"),
+			'note_field':           _("Titel"),
+			'note_field_options':   _("Opties"),
+			'note_field_required':  _("Verplicht"),
+			'note_field_public':    _("Antwoord publiek zichtbaar"),
+			'location':             _("Locatie"),
+			'price':                _("Kosten"),
+			'places':               _("Beschikbare plaatsen")
 		}
 		widgets = {
-			'deadline_at': DateTimePicker,
-			'start_at': DateTimePicker,
-			'end_at': DateTimePicker,
+			'deadline_at':  DateTimePicker,
+			'start_at':     DateTimePicker,
+			'end_at':       DateTimePicker,
 			'published_at': DateTimePicker
 		}
 
-	add_to_calendar = forms.BooleanField(required=False, initial=True, label="Toevoegen aan jaarcirkel")
+	add_to_calendar = forms.BooleanField(required=False, initial=True, label=_("Toevoegen aan jaarcirkel"))
 
 	def save(self, base_url, commit=True):
 		event = super().save(commit=commit)

@@ -1,4 +1,5 @@
 {% load bootstrap3 %}
+{% load i18n %}
 
 {% csrf_token %}
 
@@ -12,11 +13,11 @@
 <hr>
 
 <div class="form-group">
-	<label class="col-md-3 col-md-offset-3">Begin</label>
-	<label class="col-md-3">Eind</label>
+	<label class="col-md-3 col-md-offset-3">{% trans "Begin"%}</label>
+	<label class="col-md-3">{% trans "Eind"%}</label>
 </div>
 <div class="form-group">
-	<label class="control-label col-md-3">Evenement:</label>
+	<label class="control-label col-md-3">{% trans "Evenement:" %}</label>
 	<div class="col-md-3">
 		{% bootstrap_field form.start_at show_label=False form_group_class='' %}
 	</div>
@@ -25,7 +26,7 @@
 	</div>
 </div>
 <div class="form-group">
-	<label class="control-label col-md-3">Inschrijflijst:</label>
+	<label class="control-label col-md-3">{% trans "Inschrijflijst:" %}</label>
 	<div class="col-md-3">
 		{% bootstrap_field form.published_at show_label=False form_group_class='' %}
 	</div>
@@ -33,7 +34,7 @@
 		{% bootstrap_field form.deadline_at show_label=False form_group_class='' %}
 	</div>
 	<label class="control-label">
-		<span class="glyphicon glyphicon-question-sign" title="De publicatiedatum is het moment waarop de inschrijflijst zichtbaar wordt. De inschrijfdeadline is het moment waarop de inschrijving wordt gesloten."></span>
+		<span class="glyphicon glyphicon-question-sign" title="{% trans "De publicatiedatum is het moment waarop de inschrijflijst zichtbaar wordt. De inschrijfdeadline is het moment waarop de inschrijving wordt gesloten." %}"></span>
 	</label>
 </div>
 
@@ -44,7 +45,7 @@
 		<div class="checkbox">
 			<label>
 				<input type="checkbox" id="note_field_check"{% if form.note_field.value %} checked{% endif %}>
-				Voeg een extra veld toe
+				{% trans "Voeg een extra veld toe" %}
 			</label>
 		</div>
 	</div>
@@ -54,12 +55,12 @@
 	{% bootstrap_field form.note_field layout='horizontal' %}
 
 	<div class="form-group">
-		<label class="control-label col-md-3">Type:</label>
+		<label class="control-label col-md-3">{% trans "Type:" %}</label>
 		<div class="col-md-9">
 			<div class="radio">
 				<label>
 					<input type="radio" name="note_field_radio"{% if not form.note_field_options.value %} checked{% endif %}>
-					Open antwoord
+					{% trans "Open antwoord" %}
 				</label>
 			</div>
 		</div>
@@ -67,7 +68,7 @@
 			<div class="radio">
 				<label>
 					<input type="radio" name="note_field_radio"{% if form.note_field_options.value %} checked{% endif %}>
-					Meerkeuze
+					{% trans "Meerkeuze" %}
 				</label>
 			</div>
 		</div>
@@ -75,7 +76,7 @@
 			{% bootstrap_field form.note_field_options layout='horizontal' %}
 		</div>
 		<label class="control-label">
-			<span class="glyphicon glyphicon-question-sign" title="Vul hier de opties, gescheiden door een komma (of enter) in."></span>
+			<span class="glyphicon glyphicon-question-sign" title="{% trans "Vul hier de opties, gescheiden door een komma (of enter) in." %}"></span>
 		</label>
 	</div>
 

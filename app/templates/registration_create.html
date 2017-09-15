@@ -2,27 +2,28 @@
 
 {% load bootstrap3 %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Voeg inschrijvingen toe aan lijst{% endblock %}
+{% block title %}{% trans "Voeg inschrijvingen toe aan lijst" %}{% endblock %}
 
 {% block content %}
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h1>Voeg inschrijvingen toe aan {{ event.name }}</h1>
+			<h1>{% trans "Voeg inschrijvingen toe aan" %} {{ event.name }}</h1>
 		</div>
 		<div class="panel-body">
-			<p>Het is mogelijk om personen in te schrijven die nog niet in het systeem staan, maar zorg hierbij wel dat de gebruikersnaam correct is gespeld. Als de gebruikersnaam verkeerd is gespeld, zal de persoon niet correct gekoppeld worden met het juiste account. De gebruikersnaam bestaat uit de voornaam en de achternaam achter elkaar geschreven zonder spaties.</p>
+			<p>{% trans "Het is mogelijk om personen in te schrijven die nog niet in het systeem staan, maar zorg hierbij wel dat de gebruikersnaam correct is gespeld. Als de gebruikersnaam verkeerd is gespeld, zal de persoon niet correct gekoppeld worden met het juiste account. De gebruikersnaam bestaat uit de voornaam en de achternaam achter elkaar geschreven zonder spaties." %}</p>
 			<form action="{% url 'registration-list' event.pk %}?role=cm-admin" method="post">
 				{% csrf_token %}
 
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
-							<th>Gebruikersnaam</th>
+							<th>{% trans "Gebruikersnaam" %}</th>
 							{% if event.note_field != '' %}
 								<th>{{ event.note_field }}</th>
 							{% endif %}
-							<th>Datum</th>
+							<th>{% trans "Datum" %}</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -36,8 +37,8 @@
 					</tbody>
 				</table>
 
-				<button class="btn btn-default" type="button" id="addRow">Nieuwe regel</button>
-				<button class="btn btn-primary" type="submit">OK</button>
+				<button class="btn btn-default" type="button" id="addRow">{% trans "Nieuwe regel" %}</button>
+				<button class="btn btn-primary" type="submit">{% trans "OK" %}</button>
 			</form>
 		</div>
 	</div>

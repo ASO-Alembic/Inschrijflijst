@@ -1,8 +1,9 @@
 {% extends "abstract/base.html" %}
 
 {% load static %}
+{% load i18n %}
 
-{% block title %}Bewerk {{ event.name }}{% endblock %}
+{% block title %}{% trans "Bewerk" %} {{ event.name }}{% endblock %}
 
 {% block content %}
 	<div class="panel panel-default">
@@ -19,9 +20,9 @@
 			<thead>
 				<tr>
 					<th>#</th>
-					<th>Naam</th>
-					<th>Inschrijfdatum</th>
-					<th>Uitschrijfdatum</th>
+					<th>{% trans "Naam" %}</th>
+					<th>{% trans "Inschrijfdatum" %}</th>
+					<th>{% trans "Uitschrijfdatum" %}</th>
 					{% if event.note_field != '' %}
 						<th>{{ event.note_field }}</th>
 					{% endif %}
@@ -38,15 +39,15 @@
 						{% if event.note_field != '' %}
 							<td>{{ reg.note }}</td>
 						{% endif %}
-						<td><a href="{% url 'registration-edit' event.pk reg.pk %}" class="glyphicon glyphicon-edit" title="Bewerken"></a></td>
+						<td><a href="{% url 'registration-edit' event.pk reg.pk %}" class="glyphicon glyphicon-edit" title="{% trans "Bewerken" %}"></a></td>
 					</tr>
 				{% endfor %}
 			</tbody>
 		</table>
 		<div class="panel-footer">
-			<a href="{% url 'registration-create' event.pk %}" class="btn btn-primary">Inschrijvingen toevoegen</a>
-			<a href="{% url 'registration-list' event.pk %}?format=csv" class="btn btn-primary" title="Alleen ingeschreven deelnemers die niet op de reservelijst staan worden geëxporteerd">Exporteren</a>
-			<a href="{% url 'mail-create' event.pk %}" class="btn btn-primary">Mass mail</a>
+			<a href="{% url 'registration-create' event.pk %}" class="btn btn-primary">{% trans "Inschrijvingen toevoegen" %}</a>
+			<a href="{% url 'registration-list' event.pk %}?format=csv" class="btn btn-primary" title="{% trans "Alleen ingeschreven deelnemers die niet op de reservelijst staan worden geëxporteerd" %}">{% trans "Exporteren" %}</a>
+			<a href="{% url 'mail-create' event.pk %}" class="btn btn-primary">{% trans "Mass mail" %}</a>
 		</div>
 	</div>
 {% endblock %}

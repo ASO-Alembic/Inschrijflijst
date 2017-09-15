@@ -1,17 +1,19 @@
 {% extends "abstract/base.html" %}
 
-{% block title %}Beheer{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Beheer" %}{% endblock %}
 
 {% block content %}
-	<h1>Commissies</h1>
+	<h1>{% trans "Commissies" %}</h1>
 
-	<p>Hieronder vind je alle commissies waarvan jij voorzitter bent.</p>
+	<p>{% trans "Hieronder vind je alle commissies waarvan jij voorzitter bent." %}</p>
 
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
-				<th>Commissie</th>
-				<th>Aantal lijsten</th>
+				<th>{% trans "Commissie" %}</th>
+				<th>{% trans "Aantal lijsten" %}</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -20,7 +22,7 @@
 				<tr>
 					<td><a href="{% url 'committee-detail' c.pk %}">{{ c.name }}</a></td>
 					<td>{{ c.event_set.count }}</td>
-					<td><a href="{% url 'event-create' %}?committee={{ c.pk }}" title="Nieuwe inschrijflijst"><span class="glyphicon glyphicon-plus"></span></a></td>
+					<td><a href="{% url 'event-create' %}?committee={{ c.pk }}" title="{% trans "Nieuwe inschrijflijst" %}"><span class="glyphicon glyphicon-plus"></span></a></td>
 				</tr>
 			{% endfor %}
 		</tbody>

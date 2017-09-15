@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.conf import settings
 from django.contrib import messages
+from django.utils.translation import ugettext as _
 
 from lib.BetterView import BetterView, StaffRequiredMixin
 from app.services import LDAPService, GoogleCalendarService, FlowService
@@ -44,7 +45,7 @@ class AdminView(StaffRequiredMixin, BetterView):
 		cal_service = GoogleCalendarService(self.base_url())
 		cal_service.calendar = request.POST['calender_id']
 
-		messages.success(request, "Kalender ingesteld!")
+		messages.success(request, _("Kalender ingesteld!"))
 		return redirect('admin')
 
 	def calendar_flow(self, request):
@@ -57,7 +58,7 @@ class AdminView(StaffRequiredMixin, BetterView):
 		cal_service = GoogleCalendarService(self.base_url())
 		cal_service.calendar = None
 
-		messages.success(request, "Google-account gekoppeld!")
+		messages.success(request, _("Google-account gekoppeld!"))
 		return redirect('admin')
 
 	def sync_ldap(self, request):
@@ -68,5 +69,5 @@ class AdminView(StaffRequiredMixin, BetterView):
 		# Update all committees from list of dicts
 		Committee.update_committees(committees)
 
-		messages.success(request, "Commissies geupdatet!")
+		messages.success(request, _("Commissies geupdatet!"))
 		return redirect('admin')

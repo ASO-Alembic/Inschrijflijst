@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 
 from django.contrib.messages import constants as message_constants
+from django.utils.translation import ugettext_lazy as _
 
 from .settings_local import *
 
@@ -36,6 +37,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
 	'django.middleware.security.SecurityMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.locale.LocaleMiddleware',
 	'django.middleware.common.CommonMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -100,6 +102,11 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 LANGUAGE_CODE = 'NL-nl'
+
+LANGUAGES = [
+	('nl', _('Dutch')),
+	('en', _('English')),
+]
 
 FORMAT_MODULE_PATH = [
 	'app.formats',

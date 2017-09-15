@@ -1,8 +1,10 @@
 {% extends "abstract/base.html" %}
 
-{% block title %}Jaarcirkel{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Jaarcirkel" %}{% endblock %}
 
 {% block content %}
-	<h1>Jaarcirkel</h1>
+	<h1>{% trans "Jaarcirkel" %}</h1>
 	<iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=2&amp;hl=nl&amp;bgcolor=%23FFFFFF&amp;src={{ calendar }}&amp;color=%23AB8B00&amp;ctz=Europe%2FAmsterdam" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 {% endblock %}

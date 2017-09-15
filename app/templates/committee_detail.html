@@ -1,5 +1,7 @@
 {% extends "abstract/base.html" %}
 
+{% load i18n %}
+
 {% block title %}{{ committee.name }}{% endblock %}
 
 {% block content %}
@@ -8,9 +10,9 @@
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
-				<th>Inschrijflijst</th>
-				<th>Datum</th>
-				<th>Aantal inschrijvingen</th>
+				<th>{% trans "Inschrijflijst" %}</th>
+				<th>{% trans "Datum" %}</th>
+				<th>{% trans "Aantal inschrijvingen" %}</th>
 				<th></th>
 			</tr>
 		</thead>
