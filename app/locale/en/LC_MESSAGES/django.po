@@ -1,0 +1,498 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-15 22:19+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\app\forms\EventForm.py:39 .\app\templates\event_detail.html:45
+#: .\app\templates\event_edit.html:23
+msgid "Naam"
+msgstr "Name"
+
+#: .\app\forms\EventForm.py:40
+msgid "Beschrijving"
+msgstr "Description"
+
+#: .\app\forms\EventForm.py:41 .\app\templates\committee_list.html:15
+msgid "Commissie"
+msgstr "Committee"
+
+#: .\app\forms\EventForm.py:42
+msgid "Begindatumtijd"
+msgstr "Start datetime"
+
+#: .\app\forms\EventForm.py:43
+msgid "Einddatumtijd"
+msgstr "End datetime"
+
+#: .\app\forms\EventForm.py:44
+msgid "Inschrijfdeadline"
+msgstr "Enrollment deadline"
+
+#: .\app\forms\EventForm.py:45
+msgid "Publicatiedatum"
+msgstr "Publication date"
+
+#: .\app\forms\EventForm.py:46
+msgid "Titel"
+msgstr "Title"
+
+#: .\app\forms\EventForm.py:47
+msgid "Opties"
+msgstr "Options"
+
+#: .\app\forms\EventForm.py:48
+msgid "Verplicht"
+msgstr "Required"
+
+#: .\app\forms\EventForm.py:49
+msgid "Antwoord publiek zichtbaar"
+msgstr "Answer publicly visible"
+
+#: .\app\forms\EventForm.py:50
+msgid "Locatie"
+msgstr "Location"
+
+#: .\app\forms\EventForm.py:51
+msgid "Kosten"
+msgstr "Cost"
+
+#: .\app\forms\EventForm.py:52
+msgid "Beschikbare plaatsen"
+msgstr "Available places"
+
+#: .\app\forms\EventForm.py:61
+msgid "Toevoegen aan jaarcirkel"
+msgstr "Add to calendar"
+
+#: .\app\forms\MassMailForm.py:7
+msgid "Deelnemers"
+msgstr "Participants"
+
+#: .\app\forms\MassMailForm.py:8
+msgid "Deelnemers en reservelijst"
+msgstr "Participants (including backup)"
+
+#: .\app\forms\MassMailForm.py:9
+msgid "Ontvangers"
+msgstr "Receipients"
+
+#: .\app\forms\MassMailForm.py:10
+msgid "Onderwerp"
+msgstr "Subject"
+
+#: .\app\forms\MassMailForm.py:11
+msgid "<p>Beste {{ name }},</p>"
+msgstr "<p>Dear {{ name }},</p>"
+
+#: .\app\forms\RegistrationForm.py:14 .\app\forms\RegistrationForm.py:29
+#: .\app\templates\event_list.html:38
+msgid "Ingeschreven"
+msgstr "Enrolled"
+
+#: .\app\forms\RegistrationForm.py:15
+msgid "Niet ingeschreven"
+msgstr "Not enrolled"
+
+#: .\app\forms\RegistrationForm.py:30
+msgid "Uitgeschreven"
+msgstr "Disenrolled"
+
+#: .\app\forms\RegistrationsForm.py:12
+#: .\app\templates\registration_create.html:22
+msgid "Gebruikersnaam"
+msgstr "Username"
+
+#: .\app\forms\RegistrationsForm.py:39
+msgid "Gebruikersnaam {} is niet bekend"
+msgstr "Username {} is unknown"
+
+#: .\app\mails.py:10
+msgid "Ingeschreven voor {}"
+msgstr "Enrolled for {}"
+
+#: .\app\models\Event.py:88
+msgid "Begindatum is later dan de einddatum!"
+msgstr "Start date is later than end date!"
+
+#: .\app\models\Event.py:91
+msgid "Startdatum is in het verleden!"
+msgstr "Start date is in the past!"
+
+#: .\app\models\Event.py:94
+msgid "Einddatum is in het verleden!"
+msgstr "End date is in the past!"
+
+#: .\app\models\Event.py:97
+msgid "Geef minstens twee opties op."
+msgstr "Enter at least two options."
+
+#: .\app\models\User.py:14
+msgid "email address"
+msgstr "email address"
+
+#: .\app\settings.py:107
+msgid "Dutch"
+msgstr "Dutch"
+
+#: .\app\settings.py:108
+msgid "English"
+msgstr "English"
+
+#: .\app\templates\abstract\base.html:43
+#, python-format
+msgid "Welkom, %(user.first_name)s!"
+msgstr "Welcome, %(user.first_name)s!"
+
+#: .\app\templates\abstract\base.html:45
+msgid "Uitloggen"
+msgstr "Logout"
+
+#: .\app\templates\admin.html:11
+msgid "Administratie"
+msgstr "Administration"
+
+#: .\app\templates\admin.html:14
+msgid "AD-integratie"
+msgstr "AD integration"
+
+#: .\app\templates\admin.html:17
+msgid "Update commissies vanuit LDAP"
+msgstr "Update committees from LDAP"
+
+#: .\app\templates\admin.html:21
+msgid "Google Calendar-integratie"
+msgstr "Google Calendar integration"
+
+#: .\app\templates\admin.html:25
+msgid "Stap 1: Koppel Google-account"
+msgstr "Step 1: Link Google account"
+
+#: .\app\templates\admin.html:37
+msgid "Stap 2: Selecteer juiste agenda (Jaarcirkel)"
+msgstr "Step 2: Select appropriate calendar"
+
+#: .\app\templates\admin.html:46 .\app\templates\event_detail.html:86
+msgid "Opslaan"
+msgstr "Save"
+
+#: .\app\templates\calendar.html:5 .\app\templates\calendar.html:8
+#: .\app\templates\include\menu.html:8
+msgid "Jaarcirkel"
+msgstr "Calendar"
+
+#: .\app\templates\committee_detail.html:13
+msgid "Inschrijflijst"
+msgstr "Event"
+
+#: .\app\templates\committee_detail.html:14
+#: .\app\templates\registration_create.html:26
+msgid "Datum"
+msgstr "Date"
+
+#: .\app\templates\committee_detail.html:15
+msgid "Aantal inschrijvingen"
+msgstr "Number of participants"
+
+#: .\app\templates\committee_list.html:5
+msgid "Beheer"
+msgstr "Manage"
+
+#: .\app\templates\committee_list.html:8
+msgid "Commissies"
+msgstr "Committees"
+
+#: .\app\templates\committee_list.html:10
+msgid "Hieronder vind je alle commissies waarvan jij voorzitter bent."
+msgstr "Below you will find all committees of which you chair."
+
+#: .\app\templates\committee_list.html:16
+msgid "Aantal lijsten"
+msgstr "Number of events"
+
+#: .\app\templates\committee_list.html:25 .\app\templates\event_create.html:6
+msgid "Nieuwe inschrijflijst"
+msgstr "New event"
+
+#: .\app\templates\event_detail.html:14 .\app\templates\event_edit.html:42
+msgid "Bewerken"
+msgstr "Edit"
+
+#: .\app\templates\event_detail.html:23
+msgid "Inschrijfdeadline:"
+msgstr "Enrollment deadline:"
+
+#: .\app\templates\event_detail.html:25
+msgid "Locatie:"
+msgstr "Location:"
+
+#: .\app\templates\event_detail.html:26
+msgid "Kosten:"
+msgstr "Cost:"
+
+#: .\app\templates\event_detail.html:38 .\app\templates\event_list.html:32
+msgid "Ingeschreven:"
+msgstr "Enrolled:"
+
+#: .\app\templates\event_detail.html:46 .\app\templates\event_edit.html:24
+#: .\app\views\RegistrationView.py:36
+msgid "Inschrijfdatum"
+msgstr "Enrollment date"
+
+#: .\app\templates\event_detail.html:91
+msgid "Schrijf je commissie in:"
+msgstr "Enroll your committee:"
+
+#: .\app\templates\event_detail.html:103
+msgid ""
+"Deze inschrijflijst zit vol. Je kunt je nog wel inschrijven als reserve; je "
+"komt dan op de lijst te staan als iemand zich uitschrijft. Selectie is op "
+"basis van inschrijfdatum."
+msgstr "This event is full. You can still enroll as backup; you will enter as a participant when someone disenrolls. Selection is on basis of enrollment date."
+
+#: .\app\templates\event_detail.html:108
+#, python-format
+msgid ""
+"De deadline voor deze inschrijflijst is verstreken. Je kunt je niet meer in- "
+"of uitschrijven. Neem voor vragen <a href=\"mailto:%(email)s\">contact op "
+"met de %(name)s"
+msgstr "The deadline for this event has passed. You cannot enroll or disenroll. For questions, please <a href=\"mailto:%(email)s\">contact the %(name)s"
+
+#: .\app\templates\event_edit.html:6
+msgid "Bewerk"
+msgstr "Edit"
+
+#: .\app\templates\event_edit.html:25
+msgid "Uitschrijfdatum"
+msgstr "Disenrollment date"
+
+#: .\app\templates\event_edit.html:48
+msgid "Inschrijvingen toevoegen"
+msgstr "Add enrollments"
+
+#: .\app\templates\event_edit.html:49
+msgid ""
+"Alleen ingeschreven deelnemers die niet op de reservelijst staan worden "
+"geëxporteerd"
+msgstr "Only enrolled participants who are not backup will be exported."
+
+#: .\app\templates\event_edit.html:49
+msgid "Exporteren"
+msgstr "Export"
+
+#: .\app\templates\event_edit.html:50 .\app\templates\mail_create.html:6
+#: .\app\templates\mail_create.html:11
+msgid "Mass mail"
+msgstr "Mass mail"
+
+#: .\app\templates\event_list.html:5 .\app\templates\event_list.html:8
+#: .\app\templates\include\menu.html:5
+msgid "Inschrijflijsten"
+msgstr "Events"
+
+#: .\app\templates\event_list.html:36
+msgid "Details"
+msgstr "Details"
+
+#: .\app\templates\event_list.html:40
+msgid "Inschrijving sluit binnenkort!"
+msgstr "Enrollment closes soon!"
+
+#: .\app\templates\event_list.html:42
+msgid "Inschrijving gesloten!"
+msgstr "Enrollment closed!"
+
+#: .\app\templates\event_list.html:45
+msgid "Nieuw!"
+msgstr "New!"
+
+#: .\app\templates\include\bulk_registration.html:5
+msgid "Commissie inschrijven"
+msgstr "Enroll committee"
+
+#: .\app\templates\include\bulk_registration.html:9
+msgid "Weet je zeker dat je hele volgende commissie wilt inschrijven?"
+msgstr "Are you sure you want to enroll the entire committee?"
+
+#: .\app\templates\include\bulk_registration.html:18
+msgid ""
+"Dit kun jij niet ongedaan maken. De leden van je commissie kunnen zichzelf "
+"wel uitschrijven."
+msgstr "You cannot undo this action. However, your committee members will be able to disenroll themselves."
+
+#: .\app\templates\include\event_form.html:16
+msgid "Begin"
+msgstr "Start"
+
+#: .\app\templates\include\event_form.html:17
+msgid "Eind"
+msgstr "End"
+
+#: .\app\templates\include\event_form.html:20
+msgid "Evenement:"
+msgstr "Event:"
+
+#: .\app\templates\include\event_form.html:29
+msgid "Inschrijflijst:"
+msgstr "Enrollment:"
+
+#: .\app\templates\include\event_form.html:37
+msgid ""
+"De publicatiedatum is het moment waarop de inschrijflijst zichtbaar wordt. "
+"De inschrijfdeadline is het moment waarop de inschrijving wordt gesloten."
+msgstr "The publication date is the moment the enrollment will be visible. The enrollment deadline is the moment the enrollment closes."
+
+#: .\app\templates\include\event_form.html:48
+msgid "Voeg een extra veld toe"
+msgstr "Add an additional field"
+
+#: .\app\templates\include\event_form.html:58
+msgid "Type:"
+msgstr "Type:"
+
+#: .\app\templates\include\event_form.html:63
+msgid "Open antwoord"
+msgstr "Free answer"
+
+#: .\app\templates\include\event_form.html:71
+msgid "Meerkeuze"
+msgstr "Multiple choice"
+
+#: .\app\templates\include\event_form.html:79
+msgid "Vul hier de opties, gescheiden door een komma (of enter) in."
+msgstr "Enter here the options, separated by a comma (or enter)."
+
+#: .\app\templates\include\menu.html:11
+msgid "FAQ"
+msgstr "FAQ"
+
+#: .\app\templates\include\menu.html:16
+msgid "Admin"
+msgstr "Admin"
+
+#: .\app\templates\include\menu.html:20
+msgid "Lijstbeheer"
+msgstr "Event management"
+
+#: .\app\templates\include\menu.html:25
+msgid "Instellingen"
+msgstr "Settings"
+
+#: .\app\templates\include\menu.html:28
+msgid "Django admin"
+msgstr "Django admin"
+
+#: .\app\templates\mail_create.html:11
+msgid "aan deelnemers aan"
+msgstr "to participants of"
+
+#: .\app\templates\mail_create.html:14
+msgid ""
+"Gebruik dit formulier om een email te sturen aan alle deelnemers aan je "
+"activiteit. Gebruik in je bericht <code>{{ name }}</code> voor de naam van "
+"je ontvanger."
+msgstr "Use this form to send a email message to all participants of your event. Use <code>{{ name }}</code> in your message for the name of your receipient."
+
+#: .\app\templates\mail_create.html:17
+msgid "Verzenden"
+msgstr "Send"
+
+#: .\app\templates\registration_create.html:7
+msgid "Voeg inschrijvingen toe aan lijst"
+msgstr "Add enrollments to event"
+
+#: .\app\templates\registration_create.html:12
+msgid "Voeg inschrijvingen toe aan"
+msgstr "Add enrollments to"
+
+#: .\app\templates\registration_create.html:15
+msgid ""
+"Het is mogelijk om personen in te schrijven die nog niet in het systeem "
+"staan, maar zorg hierbij wel dat de gebruikersnaam correct is gespeld. Als "
+"de gebruikersnaam verkeerd is gespeld, zal de persoon niet correct gekoppeld "
+"worden met het juiste account. De gebruikersnaam bestaat uit de voornaam en "
+"de achternaam achter elkaar geschreven zonder spaties."
+msgstr "It is possible to enroll people who do not yet exist in this application, but take care to correctly spell the username. If the username is incorrectly spelled, the person will not be liked with the right account. The username consists of the first and last name concatenated without spaces."
+
+#: .\app\templates\registration_create.html:40
+msgid "Nieuwe regel"
+msgstr "Add row"
+
+#: .\app\templates\registration_create.html:41
+#: .\app\templates\registration_edit.html:18
+msgid "OK"
+msgstr "OK"
+
+#: .\app\templates\registration_edit.html:6
+msgid "Bewerk registratie"
+msgstr "Edit enrollment"
+
+#: .\app\templates\registration_edit.html:11
+#, python-format
+msgid "Bewerk inschrijving van %(first_name)s %(last_name)s voor %(event)s"
+msgstr "Edit enrollment of %(first_name)s %(last_name)s for %(event)s"
+
+#: .\app\views\AdminView.py:48
+msgid "Kalender ingesteld!"
+msgstr "Calendar set!"
+
+#: .\app\views\AdminView.py:61
+msgid "Google-account gekoppeld!"
+msgstr "Google account linked!"
+
+#: .\app\views\AdminView.py:72
+msgid "Commissies geupdatet!"
+msgstr "Committees updated!"
+
+#: .\app\views\EventView.py:79
+msgid "Inschrijflijst bijgewerkt!"
+msgstr "Event edited!"
+
+#: .\app\views\EventView.py:96
+msgid "Inschrijflijst aangemaakt!"
+msgstr "Event created!"
+
+#: .\app\views\MailView.py:45
+msgid "{} emails verstuurd!"
+msgstr "{} messages sent!"
+
+#: .\app\views\RegistrationView.py:36
+msgid "Voornaam"
+msgstr "First name"
+
+#: .\app\views\RegistrationView.py:36
+msgid "Achternaam"
+msgstr "Last name"
+
+#: .\app\views\RegistrationView.py:36
+msgid "Emailadres"
+msgstr "email address"
+
+#: .\app\views\RegistrationView.py:63
+msgid "Commissie {} geregistreerd!"
+msgstr "Committee {} enrolled!"
+
+#: .\app\views\RegistrationView.py:93
+msgid "{} inschrijvingen toegevoegd!"
+msgstr "{} enrollments added!"
+
+#: .\app\views\RegistrationView.py:104
+msgid "Inschrijving geregistreerd!"
+msgstr "Enrollment registered!"
+
+#: .\app\views\RegistrationView.py:134 .\app\views\RegistrationView.py:150
+msgid "Inschrijving bijgewerkt!"
+msgstr "Enrollment updated!"
