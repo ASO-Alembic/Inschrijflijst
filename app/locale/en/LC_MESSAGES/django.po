@@ -1,21 +1,19 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# English translation of Inschrijflijst.
+# Copyright (C) 2017 Lars Veldscholte
+# This file is distributed under the same license as the Inschrijflijst package.
+# Lars Veldscholte <lars@tuxplace.nl>, 2017.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Inschrijflijst v3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-15 22:19+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2017-09-16 18:09+0200\n"
+"PO-Revision-Date: 2017-09-16 18:19+0200\n"
+"Last-Translator: Lars Veldscholte <lars@tuxplace.nl>\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: .\app\forms\EventForm.py:39 .\app\templates\event_detail.html:45
 #: .\app\templates\event_edit.html:23
@@ -40,7 +38,7 @@ msgstr "End datetime"
 
 #: .\app\forms\EventForm.py:44
 msgid "Inschrijfdeadline"
-msgstr "Enrollment deadline"
+msgstr "Enrolment deadline"
 
 #: .\app\forms\EventForm.py:45
 msgid "Publicatiedatum"
@@ -88,7 +86,7 @@ msgstr "Participants (including backup)"
 
 #: .\app\forms\MassMailForm.py:9
 msgid "Ontvangers"
-msgstr "Receipients"
+msgstr "Recipients"
 
 #: .\app\forms\MassMailForm.py:10
 msgid "Onderwerp"
@@ -145,7 +143,7 @@ msgid "email address"
 msgstr "email address"
 
 #: .\app\settings.py:107
-msgid "Dutch"
+msgid "Nederlands"
 msgstr "Dutch"
 
 #: .\app\settings.py:108
@@ -154,10 +152,10 @@ msgstr "English"
 
 #: .\app\templates\abstract\base.html:43
 #, python-format
-msgid "Welkom, %(user.first_name)s!"
-msgstr "Welcome, %(user.first_name)s!"
+msgid "Welkom, %(first_name)s!"
+msgstr "Welcome, %(first_name)s!"
 
-#: .\app\templates\abstract\base.html:45
+#: .\app\templates\abstract\base.html:48
 msgid "Uitloggen"
 msgstr "Logout"
 
@@ -217,7 +215,7 @@ msgstr "Committees"
 
 #: .\app\templates\committee_list.html:10
 msgid "Hieronder vind je alle commissies waarvan jij voorzitter bent."
-msgstr "Below you will find all committees of which you chair."
+msgstr "Below you will find all committees which you chair."
 
 #: .\app\templates\committee_list.html:16
 msgid "Aantal lijsten"
@@ -233,7 +231,7 @@ msgstr "Edit"
 
 #: .\app\templates\event_detail.html:23
 msgid "Inschrijfdeadline:"
-msgstr "Enrollment deadline:"
+msgstr "Enrolment deadline:"
 
 #: .\app\templates\event_detail.html:25
 msgid "Locatie:"
@@ -250,18 +248,20 @@ msgstr "Enrolled:"
 #: .\app\templates\event_detail.html:46 .\app\templates\event_edit.html:24
 #: .\app\views\RegistrationView.py:36
 msgid "Inschrijfdatum"
-msgstr "Enrollment date"
+msgstr "Enrolment date"
 
 #: .\app\templates\event_detail.html:91
 msgid "Schrijf je commissie in:"
-msgstr "Enroll your committee:"
+msgstr "Enrol your committee:"
 
 #: .\app\templates\event_detail.html:103
 msgid ""
 "Deze inschrijflijst zit vol. Je kunt je nog wel inschrijven als reserve; je "
 "komt dan op de lijst te staan als iemand zich uitschrijft. Selectie is op "
 "basis van inschrijfdatum."
-msgstr "This event is full. You can still enroll as backup; you will enter as a participant when someone disenrolls. Selection is on basis of enrollment date."
+msgstr ""
+"This event is full. You can still enrol as backup; you will enter as a "
+"participant when someone disenrolls. Selection is on basis of enrolment date."
 
 #: .\app\templates\event_detail.html:108
 #, python-format
@@ -269,7 +269,9 @@ msgid ""
 "De deadline voor deze inschrijflijst is verstreken. Je kunt je niet meer in- "
 "of uitschrijven. Neem voor vragen <a href=\"mailto:%(email)s\">contact op "
 "met de %(name)s"
-msgstr "The deadline for this event has passed. You cannot enroll or disenroll. For questions, please <a href=\"mailto:%(email)s\">contact the %(name)s"
+msgstr ""
+"The deadline for this event has passed. You cannot enrol or disenrol. For "
+"questions, please <a href=\"mailto:%(email)s\">contact the %(name)s"
 
 #: .\app\templates\event_edit.html:6
 msgid "Bewerk"
@@ -277,17 +279,17 @@ msgstr "Edit"
 
 #: .\app\templates\event_edit.html:25
 msgid "Uitschrijfdatum"
-msgstr "Disenrollment date"
+msgstr "Disenrolment date"
 
 #: .\app\templates\event_edit.html:48
 msgid "Inschrijvingen toevoegen"
-msgstr "Add enrollments"
+msgstr "Add enrolments"
 
 #: .\app\templates\event_edit.html:49
 msgid ""
 "Alleen ingeschreven deelnemers die niet op de reservelijst staan worden "
 "geëxporteerd"
-msgstr "Only enrolled participants who are not backup will be exported."
+msgstr "Only enrolled participants who are not backup will be exported"
 
 #: .\app\templates\event_edit.html:49
 msgid "Exporteren"
@@ -309,29 +311,129 @@ msgstr "Details"
 
 #: .\app\templates\event_list.html:40
 msgid "Inschrijving sluit binnenkort!"
-msgstr "Enrollment closes soon!"
+msgstr "Enrolment closes soon!"
 
 #: .\app\templates\event_list.html:42
 msgid "Inschrijving gesloten!"
-msgstr "Enrollment closed!"
+msgstr "Enrolment closed!"
 
 #: .\app\templates\event_list.html:45
 msgid "Nieuw!"
 msgstr "New!"
 
+#: .\app\templates\faq.html:8 .\app\templates\include\menu.html:11
+msgid "FAQ"
+msgstr "FAQ"
+
+#: .\app\templates\faq.html:9
+msgid "Wat betekenen de kleurtjes in de tabel met deelnemers?"
+msgstr "What do the colours in the participants table mean?"
+
+#: .\app\templates\faq.html:11
+msgid "Groen betekent dat je bent ingeschreven."
+msgstr "Green means you are enrolled."
+
+#: .\app\templates\faq.html:12
+msgid "Rood betekent dat je je weer hebt uitgeschreven."
+msgstr "Red means you are disenrolled."
+
+#: .\app\templates\faq.html:13
+msgid "Geel betekent dat je op de reservelijst staat."
+msgstr "Yellow means you are on the backup list."
+
+#: .\app\templates\faq.html:16
+msgid "En wat betekenen de kleurtjes in de voortgangsbalkjes?"
+msgstr "And what do the colours in the progress bars mean?"
+
+#: .\app\templates\faq.html:18
+msgid "Blauw betekent dat er nog genoeg plek is."
+msgstr "Blue means there are still places left."
+
+#: .\app\templates\faq.html:19
+msgid "Geel betekent dat de lijst precies vol zit."
+msgstr "Yellow means the event is fully booked."
+
+#: .\app\templates\faq.html:20
+msgid ""
+"Rood betekent dat de lijst overboekt is, dus dat er mensen op de "
+"reservelijst staan."
+msgstr ""
+"Red means the event is overbooked. In other words, there are people on the "
+"backup list."
+
+#: .\app\templates\faq.html:23
+msgid "Hoe zit dat met de reservelijst?"
+msgstr "What's with the backup list?"
+
+#: .\app\templates\faq.html:24
+msgid ""
+"Een lijst kan een maximaal aantal plekken hebben. Wanneer deze volzit, kun "
+"je je nog wel inschrijven voor die lijst, maar kom je als reserve in de "
+"lijst te staan. Je kunt dan alsnog meedoen als iemand die zich eerder heeft "
+"ingeschreven zich weer uitschrijft. Dit werkt op zo'n manier dat altijd de "
+"<i>n</i> eerste ingeschreven deelnemers (op volgorde van inschrijfdatum) "
+"geselecteerd worden. Je hoeft dus niets te doen om een deelnemersplek te "
+"bemachtigen als je op de reservelijst staat; je komt er vanzelf in als "
+"genoeg mensen (afhankelijk van je plaats op de reservelijst) zich "
+"uitschrijven."
+msgstr ""
+"An event can have a limited amount of places. When it is full, you can still "
+"enrol for the event, but you will be placed on the backup list. In that case "
+"you can still enter the event when someone above you on the list disenrols. "
+"This functions in such a way that in any case the <i>n</i> first enrolled "
+"participants (sorted by enrolment date) are selected. You don't have to do "
+"anything to enter as a participant; this will happen automatically when "
+"enough people above you (depending on your place on the backup list) "
+"disenrol."
+
+#: .\app\templates\faq.html:25
+msgid ""
+"Als je je uitschrijft verlies je je plek en kom je weer onderaan als je je "
+"besluit toch weer in te schrijven!"
+msgstr ""
+"If you disenrol, you lose your place on the list and will end up at the "
+"bottom again if you decide to re-enrol!"
+
+#: .\app\templates\faq.html:27
+msgid "Hoe gaat het?"
+msgstr "How are you?"
+
+#: .\app\templates\faq.html:28
+msgid "Goed, met jou?"
+msgstr "Fine, you?"
+
+#: .\app\templates\faq.html:31
+msgid "Hoe kan ik inschrijvingen op papier in het systeem zetten?"
+msgstr "How can I enter paper-based enrolments?"
+
+#: .\app\templates\faq.html:32
+msgid ""
+"Dit kan via de functie &quot;Inschrijvingen toevoegen&quot;, te vinden op de "
+"bewerkpagina van je inschrijflijst. Deelnemers die al in het systeem staan "
+"worden geäutocompletet. Het is ook mogelijk om deelnemers in te schrijven "
+"die nog niet bestaan in het systeem, mits de gebruikersnaam correct wordt "
+"gespeld."
+msgstr ""
+"This is possible using the feature &quot;Add enrolments&quot; on the edit "
+"page of your event. Participants who are already known in the application "
+"will be autocompleted. It is also possible to enrol participants who are not "
+"yet known; given that the username will be spelled correctly."
+
 #: .\app\templates\include\bulk_registration.html:5
 msgid "Commissie inschrijven"
-msgstr "Enroll committee"
+msgstr "Enrol committee"
 
 #: .\app\templates\include\bulk_registration.html:9
 msgid "Weet je zeker dat je hele volgende commissie wilt inschrijven?"
-msgstr "Are you sure you want to enroll the entire committee?"
+msgstr "Are you sure you want to enrol the entire committee?"
 
 #: .\app\templates\include\bulk_registration.html:18
 msgid ""
 "Dit kun jij niet ongedaan maken. De leden van je commissie kunnen zichzelf "
 "wel uitschrijven."
-msgstr "You cannot undo this action. However, your committee members will be able to disenroll themselves."
+msgstr ""
+"You cannot undo this action. However, your committee members will be able to "
+"disenrol themselves."
 
 #: .\app\templates\include\event_form.html:16
 msgid "Begin"
@@ -347,13 +449,15 @@ msgstr "Event:"
 
 #: .\app\templates\include\event_form.html:29
 msgid "Inschrijflijst:"
-msgstr "Enrollment:"
+msgstr "Enrolment:"
 
 #: .\app\templates\include\event_form.html:37
 msgid ""
 "De publicatiedatum is het moment waarop de inschrijflijst zichtbaar wordt. "
 "De inschrijfdeadline is het moment waarop de inschrijving wordt gesloten."
-msgstr "The publication date is the moment the enrollment will be visible. The enrollment deadline is the moment the enrollment closes."
+msgstr ""
+"The publication date is the moment the enrolment will be visible. The "
+"enrolment deadline is the moment the enrolment closes."
 
 #: .\app\templates\include\event_form.html:48
 msgid "Voeg een extra veld toe"
@@ -374,10 +478,6 @@ msgstr "Multiple choice"
 #: .\app\templates\include\event_form.html:79
 msgid "Vul hier de opties, gescheiden door een komma (of enter) in."
 msgstr "Enter here the options, separated by a comma (or enter)."
-
-#: .\app\templates\include\menu.html:11
-msgid "FAQ"
-msgstr "FAQ"
 
 #: .\app\templates\include\menu.html:16
 msgid "Admin"
@@ -404,7 +504,9 @@ msgid ""
 "Gebruik dit formulier om een email te sturen aan alle deelnemers aan je "
 "activiteit. Gebruik in je bericht <code>{{ name }}</code> voor de naam van "
 "je ontvanger."
-msgstr "Use this form to send a email message to all participants of your event. Use <code>{{ name }}</code> in your message for the name of your receipient."
+msgstr ""
+"Use this form to send an email message to all participants of your event. "
+"Use <code>{{ name }}</code> in your message for the name of your recipient."
 
 #: .\app\templates\mail_create.html:17
 msgid "Verzenden"
@@ -412,11 +514,11 @@ msgstr "Send"
 
 #: .\app\templates\registration_create.html:7
 msgid "Voeg inschrijvingen toe aan lijst"
-msgstr "Add enrollments to event"
+msgstr "Add enrolments to event"
 
 #: .\app\templates\registration_create.html:12
 msgid "Voeg inschrijvingen toe aan"
-msgstr "Add enrollments to"
+msgstr "Add enrolments to"
 
 #: .\app\templates\registration_create.html:15
 msgid ""
@@ -425,7 +527,11 @@ msgid ""
 "de gebruikersnaam verkeerd is gespeld, zal de persoon niet correct gekoppeld "
 "worden met het juiste account. De gebruikersnaam bestaat uit de voornaam en "
 "de achternaam achter elkaar geschreven zonder spaties."
-msgstr "It is possible to enroll people who do not yet exist in this application, but take care to correctly spell the username. If the username is incorrectly spelled, the person will not be liked with the right account. The username consists of the first and last name concatenated without spaces."
+msgstr ""
+"It is possible to enrol people who do not yet exist in this application, but "
+"take care to correctly spell the username. If the username is incorrectly "
+"spelled, the person will not be linked with the right account. The username "
+"consists of the first and last name concatenated without spaces."
 
 #: .\app\templates\registration_create.html:40
 msgid "Nieuwe regel"
@@ -438,12 +544,12 @@ msgstr "OK"
 
 #: .\app\templates\registration_edit.html:6
 msgid "Bewerk registratie"
-msgstr "Edit enrollment"
+msgstr "Edit enrolment"
 
 #: .\app\templates\registration_edit.html:11
 #, python-format
 msgid "Bewerk inschrijving van %(first_name)s %(last_name)s voor %(event)s"
-msgstr "Edit enrollment of %(first_name)s %(last_name)s for %(event)s"
+msgstr "Edit enrolment of %(first_name)s %(last_name)s for %(event)s"
 
 #: .\app\views\AdminView.py:48
 msgid "Kalender ingesteld!"
@@ -479,7 +585,7 @@ msgstr "Last name"
 
 #: .\app\views\RegistrationView.py:36
 msgid "Emailadres"
-msgstr "email address"
+msgstr "Email address"
 
 #: .\app\views\RegistrationView.py:63
 msgid "Commissie {} geregistreerd!"
@@ -487,12 +593,15 @@ msgstr "Committee {} enrolled!"
 
 #: .\app\views\RegistrationView.py:93
 msgid "{} inschrijvingen toegevoegd!"
-msgstr "{} enrollments added!"
+msgstr "{} enrolments added!"
 
 #: .\app\views\RegistrationView.py:104
 msgid "Inschrijving geregistreerd!"
-msgstr "Enrollment registered!"
+msgstr "Enrolment registered!"
 
 #: .\app\views\RegistrationView.py:134 .\app\views\RegistrationView.py:150
 msgid "Inschrijving bijgewerkt!"
 msgstr "Enrollment updated!"
+
+#~ msgid "Dutch"
+#~ msgstr "Dutch"

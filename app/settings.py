@@ -104,7 +104,7 @@ USE_TZ = True
 LANGUAGE_CODE = 'NL-nl'
 
 LANGUAGES = [
-	('nl', _('Dutch')),
+	('nl', _('Nederlands')),
 	('en', _('English')),
 ]
 
