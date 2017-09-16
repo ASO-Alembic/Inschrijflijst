@@ -2,7 +2,7 @@ from django import forms
 from django.utils import timezone
 from bootstrap3_datetime.widgets import DateTimePicker
 from django_auth_ldap.backend import LDAPBackend
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from app.models import User, Registration
 from app.mails import RegistrationNotificationMail
