@@ -9,6 +9,7 @@ from django.utils.formats import date_format
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.conf import settings
+from django.utils.translation import ugettext as _
 
 from lib.ResourceView import ResourceView, bind_model
 from lib.Mail import Mailer
@@ -32,7 +33,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 			response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(event.name)
 
 			writer = csv.writer(response)
-			writer.writerow(('#', 'Voornaam', 'Achternaam', 'Emailadres', 'Inschrijfdatum', event.note_field))
+			writer.writerow(('#', _("Voornaam"), _("Achternaam"), _("Emailadres"), _("Inschrijfdatum"), event.note_field))
 
 			for i, reg in enumerate(regs):
 				if not reg.is_backup():
@@ -59,7 +60,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 					# Send mail to member
 					mailer.send(RegistrationNotificationMail(event, member, request))
 
-			messages.success(request, "Commissie {} geregistreerd!".format(committee.name))
+			messages.success(request, _("Commissie {} geregistreerd!").format(committee.name))
 			return redirect('event-detail', event.pk)
 		elif request.GET['role'] == 'cm-admin':
 			# Bulk registration of users as chairman administrating the event
@@ -89,7 +90,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 						messages.error(request, form.errors)
 
 			if count > 0:
-				messages.success(request, "{} inschrijvingen toegevoegd!".format(count))
+				messages.success(request, _("{} inschrijvingen toegevoegd!").format(count))
 			return redirect('event-edit', event.pk)
 		elif request.GET['role'] == 'user':
 			form = RegistrationForm(event, data=request.POST)
@@ -100,7 +101,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 			if form.is_valid():
 				form.save(request.user)
-				messages.success(request, "Inschrijving geregistreerd!")
+				messages.success(request, _("Inschrijving geregistreerd!"))
 				return redirect('event-detail', event.pk)
 			else:
 				# Render previous page with validation errors
@@ -130,7 +131,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 			if form.is_valid():
 				form.save(registration.participant)
-				messages.success(request, "Inschrijving bijgewerkt!")
+				messages.success(request, _("Inschrijving bijgewerkt!"))
 				return redirect('event-edit', event.pk)
 			else:
 				# Render previous page with validation errors
@@ -146,7 +147,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 			if form.is_valid():
 				form.save(request.user)
-				messages.success(request, "Inschrijving bijgewerkt!")
+				messages.success(request, _("Inschrijving bijgewerkt!"))
 				return redirect('event-detail', event.pk)
 			else:
 				# Render previous page with validation errors

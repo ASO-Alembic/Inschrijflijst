@@ -2,6 +2,7 @@
 
 {% load bootstrap3 %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}{{ event.name }}{% endblock %}
 
@@ -10,7 +11,7 @@
 		<div class="panel-heading">
 			<h1>{{ event.name }} <small>{{ event.committee.name }}</small></h1>
 			{% if event.committee in user.get_admined_committees %}
-				<a class="btn btn-default" href="{% url 'event-edit' event.pk %}" role="button">Bewerken</a>
+				<a class="btn btn-default" href="{% url 'event-edit' event.pk %}" role="button">{% trans "Bewerken" %}</a>
 			{% endif %}
 			{% if event.calendar_url %}
 				<a href="{{ event.calendar_url }}"><img src="{% static 'images/logo_calendar_32px.png' %}"></a>
@@ -19,10 +20,10 @@
 		<div class="panel-body">
 			<p><strong>Datum: </strong>{{ event.start_at }} - {{ event.end_at }}</p>
 			{% if event.deadline_at != None %}
-				<p><strong>Inschrijfdeadline: </strong>{{ event.deadline_at }}</p>
+				<p><strong>{% trans "Inschrijfdeadline:" %} </strong>{{ event.deadline_at }}</p>
 			{% endif %}
-			<p><strong>Locatie: </strong>{{ event.location }}</p>
-			<p><strong>Kosten: </strong>€{{ event.price }}</p>
+			<p><strong>{% trans "Locatie:" %} </strong>{{ event.location }}</p>
+			<p><strong>{% trans "Kosten:" %} </strong>€{{ event.price }}</p>
 
 			<br>
 			<p>{{ event.description }}</p>
@@ -34,15 +35,15 @@
 					</div>
 				</div>
 			{% else %}
-				<p>Ingeschreven: {{ event.get_active_registrations_count }}</p>
+				<p>{% trans "Ingeschreven:" %} {{ event.get_active_registrations_count }}</p>
 			{% endif %}
 		</div>
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
 					<th>#</th>
-					<th>Naam</th>
-					<th>Inschrijfdatum</th>
+					<th>{% trans "Naam" %}</th>
+					<th>{% trans "Inschrijfdatum" %}</th>
 					{% if event.note_field != '' and event.note_field_public %}
 						<th>{{ event.note_field }}</th>
 					{% endif %}
@@ -82,12 +83,12 @@
 						<input name="_method" value="PUT" type="hidden">
 					{% endif %}
 					{% bootstrap_form form layout='inline' %}
-					<button class="btn btn-primary" type="submit">Opslaan</button>
+					<button class="btn btn-primary" type="submit">{% trans "Opslaan" %}</button>
 				</form>
 				{% if user.chaired_committees.exists %}
 					<br>
 					<form class="form-inline">
-						Schrijf je commissie in:
+						{% trans "Schrijf je commissie in:" %}
 						<select id="chairedCommittees" class="form-control">
 							<option selected></option>
 							{% for committee in user.chaired_committees.all %}
@@ -99,12 +100,12 @@
 				{% if event.is_full %}
 					<br>
 					<div class="alert alert-warning">
-						<p>Deze inschrijflijst zit vol. Je kunt je nog wel inschrijven als reserve; je komt dan op de lijst te staan als iemand zich uitschrijft. Selectie is op basis van inschrijfdatum.</p>
+						<p>{% trans "Deze inschrijflijst zit vol. Je kunt je nog wel inschrijven als reserve; je komt dan op de lijst te staan als iemand zich uitschrijft. Selectie is op basis van inschrijfdatum." %}</p>
 					</div>
 				{% endif %}
 			{% else %}
 				<div class="alert alert-warning">
-					<p>De deadline voor deze inschrijflijst is verstreken. Je kunt je niet meer in- of uitschrijven. Neem voor vragen <a href="mailto:{{ event.committee.email }}">contact op met de {{ event.committee.name }}</a>.</p>
+					<p>{% blocktrans with email=event.committee.email name=event.committee.name %}De deadline voor deze inschrijflijst is verstreken. Je kunt je niet meer in- of uitschrijven. Neem voor vragen <a href="mailto:{{ email }}">contact op met de {{ name }}{% endblocktrans %}</a>.</p>
 				</div>
 			{% endif %}
 		</div>

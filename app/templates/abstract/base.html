@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -38,8 +39,13 @@
 					{% include 'include/menu.html' %}
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li class="navbar-text">Welkom, {{ user.first_name }}!</li>
-					<li><a href="{% url 'logout' %}">Uitloggen</a></li>
+					<li class="navbar-text">
+						{% blocktrans with first_name=user.first_name %}Welkom, {{ first_name }}!{% endblocktrans %}
+					</li>
+					<li>
+						{% include 'include/lang_select.html' %}
+					</li>
+					<li><a href="{% url 'logout' %}">{% trans "Uitloggen" %}</a></li>
 				</ul>
 			</div>
 		</div>
@@ -60,6 +66,7 @@
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="{% static 'js/lang_select.js' %}"></script>
 	{% block scripts %}{% endblock %}
 </body>
 </html>

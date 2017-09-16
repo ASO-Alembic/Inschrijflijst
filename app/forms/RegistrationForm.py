@@ -1,5 +1,6 @@
 from django import forms
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
 from app.models import Registration
 
@@ -9,9 +10,9 @@ class RegistrationForm(forms.Form):
 		required=False,
 		label='',
 		widget=forms.CheckboxInput(attrs={
-			'data-toggle': 'toggle',
-			'data-on': 'Ingeschreven',
-			'data-off': 'Niet ingeschreven',
+			'data-toggle':  'toggle',
+			'data-on':      _("Ingeschreven"),
+			'data-off':     _("Niet ingeschreven"),
 			'data-onstyle': 'success'
 		})
 	)
@@ -24,11 +25,11 @@ class RegistrationForm(forms.Form):
 			super().__init__(data=data, initial={'registered': instance.withdrawn_at is None, 'note': instance.note})
 
 			self.fields['registered'].widget = forms.CheckboxInput(attrs={
-				'data-toggle': 'toggle',
-				'data-on': 'Ingeschreven',
-				'data-off': 'Uitgeschreven',
-				'data-onstyle': 'success',
-				'data-offstyle': 'danger'
+				'data-toggle':      'toggle',
+				'data-on':          _("Ingeschreven"),
+				'data-off':         _("Uitgeschreven"),
+				'data-onstyle':     'success',
+				'data-offstyle':    'danger'
 			})
 		else:
 			super().__init__(data=data, initial=initial)

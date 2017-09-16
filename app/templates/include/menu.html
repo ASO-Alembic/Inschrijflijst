@@ -1,29 +1,31 @@
+{% load i18n %}
+
 {% with request.resolver_match.url_name as url_name %}
 	<li class="{% if url_name == 'event-list' %}active{% endif %}">
-		<a href="{% url 'event-list' %}"><span class="glyphicon glyphicon-list-alt"></span> Inschrijflijsten</a>
+		<a href="{% url 'event-list' %}"><span class="glyphicon glyphicon-list-alt"></span> {% trans "Inschrijflijsten" %}</a>
 	</li>
 	<li class="{% if url_name == 'calendar' %}active{% endif %}">
-		<a href="{% url 'calendar' %}"><span class="glyphicon glyphicon-calendar"></span> Jaarcirkel</a>
+		<a href="{% url 'calendar' %}"><span class="glyphicon glyphicon-calendar"></span> {% trans "Jaarcirkel" %}</a>
 	</li>
 	<li class="{% if url_name == 'faq' %}active{% endif %}">
-		<a href="{% url 'faq' %}"><span class="glyphicon glyphicon-question-sign"></span> FAQ</a>
+		<a href="{% url 'faq' %}"><span class="glyphicon glyphicon-question-sign"></span> {% trans "FAQ" %}</a>
 	</li>
 
 	{% if user.is_admin %}
 		<li class="dropdown{% if url_name == 'committee-list' or url_name == 'admin' %} active{% endif %}">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Admin<span class="caret"></span></a>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> {% trans "Admin" %}<span class="caret"></span></a>
 			<ul class="dropdown-menu">
 				{% if user.is_admin %}
 					<li class="{% if url_name == 'committee-list' %}active{% endif %}">
-						<a href="{% url 'committee-list' %}">Lijstbeheer</a>
+						<a href="{% url 'committee-list' %}">{% trans "Lijstbeheer" %}</a>
 					</li>
 				{% endif %}
 				{% if user.is_staff %}
 					<li class="{% if url_name == 'admin' %}active{% endif %}">
-						<a href="{% url 'admin' %}">Instellingen</a>
+						<a href="{% url 'admin' %}">{% trans "Instellingen" %}</a>
 					</li>
 					<li>
-						<a href="{% url 'admin:index' %}">Django admin</a>
+						<a href="{% url 'admin:index' %}">{% trans "Django admin" %}</a>
 					</li>
 				{% endif %}
 			</ul>

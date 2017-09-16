@@ -1,6 +1,8 @@
 {% extends "abstract/email_base.html" %}
 
 {% block content %}
+	<p><i>English version below</i></p>
+
 	<p>Beste {{ recipient }},</p>
 
 	<p>Je wordt erop geattendeerd dat {{ sender }} je heeft ingeschreven voor de activiteit <a href="{{ base_url }}{% url 'event-detail' event.pk %}">{{ event.name }}</a>.</p>
@@ -13,4 +15,19 @@
 	</p>
 
 	<p><i>Verzonden door het <a href="{{ base_url }}{% url 'home' %}">Alembic Inschrijfsysteem</a></i></p>
+
+	<hr>
+
+	<p>Dear {{ recipient }},</p>
+
+	<p>You are notified that {{ sender }} has enrolled you for the event <a href="{{ base_url }}{% url 'event-detail' event.pk %}">{{ event.name }}</a>.</p>
+
+	<p>
+		It is possible to cancel this by disenrolling using the link above.
+		{% if event.deadline_at is not None %}
+			This is possible until {{ event.deadline_at }}.
+		{% endif %}
+	</p>
+
+	<p><i>Sent by <a href="{{ base_url }}{% url 'home' %}">Alembic Inschrijfsysteem</a></i></p>
 {% endblock %}

@@ -1,9 +1,11 @@
 {% extends "abstract/base.html" %}
 
-{% block title %}Inschrijflijsten{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Inschrijflijsten" %}{% endblock %}
 
 {% block content %}
-	<h1>Inschrijflijsten</h1>
+	<h1>{% trans "Inschrijflijsten" %}</h1>
 
 	<div class="row">
 		{% for event, participants in events %}
@@ -27,20 +29,20 @@
 								</div>
 							</div>
 						{% else %}
-							<p>Ingeschreven: {{ participants.count }}</p>
+							<p>{% trans "Ingeschreven:" %} {{ participants.count }}</p>
 						{% endif %}
 					</div>
 					<div class="panel-footer">
-						<a class="btn btn-default" href="{% url 'event-detail' event.pk %}" role="button">Details</a>
+						<a class="btn btn-default" href="{% url 'event-detail' event.pk %}" role="button">{% trans "Details" %}</a>
 						{% if user in participants %}
-							<div><span class="glyphicon glyphicon-check"></span> Ingeschreven</div>
+							<div><span class="glyphicon glyphicon-check"></span> {% trans "Ingeschreven" %}</div>
 						{% elif event.is_almost_expired %}
-							<span class="label label-info">Inschrijving sluit binnenkort!</span>
+							<span class="label label-info">{% trans "Inschrijving sluit binnenkort!" %}</span>
 						{% elif event.is_expired %}
-							<span class="label label-warning">Inschrijving gesloten!</span>
+							<span class="label label-warning">{% trans "Inschrijving gesloten!" %}</span>
 						{% endif %}
 						{% if event.created_at > request.user.last_seen_at %}
-							<span class="label label-info">Nieuw!</span>
+							<span class="label label-info">{% trans "Nieuw!" %}</span>
 						{% endif %}
 					</div>
 				</div>

@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.conf import settings
+from django.utils.translation import ugettext as _
 
 from lib.ResourceView import ResourceView, bind_model
 from lib.Mail import CustomMail, Mailer
@@ -41,5 +42,5 @@ class MailView(LoginRequiredMixin, ResourceView):
 		else:
 			return self.create(request, event.pk, form=form)
 
-		messages.success(request, "{} emails verstuurd!".format(i))
+		messages.success(request, _("{} emails verstuurd!").format(i))
 		return redirect('mail-create', event.pk)

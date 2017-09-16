@@ -1,32 +1,34 @@
 {% extends "abstract/base.html" %}
 
+{% load i18n %}
+
 {% block title %}FAQ{% endblock %}
 
 {% block content %}
-	<h1>FAQ</h1>
-	<h3>Wat betekenen de kleurtjes in de tabel met deelnemers?</h3>
+	<h1>{% trans "FAQ" %}</h1>
+	<h3>{% trans "Wat betekenen de kleurtjes in de tabel met deelnemers?" %}</h3>
 	<ul>
-		<li>Groen betekent dat je bent ingeschreven.</li>
-		<li>Rood betekent dat je je weer hebt uitgeschreven.</li>
-		<li>Geel betekent dat je op de reservelijst staat.</li>
+		<li>{% trans "Groen betekent dat je bent ingeschreven." %}</li>
+		<li>{% trans "Rood betekent dat je je weer hebt uitgeschreven." %}</li>
+		<li>{% trans "Geel betekent dat je op de reservelijst staat." %}</li>
 	</ul>
 
-	<h3>En wat betekenen de kleurtjes in de voortgangsbalkjes?</h3>
+	<h3>{% trans "En wat betekenen de kleurtjes in de voortgangsbalkjes?" %}</h3>
 	<ul>
-		<li>Blauw betekent dat er nog genoeg plek is.</li>
-		<li>Geel betekent dat de lijst precies vol zit.</li>
-		<li>Rood betekent dat de lijst overboekt is, dus dat er mensen op de reservelijst staan.</li>
+		<li>{% trans "Blauw betekent dat er nog genoeg plek is." %}</li>
+		<li>{% trans "Geel betekent dat de lijst precies vol zit." %}</li>
+		<li>{% trans "Rood betekent dat de lijst overboekt is, dus dat er mensen op de reservelijst staan." %}</li>
 	</ul>
 
-	<h3>Hoe zit dat met de reservelijst?</h3>
-	<p>Een lijst kan een maximaal aantal plekken hebben. Wanneer deze volzit, kun je je nog wel inschrijven voor die lijst, maar kom je als reserve in de lijst te staan. Je kunt dan alsnog meedoen als iemand die zich eerder heeft ingeschreven zich weer uitschrijft. Dit werkt op zo'n manier dat altijd de <i>n</i> eerste ingeschreven deelnemers (op volgorde van inschrijfdatum) geselecteerd worden. Je hoeft dus niets te doen om een deelnemersplek te bemachtigen als je op de reservelijst staat; je komt er vanzelf in als genoeg mensen (afhankelijk van je plaats op de reservelijst) zich uitschrijven.</p>
-	<p>Als je je uitschrijft verlies je je plek en kom je weer onderaan als je je besluit toch weer in te schrijven!</p>
+	<h3>{% trans "Hoe zit dat met de reservelijst?" %}</h3>
+	<p>{% trans "Een lijst kan een maximaal aantal plekken hebben. Wanneer deze volzit, kun je je nog wel inschrijven voor die lijst, maar kom je als reserve in de lijst te staan. Je kunt dan alsnog meedoen als iemand die zich eerder heeft ingeschreven zich weer uitschrijft. Dit werkt op zo'n manier dat altijd de <i>n</i> eerste ingeschreven deelnemers (op volgorde van inschrijfdatum) geselecteerd worden. Je hoeft dus niets te doen om een deelnemersplek te bemachtigen als je op de reservelijst staat; je komt er vanzelf in als genoeg mensen (afhankelijk van je plaats op de reservelijst) zich uitschrijven." %}</p>
+	<p>{% trans "Als je je uitschrijft verlies je je plek en kom je weer onderaan als je je besluit toch weer in te schrijven!" %}</p>
 
-	<h3>Hoe gaat het?</h3>
-	<p>Goed, met jou?</p>
+	<h3>{% trans "Hoe gaat het?" %}</h3>
+	<p>{% trans "Goed, met jou?" %}</p>
 
 	{% if user.chaired_committees.exists %}
-		<h3>Hoe kan ik inschrijvingen op papier in het systeem zetten?</h3>
-		<p>Dit kan via de functie "Inschrijvingen toevoegen", te vinden op de bewerkpagina van je inschrijflijst. Deelnemers die al in het systeem staan worden geäutocompletet. Het is ook mogelijk om deelnemers in te schrijven die nog niet bestaan in het systeem, mits de gebruikersnaam correct wordt gespeld.</p>
+		<h3>{% trans "Hoe kan ik inschrijvingen op papier in het systeem zetten?" %}</h3>
+		<p>{% trans "Dit kan via de functie &quot;Inschrijvingen toevoegen&quot;, te vinden op de bewerkpagina van je inschrijflijst. Deelnemers die al in het systeem staan worden geäutocompletet. Het is ook mogelijk om deelnemers in te schrijven die nog niet bestaan in het systeem, mits de gebruikersnaam correct wordt gespeld." %}</p>
 	{% endif %}
 {% endblock %}

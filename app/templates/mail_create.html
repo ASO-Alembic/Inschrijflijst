@@ -1,19 +1,20 @@
 {% extends "abstract/base.html" %}
 
 {% load bootstrap3 %}
+{% load i18n %}
 
-{% block title %}Mass mail{% endblock %}
+{% block title %}{% trans "Mass mail" %}{% endblock %}
 
 {% block content %}
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h1>Mass mail <small>aan deelnemers aan <strong>{{ event.name }}</strong></small></h1>
+			<h1>{% trans "Mass mail" %} <small>{% trans "aan deelnemers aan" %} <strong>{{ event.name }}</strong></small></h1>
 		</div>
 		<form class="panel-body form-horizontal" action="{% url 'mail-list' event.pk %}" method="post">
-			<p>Gebruik dit formulier om een email te sturen aan alle deelnemers aan je activiteit. Gebruik in je bericht <code>{% verbatim %}{{ name }}{% endverbatim %}</code> voor de naam van je ontvanger.</p>
+			<p>{% trans "Gebruik dit formulier om een email te sturen aan alle deelnemers aan je activiteit. Gebruik in je bericht <code>{{ name }}</code> voor de naam van je ontvanger." %}</p>
 			{% csrf_token %}
 			{% bootstrap_form form layout='horizontal' %}
-			<button class="btn btn-primary" type="submit">Verzenden</button>
+			<button class="btn btn-primary" type="submit">{% trans "Verzenden" %}</button>
 		</form>
 	</div>
 {% endblock %}

@@ -1,27 +1,28 @@
 {% extends "abstract/base.html" %}
 
 {% load bootstrap3 %}
+{% load i18n %}
 
 {% block title %}{% endblock %}
 
 {% block content %}
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h1>Administratie</h1>
+			<h1>{% trans "Administratie" %}</h1>
 		</div>
 		<div class="panel-body">
-			<h2>AD-integratie</h2><hr>
+			<h2>{% trans "AD-integratie" %}</h2><hr>
 			<form action="{% url 'admin-sync-ldap' %}" method="post">
 				{% csrf_token %}
-				<button class="btn btn-primary" type="submit">Update commissies vanuit LDAP</button>
+				<button class="btn btn-primary" type="submit">{% trans "Update commissies vanuit LDAP" %}</button>
 			</form>
 			<br>
 
-			<h2>Google Calendar-integratie</h2><hr>
+			<h2>{% trans "Google Calendar-integratie" %}</h2><hr>
 			<form class="form-horizontal" action="{% url 'admin-calendar' %}" method="post">
 				{% csrf_token %}
 				<div class="form-group">
-					<label class="col-md-3 form-label">Stap 1: Koppel Google-account</label>
+					<label class="col-md-3 form-label">{% trans "Stap 1: Koppel Google-account" %}</label>
 					<div class="col-md-2">
 						<a href="{{ authorize_url }}"><img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png"></a>
 					</div>
@@ -33,7 +34,7 @@
 				</div>
 			    {% if cals is not None %}
 					<div class="form-group{% if active_cal %} has-success{% endif %}">
-						<label class="col-md-3 form-label">Stap 2: Selecteer juiste agenda (Jaarcirkel)</label>
+						<label class="col-md-3 form-label">{% trans "Stap 2: Selecteer juiste agenda (Jaarcirkel)" %}</label>
 						<div class="col-md-6">
 							<select class="form-control" name="calender_id">
 								{% for id, summary in cals.items %}
@@ -42,7 +43,7 @@
 							</select>
 						</div>
 						<div class="col-md-2">
-							<button class="btn btn-primary" type="submit">Opslaan</button>
+							<button class="btn btn-primary" type="submit">{% trans "Opslaan" %}</button>
 						</div>
 					</div>
 				{% endif %}
