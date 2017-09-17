@@ -33,17 +33,19 @@
 						{% endif %}
 					</div>
 					<div class="panel-footer">
-						<a class="btn btn-default" href="{% url 'event-detail' event.pk %}" role="button">{% trans "Details" %}</a>
-						{% if user in participants %}
-							<div><span class="glyphicon glyphicon-check"></span> {% trans "Ingeschreven" %}</div>
-						{% elif event.is_almost_expired %}
-							<span class="label label-info">{% trans "Inschrijving sluit binnenkort!" %}</span>
-						{% elif event.is_expired %}
-							<span class="label label-warning">{% trans "Inschrijving gesloten!" %}</span>
-						{% endif %}
-						{% if event.created_at > request.user.last_seen_at %}
-							<span class="label label-info">{% trans "Nieuw!" %}</span>
-						{% endif %}
+						<div class="flex-footer">
+							<a class="btn btn-default" href="{% url 'event-detail' event.pk %}" role="button">{% trans "Details" %}</a>
+							{% if user in participants %}
+								<div><span class="glyphicon glyphicon-check"></span> {% trans "Ingeschreven" %}</div>
+							{% elif event.is_almost_expired %}
+								<span class="label label-info">{% trans "Inschrijving sluit binnenkort!" %}</span>
+							{% elif event.is_expired %}
+								<span class="label label-warning">{% trans "Inschrijving gesloten!" %}</span>
+							{% endif %}
+							{% if event.created_at > request.user.last_seen_at %}
+								<span class="label label-info">{% trans "Nieuw!" %}</span>
+							{% endif %}
+						</div>
 					</div>
 				</div>
 			</div>

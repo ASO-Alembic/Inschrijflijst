@@ -45,9 +45,11 @@
 			</tbody>
 		</table>
 		<div class="panel-footer">
-			<a href="{% url 'registration-create' event.pk %}" class="btn btn-primary">{% trans "Inschrijvingen toevoegen" %}</a>
-			<a href="{% url 'registration-list' event.pk %}?format=csv" class="btn btn-primary" title="{% trans "Alleen ingeschreven deelnemers die niet op de reservelijst staan worden geëxporteerd" %}">{% trans "Exporteren" %}</a>
-			<a href="{% url 'mail-create' event.pk %}" class="btn btn-primary">{% trans "Mass mail" %}</a>
+			<div class="flex-footer">
+				<a href="{% url 'registration-create' event.pk %}" class="btn btn-primary">{% trans "Inschrijvingen toevoegen" %}</a>
+				<a href="{% url 'registration-list' event.pk %}?format=csv" class="btn btn-primary" title="{% trans "Alleen ingeschreven deelnemers die niet op de reservelijst staan worden geëxporteerd" %}">{% trans "Exporteren" %}</a>
+				<a href="{% url 'mail-create' event.pk %}" class="btn btn-primary">{% trans "Mass mail" %}</a>
+			</div>
 		</div>
 	</div>
 {% endblock %}

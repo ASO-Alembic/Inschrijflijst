@@ -76,26 +76,29 @@
 			</tbody>
 		</table>
 		<div class="panel-footer">
+
 			{% if form is not None %}
-				<form class="form-inline" action="{{ action }}?role=user" method="post">
-					{% csrf_token %}
-					{% if user in event.participants.all %}
-						<input name="_method" value="PUT" type="hidden">
-					{% endif %}
-					{% bootstrap_form form layout='inline' %}
-					<button class="btn btn-primary" type="submit">{% trans "Opslaan" %}</button>
-				</form>
-				{% if user.chaired_committees.exists %}
-					<br>
-					<form class="form-inline">
-						{% trans "Schrijf je commissie in:" %}
-						<select id="chairedCommittees" class="form-control">
-							<option selected></option>
-							{% for committee in user.chaired_committees.all %}
-								<option>{{ committee.name }}</option>
-							{% endfor %}
-						</select>
+				<div class="flex-footer">
+					<form class="form-inline" action="{{ action }}?role=user" method="post">
+						{% csrf_token %}
+						{% if user in event.participants.all %}
+							<input name="_method" value="PUT" type="hidden">
+						{% endif %}
+						{% bootstrap_form form layout='inline' %}
+						<button class="btn btn-primary" type="submit">{% trans "Opslaan" %}</button>
 					</form>
+					{% if user.chaired_committees.exists %}
+						<br>
+						<form class="form-inline">
+							{% trans "Schrijf je commissie in:" %}
+							<select id="chairedCommittees" class="form-control">
+								<option selected></option>
+								{% for committee in user.chaired_committees.all %}
+									<option>{{ committee.name }}</option>
+								{% endfor %}
+							</select>
+						</form>
+					</div>
 				{% endif %}
 				{% if event.is_full %}
 					<br>

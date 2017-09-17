@@ -63,7 +63,7 @@ footer {
 	height: 115px;
 }
 
-.panel-footer {
+.flex-footer {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
