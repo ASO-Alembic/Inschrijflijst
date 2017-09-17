@@ -28,9 +28,6 @@ class EventView(LoginRequiredMixin, ResourceView):
 		if not event.is_published() and not request.user.is_admin_of_committee(event.committee):
 			raise PermissionDenied
 
-		active_regs = Registration.objects.filter(event_id=event, withdrawn_at=None)
-		withdrawn_regs = Registration.objects.filter(event_id=event).exclude(withdrawn_at=None)
-
 		# Show form if deadline hasn't expired
 		if not event.is_expired():
 			if event.registration_set.filter(participant=request.user).exists():
@@ -53,7 +50,6 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 		return render(request, 'event_detail.html', {
 				'event': event,
-				'regs': active_regs | withdrawn_regs,
 				'form': form,
 				'action': action
 		})
@@ -62,13 +58,10 @@ class EventView(LoginRequiredMixin, ResourceView):
 	def edit(self, request, event, form=None):
 		self.check_admin_of(event.committee)
 
-		active_regs = Registration.objects.filter(event_id=event, withdrawn_at=None)
-		withdrawn_regs = Registration.objects.filter(event_id=event).exclude(withdrawn_at=None)
-
 		if form is None:
 			form = EventForm(request.user, instance=event)
 
-		return render(request, 'event_edit.html', {'event': event, 'regs': active_regs | withdrawn_regs, 'form': form})
+		return render(request, 'event_edit.html', {'event': event, 'form': form})
 
 	@bind_model
 	def update(self, request, event):

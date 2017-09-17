@@ -50,7 +50,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% for reg in regs %}
+				{% for reg in event.registration_set.all %}
 					<tr class="{% if reg.is_backup %}warning{% else %}success{% endif %}{% if reg.withdrawn_at != None %} danger{% endif %}">
 						<td>
 							{{ forloop.counter }}
@@ -76,7 +76,6 @@
 			</tbody>
 		</table>
 		<div class="panel-footer">
-
 			{% if form is not None %}
 				<div class="flex-footer">
 					<form class="form-inline" action="{{ action }}?role=user" method="post">

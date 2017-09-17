@@ -30,7 +30,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% for reg in regs %}
+				{% for reg in event.registration_set.all %}
 					<tr class="{% if reg.is_backup %}warning{% else %}success{% endif %}{% if reg.withdrawn_at != None %} danger{% endif %}">
 						<td>{{ forloop.counter }}</td>
 						<td>{{ reg.participant.first_name }} {{ reg.participant.last_name }}</td>
