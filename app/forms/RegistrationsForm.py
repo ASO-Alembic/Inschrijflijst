@@ -3,6 +3,8 @@ from django.utils import timezone
 from bootstrap3_datetime.widgets import DateTimePicker
 from django_auth_ldap.backend import LDAPBackend
 from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ValidationError
+from django.contrib import messages
 
 from app.models import User, Registration
 from app.mails import RegistrationNotificationMail
@@ -52,4 +54,7 @@ class RegistrationsForm(forms.Form):
 		registration.save()
 
 		# Send mail to participant
-		mailer.send(RegistrationNotificationMail(self.event, self.cleaned_data['username'], request))
+		try:
+			mailer.send(RegistrationNotificationMail(self.event, self.cleaned_data['username'], request))
+		except ValidationError:
+			messages.error(request, _("Kon email niet verzenden aan {} {} (ongeldig emailadres)").format(self.cleaned_data['username'].first_name, self.cleaned_data['username'].last_name))

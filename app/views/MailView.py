@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.utils.translation import ugettext as _
+from django.core.exceptions import ValidationError
 
 from lib.ResourceView import ResourceView, bind_model
 from lib.Mail import CustomMail, Mailer
@@ -36,9 +37,12 @@ class MailView(LoginRequiredMixin, ResourceView):
 				for reg in event.registration_set.filter(withdrawn_at=None):
 					# Only send mail if not withdrawn, and send mail to backup depending on form setting
 					if not reg.is_backup() or form.cleaned_data['recipients'] == 'all':
-						msg = CustomMail(event.committee.email, reg.participant, form.cleaned_data['subject'], form.cleaned_data['body'])
-						mailer.send(msg)
-						i += 1
+						try:
+							msg = CustomMail(event.committee.email, reg.participant, form.cleaned_data['subject'], form.cleaned_data['body'])
+							mailer.send(msg)
+							i += 1
+						except ValidationError:
+							messages.error(request, _("Kon email niet verzenden aan {} {} (ongeldig emailadres)").format(reg.participant.first_name, reg.participant.last_name))
 		else:
 			return self.create(request, event.pk, form=form)
 

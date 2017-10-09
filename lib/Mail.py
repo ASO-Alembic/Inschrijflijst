@@ -2,6 +2,7 @@ from abc import ABCMeta, abstractmethod
 
 from django.template.loader import render_to_string
 from django.template import Context, Template
+from django.core.validators import validate_email
 from html2text import html2text
 from post_office import mail
 
@@ -20,6 +21,8 @@ class Mail(metaclass=ABCMeta):
 		self.reply_to = ''
 		self.request = None
 
+		self.validate()
+
 	def get_html_body(self):
 		return render_to_string(self.template, self.context, self.request)
 
@@ -35,6 +38,10 @@ class Mail(metaclass=ABCMeta):
 	def get_reply_to(self):
 		return self.reply_to
 
+	def validate(self):
+		for email in self.recipients:
+			validate_email(email)
+
 
 class CustomMail(Mail):
 	"""
@@ -49,6 +56,8 @@ class CustomMail(Mail):
 		self.recipients = [user.email]
 		self.reply_to = reply_to
 		self.template_string = template_string
+
+		self.validate()
 
 	def get_html_body(self):
 		"""

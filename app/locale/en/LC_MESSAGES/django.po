@@ -6,14 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Inschrijflijst v3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-16 18:09+0200\n"
-"PO-Revision-Date: 2017-09-16 18:19+0200\n"
+"POT-Creation-Date: 2017-10-09 20:47+0200\n"
+"PO-Revision-Date: 2017-10-09 20:48+0200\n"
 "Last-Translator: Lars Veldscholte <lars@tuxplace.nl>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.3\n"
 
 #: .\app\forms\EventForm.py:39 .\app\templates\event_detail.html:45
 #: .\app\templates\event_edit.html:23
@@ -97,7 +99,7 @@ msgid "<p>Beste {{ name }},</p>"
 msgstr "<p>Dear {{ name }},</p>"
 
 #: .\app\forms\RegistrationForm.py:14 .\app\forms\RegistrationForm.py:29
-#: .\app\templates\event_list.html:38
+#: .\app\templates\event_list.html:39
 msgid "Ingeschreven"
 msgstr "Enrolled"
 
@@ -183,7 +185,7 @@ msgstr "Step 1: Link Google account"
 msgid "Stap 2: Selecteer juiste agenda (Jaarcirkel)"
 msgstr "Step 2: Select appropriate calendar"
 
-#: .\app\templates\admin.html:46 .\app\templates\event_detail.html:86
+#: .\app\templates\admin.html:46 .\app\templates\event_detail.html:87
 msgid "Opslaan"
 msgstr "Save"
 
@@ -250,11 +252,11 @@ msgstr "Enrolled:"
 msgid "Inschrijfdatum"
 msgstr "Enrolment date"
 
-#: .\app\templates\event_detail.html:91
+#: .\app\templates\event_detail.html:92
 msgid "Schrijf je commissie in:"
 msgstr "Enrol your committee:"
 
-#: .\app\templates\event_detail.html:103
+#: .\app\templates\event_detail.html:105
 msgid ""
 "Deze inschrijflijst zit vol. Je kunt je nog wel inschrijven als reserve; je "
 "komt dan op de lijst te staan als iemand zich uitschrijft. Selectie is op "
@@ -263,7 +265,7 @@ msgstr ""
 "This event is full. You can still enrol as backup; you will enter as a "
 "participant when someone disenrolls. Selection is on basis of enrolment date."
 
-#: .\app\templates\event_detail.html:108
+#: .\app\templates\event_detail.html:110
 #, python-format
 msgid ""
 "De deadline voor deze inschrijflijst is verstreken. Je kunt je niet meer in- "
@@ -281,21 +283,21 @@ msgstr "Edit"
 msgid "Uitschrijfdatum"
 msgstr "Disenrolment date"
 
-#: .\app\templates\event_edit.html:48
+#: .\app\templates\event_edit.html:49
 msgid "Inschrijvingen toevoegen"
 msgstr "Add enrolments"
 
-#: .\app\templates\event_edit.html:49
+#: .\app\templates\event_edit.html:50
 msgid ""
 "Alleen ingeschreven deelnemers die niet op de reservelijst staan worden "
 "geëxporteerd"
 msgstr "Only enrolled participants who are not backup will be exported"
 
-#: .\app\templates\event_edit.html:49
+#: .\app\templates\event_edit.html:50
 msgid "Exporteren"
 msgstr "Export"
 
-#: .\app\templates\event_edit.html:50 .\app\templates\mail_create.html:6
+#: .\app\templates\event_edit.html:51 .\app\templates\mail_create.html:6
 #: .\app\templates\mail_create.html:11
 msgid "Mass mail"
 msgstr "Mass mail"
@@ -305,19 +307,19 @@ msgstr "Mass mail"
 msgid "Inschrijflijsten"
 msgstr "Events"
 
-#: .\app\templates\event_list.html:36
+#: .\app\templates\event_list.html:37
 msgid "Details"
 msgstr "Details"
 
-#: .\app\templates\event_list.html:40
+#: .\app\templates\event_list.html:41
 msgid "Inschrijving sluit binnenkort!"
 msgstr "Enrolment closes soon!"
 
-#: .\app\templates\event_list.html:42
+#: .\app\templates\event_list.html:43
 msgid "Inschrijving gesloten!"
 msgstr "Enrolment closed!"
 
-#: .\app\templates\event_list.html:45
+#: .\app\templates\event_list.html:46
 msgid "Nieuw!"
 msgstr "New!"
 
@@ -563,15 +565,19 @@ msgstr "Google account linked!"
 msgid "Commissies geupdatet!"
 msgstr "Committees updated!"
 
-#: .\app\views\EventView.py:79
+#: .\app\views\EventView.py:72
 msgid "Inschrijflijst bijgewerkt!"
 msgstr "Event edited!"
 
-#: .\app\views\EventView.py:96
+#: .\app\views\EventView.py:89
 msgid "Inschrijflijst aangemaakt!"
 msgstr "Event created!"
 
 #: .\app\views\MailView.py:45
+msgid "Kon email niet verzenden aan {} {} (ongeldig emailadres)"
+msgstr "Could not send email message to {} {} (invalid email address)"
+
+#: .\app\views\MailView.py:49
 msgid "{} emails verstuurd!"
 msgstr "{} messages sent!"
 
