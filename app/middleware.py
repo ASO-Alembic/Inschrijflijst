@@ -1,7 +1,5 @@
 from django.utils import timezone
 
-from app.models import User
-
 
 def last_seen_middleware(get_response):
 	"""

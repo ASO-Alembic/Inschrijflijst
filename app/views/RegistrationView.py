@@ -4,7 +4,6 @@ from itertools import zip_longest
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
-from django.utils import timezone
 from django.utils.formats import date_format
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
