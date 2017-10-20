@@ -27,6 +27,7 @@ function setNoteFieldsetState() {
 	var checked = $('#note_field_check').is(':checked');
 
 	$('#note_fieldset input').prop('readonly', !checked);
+	$('#note_fieldset input:checkbox, #note_fieldset input:radio').prop('disabled', !checked);
 
 	if(!checked)
 		$('#id_note_field').val('')
