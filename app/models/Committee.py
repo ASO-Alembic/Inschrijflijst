@@ -3,6 +3,9 @@ from django.conf import settings
 from django.utils.decorators import classonlymethod
 from django.contrib.auth import get_user_model
 
+from .Registration import Registration
+from app.mails import RegistrationNotificationMail
+
 
 class Committee(models.Model):
 	name = models.CharField(max_length=25)
@@ -13,6 +16,19 @@ class Committee(models.Model):
 
 	def __str__(self):
 		return self.name
+
+	def enroll(self, mailer, event, request):
+		"""
+		Register all committee members for event, creating a new Registration instance if one does not exist yet
+		"""
+		with mailer:
+			for member in self.members.all():
+				registration, created = Registration.objects.get_or_create(event=event, participant=member)
+				registration.withdrawn_at = None
+				registration.save()
+
+				# Send mail to member
+				mailer.send(RegistrationNotificationMail(event, member, request))
 
 	@classonlymethod
 	def update_committees(cls, committees):

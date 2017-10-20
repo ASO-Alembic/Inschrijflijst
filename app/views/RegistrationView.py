@@ -15,7 +15,6 @@ from lib.Mail import Mailer
 from app.models import Event, Registration, Committee, User
 from app.forms import RegistrationForm, RegistrationsForm
 from app.views import EventView
-from app.mails import RegistrationNotificationMail
 
 
 class RegistrationView(LoginRequiredMixin, ResourceView):
@@ -49,15 +48,8 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 			committee = Committee.objects.get(name=request.POST['committee'])
 			self.check_user(committee.chairman)
 
-			# Register all members for event, creating a new Registration instance if one does not exist yet
-			with Mailer(settings.DEFAULT_FROM_EMAIL) as mailer:
-				for member in committee.members.all():
-					registration, created = Registration.objects.get_or_create(event=event, participant=member)
-					registration.withdrawn_at = None
-					registration.save()
-
-					# Send mail to member
-					mailer.send(RegistrationNotificationMail(event, member, request))
+			# Register all members for event
+			committee.enroll(Mailer(settings.DEFAULT_FROM_EMAIL), event, request)
 
 			messages.success(request, _("Commissie {} geregistreerd!").format(committee.name))
 			return redirect('event-detail', event.pk)
