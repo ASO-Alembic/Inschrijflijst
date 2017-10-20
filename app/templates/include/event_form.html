@@ -84,4 +84,10 @@
 	{% bootstrap_field form.note_field_public layout='horizontal' %}
 </fieldset>
 
+{% if not form.instance.pk %}
+	<hr>
+	{% bootstrap_field form.add_to_calendar layout='horizontal' %}
+	{% bootstrap_field form.enroll_committee layout='horizontal' %}
+{% endif %}
+
 <button class="btn btn-primary" type="submit">Opslaan</button>

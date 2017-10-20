@@ -1,9 +1,11 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 from bootstrap3_datetime.widgets import DateTimePicker
 
 from app.models import Event
 from app.services import GoogleCalendarService
+from lib.Mail import Mailer
 
 
 class EventForm(forms.ModelForm):
@@ -12,9 +14,10 @@ class EventForm(forms.ModelForm):
 
 		self.fields['committee'].queryset = user.get_admined_committees()
 
-		# Only show add_to_calendar field when creating new event
+		# Only show add_to_calendar and enroll_committee fields when creating new event
 		if instance is not None:
 			self.fields.pop('add_to_calendar')
+			self.fields.pop('enroll_committee')
 
 	class Meta:
 		model = Event
@@ -59,18 +62,26 @@ class EventForm(forms.ModelForm):
 		}
 
 	add_to_calendar = forms.BooleanField(required=False, initial=True, label=_("Toevoegen aan jaarcirkel"))
+	enroll_committee = forms.BooleanField(required=False, initial=False, label=_("Schrijf je commissie in"))
 
-	def save(self, base_url, commit=True):
+	def save(self, request, commit=True):
+		# The request object is needed for two things here: the base_url and the email message
+		# I don't really like the approach of passing around the request but I don't know anything better either
+
 		event = super().save(commit=commit)
 
 		if self.cleaned_data.get('add_to_calendar'):
 			# Try to insert event in calendar
 			try:
-				cal_service = GoogleCalendarService(base_url)
+				cal_service = GoogleCalendarService(request.base_url)
 				event.calendar_url = cal_service.insert_event(event)
 				event.save()
 			except RuntimeError:
 				# Calendar not set up
 				pass
+
+		if self.cleaned_data.get('enroll_committee'):
+			# Enroll committee
+			self.cleaned_data.get('committee').enroll(Mailer(settings.DEFAULT_FROM_EMAIL), event, request)
 
 		return event

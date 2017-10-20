@@ -68,7 +68,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 		form = EventForm(request.user, data=request.POST, instance=event)
 
 		if form.is_valid():
-			form.save(self.base_url())
+			form.save(request)
 			messages.success(request, _("Inschrijflijst bijgewerkt!"))
 			return redirect('event-edit', event.pk)
 		else:
@@ -84,7 +84,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 		form = EventForm(request.user, data=request.POST)
 
 		if form.is_valid():
-			event = form.save(self.base_url())
+			event = form.save(request)
 
 			messages.success(request, _("Inschrijflijst aangemaakt!"))
 			return redirect('event-detail', event.pk)
