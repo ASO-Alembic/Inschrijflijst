@@ -99,6 +99,10 @@
 						</form>
 					{% endif %}
 				</div>
+				{% if event.price != 0 %}
+					<br>
+					<small>{% trans "Door je in te schrijven voor deze activiteit machtig je Alembic de kosten van de activiteit te incasseren, tenzij je je uitschrijft voor de gestelde deadline." %}</small>
+				{% endif %}
 				{% if event.is_full %}
 					<br>
 					<div class="alert alert-warning">

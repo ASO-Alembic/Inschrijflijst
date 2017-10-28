@@ -6,77 +6,81 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Inschrijflijst v3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-09 20:47+0200\n"
-"PO-Revision-Date: 2017-10-09 20:48+0200\n"
+"POT-Creation-Date: 2017-10-28 18:11+0200\n"
+"PO-Revision-Date: 2017-10-28 18:14+0200\n"
 "Last-Translator: Lars Veldscholte <lars@tuxplace.nl>\n"
+"Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language-Team: \n"
 "X-Generator: Poedit 2.0.3\n"
 
-#: .\app\forms\EventForm.py:39 .\app\templates\event_detail.html:45
+#: .\app\forms\EventForm.py:42 .\app\templates\event_detail.html:45
 #: .\app\templates\event_edit.html:23
 msgid "Naam"
 msgstr "Name"
 
-#: .\app\forms\EventForm.py:40
+#: .\app\forms\EventForm.py:43
 msgid "Beschrijving"
 msgstr "Description"
 
-#: .\app\forms\EventForm.py:41 .\app\templates\committee_list.html:15
+#: .\app\forms\EventForm.py:44 .\app\templates\committee_list.html:15
 msgid "Commissie"
 msgstr "Committee"
 
-#: .\app\forms\EventForm.py:42
+#: .\app\forms\EventForm.py:45
 msgid "Begindatumtijd"
 msgstr "Start datetime"
 
-#: .\app\forms\EventForm.py:43
+#: .\app\forms\EventForm.py:46
 msgid "Einddatumtijd"
 msgstr "End datetime"
 
-#: .\app\forms\EventForm.py:44
+#: .\app\forms\EventForm.py:47
 msgid "Inschrijfdeadline"
 msgstr "Enrolment deadline"
 
-#: .\app\forms\EventForm.py:45
+#: .\app\forms\EventForm.py:48
 msgid "Publicatiedatum"
 msgstr "Publication date"
 
-#: .\app\forms\EventForm.py:46
+#: .\app\forms\EventForm.py:49
 msgid "Titel"
 msgstr "Title"
 
-#: .\app\forms\EventForm.py:47
+#: .\app\forms\EventForm.py:50
 msgid "Opties"
 msgstr "Options"
 
-#: .\app\forms\EventForm.py:48
+#: .\app\forms\EventForm.py:51
 msgid "Verplicht"
 msgstr "Required"
 
-#: .\app\forms\EventForm.py:49
+#: .\app\forms\EventForm.py:52
 msgid "Antwoord publiek zichtbaar"
 msgstr "Answer publicly visible"
 
-#: .\app\forms\EventForm.py:50
+#: .\app\forms\EventForm.py:53
 msgid "Locatie"
 msgstr "Location"
 
-#: .\app\forms\EventForm.py:51
+#: .\app\forms\EventForm.py:54
 msgid "Kosten"
 msgstr "Cost"
 
-#: .\app\forms\EventForm.py:52
+#: .\app\forms\EventForm.py:55
 msgid "Beschikbare plaatsen"
 msgstr "Available places"
 
-#: .\app\forms\EventForm.py:61
+#: .\app\forms\EventForm.py:64
 msgid "Toevoegen aan jaarcirkel"
 msgstr "Add to calendar"
+
+#: .\app\forms\EventForm.py:65
+msgid "Schrijf je commissie in"
+msgstr "Enrol your committee"
 
 #: .\app\forms\MassMailForm.py:7
 msgid "Deelnemers"
@@ -111,14 +115,18 @@ msgstr "Not enrolled"
 msgid "Uitgeschreven"
 msgstr "Disenrolled"
 
-#: .\app\forms\RegistrationsForm.py:12
+#: .\app\forms\RegistrationsForm.py:14
 #: .\app\templates\registration_create.html:22
 msgid "Gebruikersnaam"
 msgstr "Username"
 
-#: .\app\forms\RegistrationsForm.py:39
+#: .\app\forms\RegistrationsForm.py:41
 msgid "Gebruikersnaam {} is niet bekend"
 msgstr "Username {} is unknown"
+
+#: .\app\forms\RegistrationsForm.py:60 .\app\views\MailView.py:45
+msgid "Kon email niet verzenden aan {} {} (ongeldig emailadres)"
+msgstr "Could not send email message to {} {} (invalid email address)"
 
 #: .\app\mails.py:10
 msgid "Ingeschreven voor {}"
@@ -248,7 +256,7 @@ msgid "Ingeschreven:"
 msgstr "Enrolled:"
 
 #: .\app\templates\event_detail.html:46 .\app\templates\event_edit.html:24
-#: .\app\views\RegistrationView.py:36
+#: .\app\views\RegistrationView.py:34
 msgid "Inschrijfdatum"
 msgstr "Enrolment date"
 
@@ -256,7 +264,17 @@ msgstr "Enrolment date"
 msgid "Schrijf je commissie in:"
 msgstr "Enrol your committee:"
 
-#: .\app\templates\event_detail.html:105
+#: .\app\templates\event_detail.html:104
+msgid ""
+"Door je in te schrijven voor deze activiteit machtig je Alembic de kosten "
+"van de activiteit te incasseren, tenzij je je uitschrijft voor de gestelde "
+"deadline."
+msgstr ""
+"By enrolling for this activity, you authorise Alembic to withdraw the costs "
+"of this activity from your bank account, unless you disenrol before the "
+"deadline."
+
+#: .\app\templates\event_detail.html:109
 msgid ""
 "Deze inschrijflijst zit vol. Je kunt je nog wel inschrijven als reserve; je "
 "komt dan op de lijst te staan als iemand zich uitschrijft. Selectie is op "
@@ -265,7 +283,7 @@ msgstr ""
 "This event is full. You can still enrol as backup; you will enter as a "
 "participant when someone disenrolls. Selection is on basis of enrolment date."
 
-#: .\app\templates\event_detail.html:110
+#: .\app\templates\event_detail.html:114
 #, python-format
 msgid ""
 "De deadline voor deze inschrijflijst is verstreken. Je kunt je niet meer in- "
@@ -573,39 +591,35 @@ msgstr "Event edited!"
 msgid "Inschrijflijst aangemaakt!"
 msgstr "Event created!"
 
-#: .\app\views\MailView.py:45
-msgid "Kon email niet verzenden aan {} {} (ongeldig emailadres)"
-msgstr "Could not send email message to {} {} (invalid email address)"
-
 #: .\app\views\MailView.py:49
 msgid "{} emails verstuurd!"
 msgstr "{} messages sent!"
 
-#: .\app\views\RegistrationView.py:36
+#: .\app\views\RegistrationView.py:34
 msgid "Voornaam"
 msgstr "First name"
 
-#: .\app\views\RegistrationView.py:36
+#: .\app\views\RegistrationView.py:34
 msgid "Achternaam"
 msgstr "Last name"
 
-#: .\app\views\RegistrationView.py:36
+#: .\app\views\RegistrationView.py:34
 msgid "Emailadres"
 msgstr "Email address"
 
-#: .\app\views\RegistrationView.py:63
+#: .\app\views\RegistrationView.py:54
 msgid "Commissie {} geregistreerd!"
 msgstr "Committee {} enrolled!"
 
-#: .\app\views\RegistrationView.py:93
+#: .\app\views\RegistrationView.py:84
 msgid "{} inschrijvingen toegevoegd!"
 msgstr "{} enrolments added!"
 
-#: .\app\views\RegistrationView.py:104
+#: .\app\views\RegistrationView.py:95
 msgid "Inschrijving geregistreerd!"
 msgstr "Enrolment registered!"
 
-#: .\app\views\RegistrationView.py:134 .\app\views\RegistrationView.py:150
+#: .\app\views\RegistrationView.py:125 .\app\views\RegistrationView.py:141
 msgid "Inschrijving bijgewerkt!"
 msgstr "Enrollment updated!"
 
