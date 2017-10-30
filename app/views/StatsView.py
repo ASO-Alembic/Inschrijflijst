@@ -3,12 +3,13 @@ import datetime
 from django.db import connection
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from lib.BetterView import BetterView
 from app.models import Event
 
 
-class StatsView(BetterView):
+class StatsView(LoginRequiredMixin, BetterView):
 	handler_method_names = {
 		'registrations': {'get': 'get_registrations'}
 	}
