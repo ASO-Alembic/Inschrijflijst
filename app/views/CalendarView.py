@@ -1,4 +1,4 @@
-from django.shortcuts import reverse, render
+from django.shortcuts import render
 
 from app.services import GoogleCalendarService
 from lib.BetterView import BetterView
