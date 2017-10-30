@@ -24,6 +24,8 @@
     <orderEntry type="library" name="summernote" level="application" />
     <orderEntry type="library" name="bootstrap-toggle" level="application" />
     <orderEntry type="library" name="bootstrap-tagsinput" level="application" />
+    <orderEntry type="library" name="Chart.bundle" level="application" />
+    <orderEntry type="library" name="Chart" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
