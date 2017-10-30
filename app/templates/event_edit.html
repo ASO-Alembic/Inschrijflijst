@@ -15,6 +15,9 @@
 	<div class="tab-content">
 		<div id="registrations" class="tab-pane fade in active">
 			<div class="panel panel-default">
+				<div class="panel-body">
+					<canvas id="registrationsChart" width="400" height="150"></canvas>
+				</div>
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
@@ -75,6 +78,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 	<script>
         $(function () {
             $('.date').datetimepicker({
@@ -83,4 +87,38 @@
         });
 	</script>
 	<script src="{% static 'js/event_form.js' %}"></script>
+	<script>
+		var ctx = document.getElementById("registrationsChart").getContext('2d');
+		var color = Chart.helpers.color;
+
+		$.getJSON('{% url 'api-stats-registrations' event.pk %}', function (chartdata) {
+			var myBarChart = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					datasets: [{
+						backgroundColor: color('rgb(54, 162, 235)').alpha(0.5).rgbString(),
+						borderColor: 'rgb(54, 162, 235)',
+						borderWidth: 1,
+						data: chartdata
+					}]
+				},
+				options: {
+					responsive: true,
+					legend: {
+						display: false
+					},
+					scales: {
+						xAxes: [{
+							type: 'time',
+							time: {
+								displayFormats: {
+									day: 'YYYY-MM-DD'
+								}
+							}
+						}]
+					}
+				}
+			});
+		});
+	</script>
 {% endblock %}
