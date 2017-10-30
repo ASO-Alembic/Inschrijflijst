@@ -6,49 +6,61 @@
 {% block title %}{% trans "Bewerk" %} {{ event.name }}{% endblock %}
 
 {% block content %}
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h1><a href="{% url 'event-detail' event.pk %}">{{ event.name }}</a></h1>
+	<h1><a href="{% url 'event-detail' event.pk %}">{{ event.name }}</a></h1>
+
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#registrations">{% trans "Inschrijvingen" %}</a></li>
+		<li><a data-toggle="tab" href="#edit">{% trans "Bewerken" %}</a></li>
+	</ul>
+	<div class="tab-content">
+		<div id="registrations" class="tab-pane fade in active">
+			<div class="panel panel-default">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>{% trans "Naam" %}</th>
+							<th>{% trans "Inschrijfdatum" %}</th>
+							<th>{% trans "Uitschrijfdatum" %}</th>
+							{% if event.note_field != '' %}
+								<th>{{ event.note_field }}</th>
+							{% endif %}
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for reg in event.registration_set.all %}
+							<tr class="{% if reg.is_backup %}warning{% else %}success{% endif %}{% if reg.withdrawn_at != None %} danger{% endif %}">
+								<td>{{ forloop.counter }}</td>
+								<td>{{ reg.participant.first_name }} {{ reg.participant.last_name }}</td>
+								<td>{{ reg.created_at }}</td>
+								<td>{{ reg.withdrawn_at }}</td>
+								{% if event.note_field != '' %}
+									<td>{{ reg.note }}</td>
+								{% endif %}
+								<td><a href="{% url 'registration-edit' event.pk reg.pk %}" class="glyphicon glyphicon-edit" title="{% trans "Bewerken" %}"></a></td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				<div class="panel-footer">
+					<div class="flex-footer">
+						<a href="{% url 'registration-create' event.pk %}" class="btn btn-primary">{% trans "Inschrijvingen toevoegen" %}</a>
+						<a href="{% url 'registration-list' event.pk %}?format=csv" class="btn btn-primary" title="{% trans "Alleen ingeschreven deelnemers die niet op de reservelijst staan worden geëxporteerd" %}">{% trans "Exporteren" %}</a>
+						<a href="{% url 'mail-create' event.pk %}" class="btn btn-primary">{% trans "Mass mail" %}</a>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="panel-body">
-			<form class="form-horizontal" action="{% url 'event-detail' event.pk %}" method="post">
-				<input name="_method" value="PUT" type="hidden">
-				{% include 'include/event_form.html' %}
-			</form>
-		</div>
-		<table class="table table-bordered table-hover">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>{% trans "Naam" %}</th>
-					<th>{% trans "Inschrijfdatum" %}</th>
-					<th>{% trans "Uitschrijfdatum" %}</th>
-					{% if event.note_field != '' %}
-						<th>{{ event.note_field }}</th>
-					{% endif %}
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for reg in event.registration_set.all %}
-					<tr class="{% if reg.is_backup %}warning{% else %}success{% endif %}{% if reg.withdrawn_at != None %} danger{% endif %}">
-						<td>{{ forloop.counter }}</td>
-						<td>{{ reg.participant.first_name }} {{ reg.participant.last_name }}</td>
-						<td>{{ reg.created_at }}</td>
-						<td>{{ reg.withdrawn_at }}</td>
-						{% if event.note_field != '' %}
-							<td>{{ reg.note }}</td>
-						{% endif %}
-						<td><a href="{% url 'registration-edit' event.pk reg.pk %}" class="glyphicon glyphicon-edit" title="{% trans "Bewerken" %}"></a></td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		<div class="panel-footer">
-			<div class="flex-footer">
-				<a href="{% url 'registration-create' event.pk %}" class="btn btn-primary">{% trans "Inschrijvingen toevoegen" %}</a>
-				<a href="{% url 'registration-list' event.pk %}?format=csv" class="btn btn-primary" title="{% trans "Alleen ingeschreven deelnemers die niet op de reservelijst staan worden geëxporteerd" %}">{% trans "Exporteren" %}</a>
-				<a href="{% url 'mail-create' event.pk %}" class="btn btn-primary">{% trans "Mass mail" %}</a>
+
+		<div id="edit" class="tab-pane fade in">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<form class="form-horizontal" action="{% url 'event-detail' event.pk %}" method="post">
+						<input name="_method" value="PUT" type="hidden">
+						{% include 'include/event_form.html' %}
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
