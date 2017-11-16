@@ -67,9 +67,6 @@ class BetterView(metaclass=ABCMeta):
 		if not self.request.user.is_admin_of_committee(committee):
 			raise PermissionDenied
 
-	def base_url(self):
-		return self.request.build_absolute_uri('/').strip("/")
-
 
 class StaffRequiredMixin:
 	"""

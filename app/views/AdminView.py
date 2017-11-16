@@ -19,7 +19,7 @@ class AdminView(StaffRequiredMixin, BetterView):
 	def __init__(self, route, request):
 		super().__init__(route, request)
 		# Instantiate FlowService
-		self.flow = FlowService(self.base_url() + reverse('admin-calendar-flow'))
+		self.flow = FlowService(request.base_url + reverse('admin-calendar-flow'))
 
 	def show(self, request):
 		# Get authorization URL for link
@@ -27,7 +27,7 @@ class AdminView(StaffRequiredMixin, BetterView):
 
 		# Try to instantiate GoogleCalendarService and get list of calendars
 		try:
-			cal_service = GoogleCalendarService(self.base_url())
+			cal_service = GoogleCalendarService(request.base_url)
 			cals = cal_service.get_calendars()
 			active_cal = cal_service.calendar
 		except RuntimeError:
@@ -42,7 +42,7 @@ class AdminView(StaffRequiredMixin, BetterView):
 
 	def calendar(self, request):
 		# Set 'active' calendar
-		cal_service = GoogleCalendarService(self.base_url())
+		cal_service = GoogleCalendarService(request.base_url)
 		cal_service.calendar = request.POST['calender_id']
 
 		messages.success(request, _("Kalender ingesteld!"))
@@ -55,7 +55,7 @@ class AdminView(StaffRequiredMixin, BetterView):
 		self.flow.exchange(request.GET['code'])
 
 		# Empty active calendar setting
-		cal_service = GoogleCalendarService(self.base_url())
+		cal_service = GoogleCalendarService(request.base_url)
 		cal_service.calendar = None
 
 		messages.success(request, _("Google-account gekoppeld!"))

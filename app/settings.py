@@ -44,6 +44,7 @@ MIDDLEWARE = [
 	'app.middleware.last_seen_middleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'app.middleware.base_url_middleware',
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -60,7 +61,6 @@ TEMPLATES = [
 				'django.contrib.auth.context_processors.auth',
 				'django.contrib.messages.context_processors.messages',
 				'app.context_processors.now',
-				'app.context_processors.base_url'
 			],
 		},
 	},

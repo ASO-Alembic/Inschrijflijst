@@ -15,3 +15,15 @@ def last_seen_middleware(get_response):
 		return response
 
 	return middleware
+
+
+def base_url_middleware(get_response):
+	"""
+	Add base url to request
+	"""
+	def middleware(request):
+		request.base_url = request.build_absolute_uri('/').strip("/")
+
+		return get_response(request)
+
+	return middleware
