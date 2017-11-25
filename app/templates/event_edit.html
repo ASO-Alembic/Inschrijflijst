@@ -57,14 +57,8 @@
 		</div>
 
 		<div id="edit" class="tab-pane fade in">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<form class="form-horizontal" action="{% url 'event-detail' event.pk %}" method="post">
-						<input name="_method" value="PUT" type="hidden">
-						{% include 'include/event_form.html' %}
-					</form>
-				</div>
-			</div>
+			{% url 'event-detail' event.pk as action %}
+			{% include 'include/event_form.html' with action=action method="PUT" %}
 		</div>
 	</div>
 {% endblock %}

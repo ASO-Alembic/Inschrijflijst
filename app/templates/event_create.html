@@ -6,16 +6,8 @@
 {% block title %}{% trans "Nieuwe inschrijflijst" %}{% endblock %}
 
 {% block content %}
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h1>Nieuwe inschrijflijst</h1>
-		</div>
-		<div class="panel-body">
-			<form class="form-horizontal" action="{% url 'event-list' %}" method="post">
-				{% include 'include/event_form.html' %}
-			</form>
-		</div>
-	</div>
+	{% url 'event-list' as action %}
+	{% include 'include/event_form.html' with action=action heading="Nieuwe inschrijflijst" %}
 {% endblock %}
 
 {% block links %}

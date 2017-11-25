@@ -5,26 +5,28 @@
 {% block title %}{% trans "Beheer" %}{% endblock %}
 
 {% block content %}
-	<h1>{% trans "Commissies" %}</h1>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h1>{% trans "Commissies" %}</h1>
+		</div>
 
-	<p>{% trans "Hieronder vind je alle commissies waarvan jij voorzitter bent." %}</p>
-
-	<table class="table table-bordered table-hover">
-		<thead>
-			<tr>
-				<th>{% trans "Commissie" %}</th>
-				<th>{% trans "Aantal lijsten" %}</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for c in committees %}
+		<table class="table table-bordered table-hover">
+			<thead>
 				<tr>
-					<td><a href="{% url 'committee-detail' c.pk %}">{{ c.name }}</a></td>
-					<td>{{ c.event_set.count }}</td>
-					<td><a href="{% url 'event-create' %}?committee={{ c.pk }}" title="{% trans "Nieuwe inschrijflijst" %}"><span class="glyphicon glyphicon-plus"></span></a></td>
+					<th>{% trans "Commissie" %}</th>
+					<th>{% trans "Aantal lijsten" %}</th>
+					<th></th>
 				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				{% for c in committees %}
+					<tr>
+						<td><a href="{% url 'committee-detail' c.pk %}">{{ c.name }}</a></td>
+						<td>{{ c.event_set.count }}</td>
+						<td><a href="{% url 'event-create' %}?committee={{ c.pk }}" title="{% trans "Nieuwe inschrijflijst" %}"><span class="glyphicon glyphicon-plus"></span></a></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 {% endblock %}

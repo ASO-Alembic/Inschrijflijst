@@ -1,93 +1,107 @@
 {% load bootstrap3 %}
 {% load i18n %}
 
-{% csrf_token %}
+<form class="panel panel-default" action="{{ action }}" method="post">
+	{% if heading %}
+		<div class="panel-heading">
+			<h1>{{ heading }}</h1>
+		</div>
+	{% endif %}
+	<div class="panel-body form-horizontal">
+		{% if method == "PUT" %}
+			<input name="_method" value="PUT" type="hidden">
+		{% endif %}
 
-{% bootstrap_field form.name layout='horizontal' %}
-{% bootstrap_field form.description layout='horizontal' %}
-{% bootstrap_field form.committee layout='horizontal' %}
-{% bootstrap_field form.location layout='horizontal' %}
-{% bootstrap_field form.price layout='horizontal' addon_before='€' %}
-{% bootstrap_field form.places layout='horizontal' %}
+		{% csrf_token %}
 
-<hr>
+		{% bootstrap_field form.name layout='horizontal' %}
+		{% bootstrap_field form.description layout='horizontal' %}
+		{% bootstrap_field form.committee layout='horizontal' %}
+		{% bootstrap_field form.location layout='horizontal' %}
+		{% bootstrap_field form.price layout='horizontal' addon_before='€' %}
+		{% bootstrap_field form.places layout='horizontal' %}
 
-<div class="form-group">
-	<label class="col-md-3 col-md-offset-3">{% trans "Begin"%}</label>
-	<label class="col-md-3">{% trans "Eind"%}</label>
-</div>
-<div class="form-group">
-	<label class="control-label col-md-3">{% trans "Evenement:" %}</label>
-	<div class="col-md-3">
-		{% bootstrap_field form.start_at show_label=False form_group_class='' %}
-	</div>
-	<div class="col-md-3">
-		{% bootstrap_field form.end_at show_label=False form_group_class='' %}
-	</div>
-</div>
-<div class="form-group">
-	<label class="control-label col-md-3">{% trans "Inschrijflijst:" %}</label>
-	<div class="col-md-3">
-		{% bootstrap_field form.published_at show_label=False form_group_class='' %}
-	</div>
-	<div class="col-md-3">
-		{% bootstrap_field form.deadline_at show_label=False form_group_class='' %}
-	</div>
-	<label class="control-label">
-		<span class="glyphicon glyphicon-question-sign" title="{% trans "De publicatiedatum is het moment waarop de inschrijflijst zichtbaar wordt. De inschrijfdeadline is het moment waarop de inschrijving wordt gesloten." %}"></span>
-	</label>
-</div>
+		<hr>
 
-<hr>
-
-<div class="form-group">
-	<div class="col-md-offset-3 col-md-4">
-		<div class="checkbox">
-			<label>
-				<input type="checkbox" id="note_field_check"{% if form.note_field.value %} checked{% endif %}>
-				{% trans "Voeg een extra veld toe" %}
+		<div class="form-group">
+			<label class="col-md-3 col-md-offset-3">{% trans "Begin" %}</label>
+			<label class="col-md-3">{% trans "Eind" %}</label>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3">{% trans "Evenement:" %}</label>
+			<div class="col-md-3">
+				{% bootstrap_field form.start_at show_label=False form_group_class='' %}
+			</div>
+			<div class="col-md-3">
+				{% bootstrap_field form.end_at show_label=False form_group_class='' %}
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3">{% trans "Inschrijflijst:" %}</label>
+			<div class="col-md-3">
+				{% bootstrap_field form.published_at show_label=False form_group_class='' %}
+			</div>
+			<div class="col-md-3">
+				{% bootstrap_field form.deadline_at show_label=False form_group_class='' %}
+			</div>
+			<label class="control-label">
+				<span class="glyphicon glyphicon-question-sign" title="{% trans "De publicatiedatum is het moment waarop de inschrijflijst zichtbaar wordt. De inschrijfdeadline is het moment waarop de inschrijving wordt gesloten." %}"></span>
 			</label>
 		</div>
-	</div>
-</div>
 
-<fieldset id="note_fieldset">
-	{% bootstrap_field form.note_field layout='horizontal' %}
+		<hr>
 
-	<div class="form-group">
-		<label class="control-label col-md-3">{% trans "Type:" %}</label>
-		<div class="col-md-9">
-			<div class="radio">
-				<label>
-					<input type="radio" name="note_field_radio"{% if not form.note_field_options.value %} checked{% endif %}>
-					{% trans "Open antwoord" %}
-				</label>
+		<div class="form-group">
+			<div class="col-md-offset-3 col-md-4">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" id="note_field_check"{% if form.note_field.value %} checked{% endif %}>
+						{% trans "Voeg een extra veld toe" %}
+					</label>
+				</div>
 			</div>
 		</div>
-		<div class="col-md-offset-3 col-md-2">
-			<div class="radio">
-				<label>
-					<input type="radio" name="note_field_radio"{% if form.note_field_options.value %} checked{% endif %}>
-					{% trans "Meerkeuze" %}
+
+		<fieldset id="note_fieldset">
+			{% bootstrap_field form.note_field layout='horizontal' %}
+
+			<div class="form-group">
+				<label class="control-label col-md-3">{% trans "Type:" %}</label>
+				<div class="col-md-9">
+					<div class="radio">
+						<label>
+							<input type="radio" name="note_field_radio"{% if not form.note_field_options.value %} checked{% endif %}>
+							{% trans "Open antwoord" %}
+						</label>
+					</div>
+				</div>
+				<div class="col-md-offset-3 col-md-2">
+					<div class="radio">
+						<label>
+							<input type="radio" name="note_field_radio"{% if form.note_field_options.value %} checked{% endif %}>
+							{% trans "Meerkeuze" %}
+						</label>
+					</div>
+				</div>
+				<div class="col-md-6">
+					{% bootstrap_field form.note_field_options layout='horizontal' %}
+				</div>
+				<label class="control-label">
+					<span class="glyphicon glyphicon-question-sign" title="{% trans "Vul hier de opties, gescheiden door een komma (of enter) in." %}"></span>
 				</label>
 			</div>
-		</div>
-		<div class="col-md-6">
-			{% bootstrap_field form.note_field_options layout='horizontal' %}
-		</div>
-		<label class="control-label">
-			<span class="glyphicon glyphicon-question-sign" title="{% trans "Vul hier de opties, gescheiden door een komma (of enter) in." %}"></span>
-		</label>
+
+			{% bootstrap_field form.note_field_required layout='horizontal' %}
+			{% bootstrap_field form.note_field_public layout='horizontal' %}
+		</fieldset>
+
+		{% if not form.instance.pk %}
+			<hr>
+			{% bootstrap_field form.add_to_calendar layout='horizontal' %}
+			{% bootstrap_field form.enroll_committee layout='horizontal' %}
+		{% endif %}
 	</div>
-
-	{% bootstrap_field form.note_field_required layout='horizontal' %}
-	{% bootstrap_field form.note_field_public layout='horizontal' %}
-</fieldset>
-
-{% if not form.instance.pk %}
-	<hr>
-	{% bootstrap_field form.add_to_calendar layout='horizontal' %}
-	{% bootstrap_field form.enroll_committee layout='horizontal' %}
-{% endif %}
-
-<button class="btn btn-primary" type="submit">Opslaan</button>
+	<div class="panel-footer">
+		<button class="btn btn-primary" type="submit">Opslaan</button>
+	</div>
+</form>

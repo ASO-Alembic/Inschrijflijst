@@ -5,26 +5,30 @@
 {% block title %}{{ committee.name }}{% endblock %}
 
 {% block content %}
-	<h1>{{ committee.name }}</h1>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h1>{{ committee.name }}</h1>
+		</div>
 
-	<table class="table table-bordered table-hover">
-		<thead>
-			<tr>
-				<th>{% trans "Inschrijflijst" %}</th>
-				<th>{% trans "Datum" %}</th>
-				<th>{% trans "Aantal inschrijvingen" %}</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for event in committee.event_set.all %}
-				<tr class="{% if event.deadline_at > now %}active{% endif %}">
-					<td><a href="{% url 'event-detail' event.pk %}">{{ event.name }}</a></td>
-					<td>{{ event.start_at }}</td>
-					<td>{{ event.get_active_registrations_count }} / {{ event.places|default:'∞' }}</td>
-					<td><a href="{% url 'event-edit' event.pk %}" class="glyphicon glyphicon-edit" title="Bewerken"></a></td>
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>{% trans "Inschrijflijst" %}</th>
+					<th>{% trans "Datum" %}</th>
+					<th>{% trans "Aantal inschrijvingen" %}</th>
+					<th></th>
 				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				{% for event in committee.event_set.all %}
+					<tr class="{% if event.deadline_at > now %}active{% endif %}">
+						<td><a href="{% url 'event-detail' event.pk %}">{{ event.name }}</a></td>
+						<td>{{ event.start_at }}</td>
+						<td>{{ event.get_active_registrations_count }} / {{ event.places|default:'∞' }}</td>
+						<td><a href="{% url 'event-edit' event.pk %}" class="glyphicon glyphicon-edit" title="Bewerken"></a></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 {% endblock %}
