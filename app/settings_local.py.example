@@ -6,6 +6,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Europe/Amsterdam'
+FORCE_SCRIPT_NAME = ''
 DEFAULT_FROM_EMAIL = 'Inschrijflijst <www-data@example.com>'
 
 # Database
@@ -23,7 +24,6 @@ DATABASES = {
 # LDAP Auth
 AUTHENTICATION_BACKENDS = [
 	'django_auth_ldap.backend.LDAPBackend',
-	'django.contrib.auth.backends.ModelBackend'
 ]
 
 AUTH_LDAP_SERVER_URI = 'ldap://dc.example.com'
