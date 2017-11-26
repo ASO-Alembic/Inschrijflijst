@@ -54,8 +54,8 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 			messages.success(request, _("Commissie {} geregistreerd!").format(committee.name))
 			return redirect('event-detail', event.pk)
 		elif request.GET['role'] == 'cm-admin':
-			# Bulk registration of users as chairman administrating the event
-			request.user.check_admin_of(event.committee)
+			# Bulk registration of users as staff administrating the event
+			request.user.check_staff()
 
 			# Create list of tuples from three lists of inputs
 			rows = list(zip_longest(
