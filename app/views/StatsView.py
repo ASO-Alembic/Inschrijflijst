@@ -23,7 +23,7 @@ class StatsView(LoginRequiredMixin, BetterView):
 			result = {date: count for date, count in cursor.fetchall()}
 
 		# Generate list of dates in range of event
-		date_list = ((event.published_at + datetime.timedelta(days=x)).date() for x in range(0, (event.deadline_at - event.published_at).days))
+		date_list = ((event.created_at + datetime.timedelta(days=x)).date() for x in range(0, (event.deadline_at - event.created_at).days))
 
 		# Return list of dicts in correct format for Chart.js
 		chartdata = [{'x': date, 'y': result.get(str(date), 0)} for date in date_list]
