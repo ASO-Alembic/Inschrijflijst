@@ -22,7 +22,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def index(self, request, event):
-		self.check_admin_of(event.committee)
+		request.user.check_admin_of(event.committee)
 
 		regs = event.registration_set.filter(withdrawn_at=None)
 
@@ -55,7 +55,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 			return redirect('event-detail', event.pk)
 		elif request.GET['role'] == 'cm-admin':
 			# Bulk registration of users as chairman administrating the event
-			self.check_admin_of(event.committee)
+			request.user.check_admin_of(event.committee)
 
 			# Create list of tuples from three lists of inputs
 			rows = list(zip_longest(
@@ -101,7 +101,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def edit(self, request, event, registration, form=None):
-		self.check_admin_of(event.committee)
+		check_admin_of(self.request, event.committee)
 
 		if form is None:
 			form = RegistrationForm(event, instance=registration)
@@ -118,7 +118,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 		if request.GET['role'] == 'cm-admin':
 			# POSTing the form as an chairman administrating the event
-			self.check_admin_of(event.committee)
+			check_admin_of(self.request, event.committee)
 
 			if form.is_valid():
 				form.save(registration.participant)

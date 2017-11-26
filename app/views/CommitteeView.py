@@ -16,6 +16,6 @@ class CommitteeView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def show(self, request, committee):
-		self.check_admin_of(committee)
+		request.user.check_admin_of(committee)
 
 		return render(request, 'committee_detail.html', {'committee': committee})

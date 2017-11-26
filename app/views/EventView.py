@@ -2,7 +2,6 @@ from django.shortcuts import render, reverse, redirect
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
-from django.core.exceptions import PermissionDenied
 from django.utils.translation import ugettext as _
 
 from lib.ResourceView import ResourceView, bind_model
@@ -25,8 +24,8 @@ class EventView(LoginRequiredMixin, ResourceView):
 	@bind_model
 	def show(self, request, event, form=None):
 		# Deny access for non-admins if event is not published
-		if not event.is_published() and not request.user.is_admin_of_committee(event.committee):
-			raise PermissionDenied
+		if not event.is_published():
+			request.user.check_admin_of(event.committee)
 
 		# Show form if deadline hasn't expired
 		if not event.is_expired():
@@ -56,7 +55,7 @@ class EventView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def edit(self, request, event, form=None):
-		self.check_admin_of(event.committee)
+		request.user.check_admin_of(event.committee)
 
 		if form is None:
 			form = EventForm(request.user, instance=event)

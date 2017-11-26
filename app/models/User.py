@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import PermissionDenied
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -19,12 +20,6 @@ class User(AbstractUser):
 		"""
 		return self.is_staff or self.chaired_committees.exists() or self.in_committees.filter(super_members=True).exists()
 
-	def is_admin_of_committee(self, committee):
-		"""
-		Return true if the user is admin of given committee.
-		"""
-		return committee in self.get_admined_committees()
-
 	def get_admined_committees(self):
 		"""
 		Return all committees the users is admin of (the union of chaired committees and the committees the user is super member of)
@@ -34,3 +29,17 @@ class User(AbstractUser):
 			return Committee.objects.all()
 		else:
 			return (self.chaired_committees.all() | self.in_committees.filter(super_members=True)).distinct()
+
+	def check_admin_of(self, committee):
+		"""
+		Check if the user is admin of the passed committee and raise PermissionDenied if not
+		"""
+		if committee not in self.get_admined_committees():
+			raise PermissionDenied
+
+	def check_staff(self):
+		"""
+		Check if the user is staff and raise PermissionDenied if not
+		"""
+		if not self.is_staff:
+			raise PermissionDenied
