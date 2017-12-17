@@ -8,7 +8,7 @@ def last_seen_middleware(get_response):
 	def middleware(request):
 		response = get_response(request)
 
-		if request.user.is_authenticated():
+		if request.user.is_authenticated:
 			request.user.last_seen_at = timezone.now()
 			request.user.save()
 
