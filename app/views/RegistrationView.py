@@ -101,7 +101,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 	@bind_model
 	def edit(self, request, event, registration, form=None):
-		request.user.check_admin_of(self.request, event.committee)
+		request.user.check_admin_of(event.committee)
 
 		if form is None:
 			form = RegistrationForm(event, instance=registration)
@@ -118,7 +118,7 @@ class RegistrationView(LoginRequiredMixin, ResourceView):
 
 		if request.GET['role'] == 'cm-admin':
 			# POSTing the form as an chairman administrating the event
-			request.user.check_admin_of(self.request, event.committee)
+			request.user.check_admin_of(event.committee)
 
 			if form.is_valid():
 				form.save(registration.participant)
