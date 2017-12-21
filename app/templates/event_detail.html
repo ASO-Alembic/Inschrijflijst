@@ -26,7 +26,7 @@
 			<p><strong>{% trans "Kosten:" %} </strong>€{{ event.price }}</p>
 
 			<br>
-			<p>{{ event.description }}</p>
+			<p>{{ event.long_description|default:event.description }}</p>
 
 			{% if event.places != None %}
 				<div class="progress">

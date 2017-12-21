@@ -24,6 +24,7 @@ class EventForm(forms.ModelForm):
 		fields = [
 			'name',
 			'description',
+			'long_description',
 			'committee',
 			'start_at',
 			'end_at',
@@ -41,6 +42,7 @@ class EventForm(forms.ModelForm):
 		labels = {
 			'name':                 _('Naam'),
 			'description':          _("Beschrijving"),
+			'long_description':     _("Lange beschrijving"),
 			'committee':            _("Commissie"),
 			'start_at':             _("Begindatumtijd"),
 			'end_at':               _("Einddatumtijd"),
