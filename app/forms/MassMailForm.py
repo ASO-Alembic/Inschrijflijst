@@ -7,5 +7,5 @@ class MassMailForm(forms.Form):
 		('active', _("Deelnemers")),
 		('all', _("Deelnemers en reservelijst"))
 	], label=_("Ontvangers"))
-	subject = forms.CharField(max_length=25, label=_("Onderwerp"))
+	subject = forms.CharField(max_length=100, label=_("Onderwerp"))
 	body = forms.CharField(widget=forms.Textarea(attrs={'id': 'summernote'}), initial=_("<p>Beste {{ name }},</p>"))
