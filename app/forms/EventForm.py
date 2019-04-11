@@ -66,7 +66,7 @@ class EventForm(forms.ModelForm):
 
 	add_to_calendar = forms.BooleanField(required=False, initial=True, label=_("Toevoegen aan jaarcirkel"))
 	enroll_committee = forms.BooleanField(required=False, initial=False, label=_("Schrijf je commissie in"))
-	send_notification = forms.BooleanField(required=False, initial=True, label=_("Stuur notificatie naar app gebruikers") )
+	send_notification = forms.BooleanField(required=False, initial=True, label=_("Stuur notificatie naar app gebruikers"))
 
 	def save(self, request, commit=True):
 		# The request object is needed for two things here: the base_url and the email message
