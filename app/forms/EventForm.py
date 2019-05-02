@@ -90,7 +90,7 @@ class EventForm(forms.ModelForm):
 				fcm_service = FCMService(request.base_url)
 				fcm_service.notify(event)
 			except RuntimeError:
-				# Notification not sent
+				raise RuntimeError('Notification message not sent')
 				pass
 
 		if self.cleaned_data.get('enroll_committee'):

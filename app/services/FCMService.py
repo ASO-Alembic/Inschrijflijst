@@ -31,4 +31,4 @@ class FCMService:
             topic = self.DEFAULT_TOPIC,
         )
 
-        response = messaging.send(message)
+        messaging.send(message)
