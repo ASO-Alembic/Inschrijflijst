@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from bootstrap3_datetime.widgets import DateTimePicker
@@ -90,8 +91,7 @@ class EventForm(forms.ModelForm):
 				fcm_service = FCMService(request.base_url)
 				fcm_service.notify(event)
 			except RuntimeError:
-				raise RuntimeError('Notification message not sent')
-				pass
+				messages.error(request, _("Notification message not sent."))
 
 		if self.cleaned_data.get('enroll_committee'):
 			# Enroll committee
