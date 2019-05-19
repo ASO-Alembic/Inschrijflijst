@@ -24,9 +24,9 @@ class FCMService:
         message = messaging.Message(
 
             data = {
-                'title' = app_event.name,
-                'body' = app_event.description,
-                'eventURL' = self.base_url + app_event.get_absolute_url,
+                'title': app_event.name,
+                'body': app_event.description,
+                'eventURL': self.base_url + app_event.get_absolute_url,
             },
             topic = self.DEFAULT_TOPIC,
         )
