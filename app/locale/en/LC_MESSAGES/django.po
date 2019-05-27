@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Inschrijflijst v3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-28 18:11+0200\n"
-"PO-Revision-Date: 2017-10-28 18:14+0200\n"
+"POT-Creation-Date: 2019-05-27 22:23+0200\n"
+"PO-Revision-Date: 2019-05-27 22:30+0200\n"
 "Last-Translator: Lars Veldscholte <lars@tuxplace.nl>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -17,70 +17,82 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.3\n"
 
-#: .\app\forms\EventForm.py:42 .\app\templates\event_detail.html:45
-#: .\app\templates\event_edit.html:23
+#: .\app\forms\EventForm.py:45 .\app\templates\event_detail.html:45
+#: .\app\templates\event_edit.html:25
 msgid "Naam"
 msgstr "Name"
 
-#: .\app\forms\EventForm.py:43
+#: .\app\forms\EventForm.py:46
 msgid "Beschrijving"
 msgstr "Description"
 
-#: .\app\forms\EventForm.py:44 .\app\templates\committee_list.html:15
+#: .\app\forms\EventForm.py:47
+msgid "Lange beschrijving"
+msgstr "Long description"
+
+#: .\app\forms\EventForm.py:48 .\app\templates\committee_list.html:16
 msgid "Commissie"
 msgstr "Committee"
 
-#: .\app\forms\EventForm.py:45
+#: .\app\forms\EventForm.py:49
 msgid "Begindatumtijd"
 msgstr "Start datetime"
 
-#: .\app\forms\EventForm.py:46
+#: .\app\forms\EventForm.py:50
 msgid "Einddatumtijd"
 msgstr "End datetime"
 
-#: .\app\forms\EventForm.py:47
+#: .\app\forms\EventForm.py:51
 msgid "Inschrijfdeadline"
 msgstr "Enrolment deadline"
 
-#: .\app\forms\EventForm.py:48
+#: .\app\forms\EventForm.py:52
 msgid "Publicatiedatum"
 msgstr "Publication date"
 
-#: .\app\forms\EventForm.py:49
+#: .\app\forms\EventForm.py:53
 msgid "Titel"
 msgstr "Title"
 
-#: .\app\forms\EventForm.py:50
+#: .\app\forms\EventForm.py:54
 msgid "Opties"
 msgstr "Options"
 
-#: .\app\forms\EventForm.py:51
+#: .\app\forms\EventForm.py:55
 msgid "Verplicht"
 msgstr "Required"
 
-#: .\app\forms\EventForm.py:52
+#: .\app\forms\EventForm.py:56
 msgid "Antwoord publiek zichtbaar"
 msgstr "Answer publicly visible"
 
-#: .\app\forms\EventForm.py:53
+#: .\app\forms\EventForm.py:57
 msgid "Locatie"
 msgstr "Location"
 
-#: .\app\forms\EventForm.py:54
+#: .\app\forms\EventForm.py:58
 msgid "Kosten"
 msgstr "Cost"
 
-#: .\app\forms\EventForm.py:55
+#: .\app\forms\EventForm.py:59
 msgid "Beschikbare plaatsen"
 msgstr "Available places"
 
-#: .\app\forms\EventForm.py:64
+#: .\app\forms\EventForm.py:68
 msgid "Toevoegen aan jaarcirkel"
 msgstr "Add to calendar"
 
-#: .\app\forms\EventForm.py:65
+#: .\app\forms\EventForm.py:69
 msgid "Schrijf je commissie in"
 msgstr "Enrol your committee"
+
+#: .\app\forms\EventForm.py:70
+msgid "Stuur notificatie naar app gebruikers"
+msgstr "Send notification to app users"
+
+#: .\app\forms\EventForm.py:94
+msgid "Notificatie niet verstuurd."
+msgstr "Notification not sent."
 
 #: .\app\forms\MassMailForm.py:7
 msgid "Deelnemers"
@@ -116,7 +128,7 @@ msgid "Uitgeschreven"
 msgstr "Disenrolled"
 
 #: .\app\forms\RegistrationsForm.py:14
-#: .\app\templates\registration_create.html:22
+#: .\app\templates\registration_create.html:20
 msgid "Gebruikersnaam"
 msgstr "Username"
 
@@ -132,23 +144,23 @@ msgstr "Could not send email message to {} {} (invalid email address)"
 msgid "Ingeschreven voor {}"
 msgstr "Enrolled for {}"
 
-#: .\app\models\Event.py:88
+#: .\app\models\Event.py:89
 msgid "Begindatum is later dan de einddatum!"
 msgstr "Start date is later than end date!"
 
-#: .\app\models\Event.py:91
+#: .\app\models\Event.py:92
 msgid "Startdatum is in het verleden!"
 msgstr "Start date is in the past!"
 
-#: .\app\models\Event.py:94
+#: .\app\models\Event.py:95
 msgid "Einddatum is in het verleden!"
 msgstr "End date is in the past!"
 
-#: .\app\models\Event.py:97
+#: .\app\models\Event.py:98
 msgid "Geef minstens twee opties op."
 msgstr "Enter at least two options."
 
-#: .\app\models\User.py:14
+#: .\app\models\User.py:15
 msgid "email address"
 msgstr "email address"
 
@@ -202,16 +214,16 @@ msgstr "Save"
 msgid "Jaarcirkel"
 msgstr "Calendar"
 
-#: .\app\templates\committee_detail.html:13
+#: .\app\templates\committee_detail.html:16
 msgid "Inschrijflijst"
 msgstr "Event"
 
-#: .\app\templates\committee_detail.html:14
-#: .\app\templates\registration_create.html:26
+#: .\app\templates\committee_detail.html:17
+#: .\app\templates\registration_create.html:21
 msgid "Datum"
 msgstr "Date"
 
-#: .\app\templates\committee_detail.html:15
+#: .\app\templates\committee_detail.html:18
 msgid "Aantal inschrijvingen"
 msgstr "Number of participants"
 
@@ -219,23 +231,20 @@ msgstr "Number of participants"
 msgid "Beheer"
 msgstr "Manage"
 
-#: .\app\templates\committee_list.html:8
+#: .\app\templates\committee_list.html:10
 msgid "Commissies"
 msgstr "Committees"
 
-#: .\app\templates\committee_list.html:10
-msgid "Hieronder vind je alle commissies waarvan jij voorzitter bent."
-msgstr "Below you will find all committees which you chair."
-
-#: .\app\templates\committee_list.html:16
+#: .\app\templates\committee_list.html:17
 msgid "Aantal lijsten"
 msgstr "Number of events"
 
-#: .\app\templates\committee_list.html:25 .\app\templates\event_create.html:6
+#: .\app\templates\committee_list.html:26 .\app\templates\event_create.html:6
 msgid "Nieuwe inschrijflijst"
 msgstr "New event"
 
-#: .\app\templates\event_detail.html:14 .\app\templates\event_edit.html:42
+#: .\app\templates\event_detail.html:14 .\app\templates\event_edit.html:13
+#: .\app\templates\event_edit.html:44
 msgid "Bewerken"
 msgstr "Edit"
 
@@ -255,7 +264,7 @@ msgstr "Cost:"
 msgid "Ingeschreven:"
 msgstr "Enrolled:"
 
-#: .\app\templates\event_detail.html:46 .\app\templates\event_edit.html:24
+#: .\app\templates\event_detail.html:46 .\app\templates\event_edit.html:26
 #: .\app\views\RegistrationView.py:34
 msgid "Inschrijfdatum"
 msgstr "Enrolment date"
@@ -297,25 +306,29 @@ msgstr ""
 msgid "Bewerk"
 msgstr "Edit"
 
-#: .\app\templates\event_edit.html:25
+#: .\app\templates\event_edit.html:12
+msgid "Inschrijvingen"
+msgstr "Enrolments"
+
+#: .\app\templates\event_edit.html:27
 msgid "Uitschrijfdatum"
 msgstr "Disenrolment date"
 
-#: .\app\templates\event_edit.html:49
+#: .\app\templates\event_edit.html:52
 msgid "Inschrijvingen toevoegen"
 msgstr "Add enrolments"
 
-#: .\app\templates\event_edit.html:50
+#: .\app\templates\event_edit.html:54
 msgid ""
 "Alleen ingeschreven deelnemers die niet op de reservelijst staan worden "
 "geëxporteerd"
 msgstr "Only enrolled participants who are not backup will be exported"
 
-#: .\app\templates\event_edit.html:50
+#: .\app\templates\event_edit.html:54
 msgid "Exporteren"
 msgstr "Export"
 
-#: .\app\templates\event_edit.html:51 .\app\templates\mail_create.html:6
+#: .\app\templates\event_edit.html:55 .\app\templates\mail_create.html:6
 #: .\app\templates\mail_create.html:11
 msgid "Mass mail"
 msgstr "Mass mail"
@@ -455,23 +468,23 @@ msgstr ""
 "You cannot undo this action. However, your committee members will be able to "
 "disenrol themselves."
 
-#: .\app\templates\include\event_form.html:16
+#: .\app\templates\include\event_form.html:28
 msgid "Begin"
 msgstr "Start"
 
-#: .\app\templates\include\event_form.html:17
+#: .\app\templates\include\event_form.html:29
 msgid "Eind"
 msgstr "End"
 
-#: .\app\templates\include\event_form.html:20
+#: .\app\templates\include\event_form.html:32
 msgid "Evenement:"
 msgstr "Event:"
 
-#: .\app\templates\include\event_form.html:29
+#: .\app\templates\include\event_form.html:41
 msgid "Inschrijflijst:"
 msgstr "Enrolment:"
 
-#: .\app\templates\include\event_form.html:37
+#: .\app\templates\include\event_form.html:49
 msgid ""
 "De publicatiedatum is het moment waarop de inschrijflijst zichtbaar wordt. "
 "De inschrijfdeadline is het moment waarop de inschrijving wordt gesloten."
@@ -479,23 +492,23 @@ msgstr ""
 "The publication date is the moment the enrolment will be visible. The "
 "enrolment deadline is the moment the enrolment closes."
 
-#: .\app\templates\include\event_form.html:48
+#: .\app\templates\include\event_form.html:60
 msgid "Voeg een extra veld toe"
 msgstr "Add an additional field"
 
-#: .\app\templates\include\event_form.html:58
+#: .\app\templates\include\event_form.html:70
 msgid "Type:"
 msgstr "Type:"
 
-#: .\app\templates\include\event_form.html:63
+#: .\app\templates\include\event_form.html:75
 msgid "Open antwoord"
 msgstr "Free answer"
 
-#: .\app\templates\include\event_form.html:71
+#: .\app\templates\include\event_form.html:83
 msgid "Meerkeuze"
 msgstr "Multiple choice"
 
-#: .\app\templates\include\event_form.html:79
+#: .\app\templates\include\event_form.html:91
 msgid "Vul hier de opties, gescheiden door een komma (of enter) in."
 msgstr "Enter here the options, separated by a comma (or enter)."
 
@@ -528,7 +541,7 @@ msgstr ""
 "Use this form to send an email message to all participants of your event. "
 "Use <code>{{ name }}</code> in your message for the name of your recipient."
 
-#: .\app\templates\mail_create.html:17
+#: .\app\templates\mail_create.html:19
 msgid "Verzenden"
 msgstr "Send"
 
@@ -553,11 +566,11 @@ msgstr ""
 "spelled, the person will not be linked with the right account. The username "
 "consists of the first and last name concatenated without spaces."
 
-#: .\app\templates\registration_create.html:40
+#: .\app\templates\registration_create.html:39
 msgid "Nieuwe regel"
 msgstr "Add row"
 
-#: .\app\templates\registration_create.html:41
+#: .\app\templates\registration_create.html:40
 #: .\app\templates\registration_edit.html:18
 msgid "OK"
 msgstr "OK"
@@ -583,11 +596,11 @@ msgstr "Google account linked!"
 msgid "Commissies geupdatet!"
 msgstr "Committees updated!"
 
-#: .\app\views\EventView.py:72
+#: .\app\views\EventView.py:71
 msgid "Inschrijflijst bijgewerkt!"
 msgstr "Event edited!"
 
-#: .\app\views\EventView.py:89
+#: .\app\views\EventView.py:88
 msgid "Inschrijflijst aangemaakt!"
 msgstr "Event created!"
 
@@ -622,6 +635,9 @@ msgstr "Enrolment registered!"
 #: .\app\views\RegistrationView.py:125 .\app\views\RegistrationView.py:141
 msgid "Inschrijving bijgewerkt!"
 msgstr "Enrollment updated!"
+
+#~ msgid "Hieronder vind je alle commissies waarvan jij voorzitter bent."
+#~ msgstr "Below you will find all committees which you chair."
 
 #~ msgid "Dutch"
 #~ msgstr "Dutch"
