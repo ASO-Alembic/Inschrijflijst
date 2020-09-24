@@ -12,18 +12,20 @@ class FCMService:
 
 	def __init__(self, base_url):
 		"""
-        Get credentials
-        """
+		Get credentials and initialize the app instance
+		"""
 		self.base_url = base_url
 		try:
 			cred = credentials.Certificate(self.FCM_CLIENT_SECRET_FILE)
 			self.app = firebase_admin.initialize_app(cred)
+		except ValueError:
+			raise ValueError('Firebase has been initialized multiple times')
 		except FileNotFoundError:
 			raise RuntimeError('Client secrets invalid')
 
 	def notify(self, app_event):
 		"""
-		Send notification to app users
+		Send notification to app users and remove app instance
 		"""
 		message = messaging.Message(
 			data={
@@ -35,3 +37,4 @@ class FCMService:
 		)
 
 		messaging.send(message)
+		firebase_admin.delete_app(self.app)
