@@ -102,7 +102,7 @@ requests==2.22.0
     # via
     #   cachecontrol
     #   google-api-core
-rsa==4.0
+rsa==4.1
     # via
     #   google-auth
     #   oauth2client
