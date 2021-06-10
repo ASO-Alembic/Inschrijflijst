@@ -20,7 +20,7 @@ django-bootstrap3==11.0.0
     # via -r requirements.in
 django-post-office==3.2.1
     # via -r requirements.in
-django==2.2.22
+django==2.2.24
     # via
     #   -r requirements.in
     #   django-auth-ldap
